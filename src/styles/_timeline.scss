@@ -1,0 +1,20 @@
+.container {
+  &-timeline {
+    padding: 0.5rem;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+
+    overflow: hidden;
+    overflow-y: auto;
+
+    // Animate on the left property
+    transition: width 0.5s ease-in-out;
+
+    &.open {
+      width: 50%;
+    }
+
+  }
+}

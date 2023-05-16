@@ -1,0 +1,37 @@
+<h4 class="mt-2">Unabridged Certificates</h4>
+<hr>
+<div class="form-check mb-3">
+  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+    <i>Mark as done!</i>
+  </label>
+</div>
+<p class="fst-italic">In preparation for your move to the Netherlands, you'll need to apply for your <b>unabridged
+  birth</b>
+  and/or <b>marriage certificate</b> from the Department of Home affairs (DHA).
+</p>
+
+<h5>Take note!</h5>
+<p>Prevent doing this over the December period or over public holidays if you want to get this done as quickly as
+  possible</p>
+
+<hr>
+
+<h5>Timeline</h5>
+<p>
+  This usually takes <b>between 4 and 8 weeks</b>.
+</p>
+
+
+<div class="mb-3">
+  <h5>Options</h5>
+  <ng-container *ngFor="let option of options">
+    <div class="option" [class.selected]="option.selected" (click)="select(option)">
+      <h6>{{option.title}}</h6>
+      <span>{{option.description}}</span>
+    </div>
+  </ng-container>
+</div>
+
+<h5>Cost</h5>
+WIth your selection, this usually costs <b>around R 5000</b>.
