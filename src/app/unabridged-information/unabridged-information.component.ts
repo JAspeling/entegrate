@@ -1,10 +1,17 @@
 import { Component } from "@angular/core";
+import { getMarkAsDone, getSelectedOption, UnabridgedState } from "./state/unabridged.reducer";
+import { Store } from "@ngrx/store";
+import * as UnabridgedActions from './state/unabridged.actions';
 
 @Component({
   selector: 'app-unabridged-information',
   templateUrl: './unabridged-information.component.html'
 })
 export class UnabridgedInformationComponent {
+
+  public done: boolean = true;
+  public selectedOption?: number;
+
   options = [
     {
       title: 'I am doing this myself',
@@ -18,15 +25,21 @@ export class UnabridgedInformationComponent {
     }
   ]
 
-  constructor() {
+  constructor(private store: Store<UnabridgedState>) {
+    this.store.select(getMarkAsDone).subscribe((markAsDone) => {
+      this.done = markAsDone;
+    })
 
+    this.store.select(getSelectedOption).subscribe((option) => {
+      this.selectedOption = option;
+    })
   }
 
-  select(option: any) {
-    this.options.forEach((item) => {
-      item.selected = false;
-    });
+  markAsDone(value: boolean) {
+    this.store.dispatch(UnabridgedActions.setMarkAsDone({ markAsDone: value }));
+  }
 
-    option.selected = true;
+  select(index: number) {
+    this.store.dispatch(UnabridgedActions.setSelectedOption({ selectedOption: index }));
   }
 }

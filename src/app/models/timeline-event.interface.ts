@@ -1,5 +1,4 @@
 import { NgxTimelineEvent } from "@frxjs/ngx-timeline";
-import { Type } from "@angular/core";
 
 export interface CustomTimelineEvent extends NgxTimelineEvent {
   /**
@@ -13,8 +12,8 @@ export interface CustomTimelineEvent extends NgxTimelineEvent {
   cost?: Metric;
 
   alternatives?: CustomTimelineEvent[],
-  active?: boolean;
-  template?: Type<any>;
+
+  template?: string;
 }
 
 export interface Metric {

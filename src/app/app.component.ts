@@ -4,6 +4,10 @@ import { InformationService } from "./services/information-service";
 import { CustomTimelineEvent } from "./models/timeline-event.interface";
 import { HostDirective } from "./services/dynamic-host.directive";
 import { UnabridgedInformationComponent } from "./unabridged-information/unabridged-information.component";
+import { Store } from "@ngrx/store";
+import { getCurrentEvent, getCurrentTemplate, getEvents } from "./timeline/state/timeline.reducer";
+import * as timelineActions from "./timeline/state/timeline.actions";
+import { componentMap } from "./state/app.state";
 
 @Component({
   selector: 'app-root',
@@ -11,11 +15,10 @@ import { UnabridgedInformationComponent } from "./unabridged-information/unabrid
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'entegrate';
   events: CustomTimelineEvent[] = [
     {
       id: '1',
-      template: UnabridgedInformationComponent,
+      template: 'UnabridgedInformationComponent',
       title: 'Unabridged certificates',
       description: 'You’ll need to apply for your unabridged birth and/or marriage certificate from the Department of Home Affairs',
       timestamp: new Date(),
@@ -65,31 +68,35 @@ export class AppComponent {
   ];
   open: boolean = false;
   @ViewChild(HostDirective, { static: true }) host: HostDirective;
+
   protected NgxTimelineEventChangeSideInGroup = NgxTimelineEventChangeSideInGroup;
 
-  constructor(private viewContainerRef: ViewContainerRef,
-    private informationService: InformationService) {
-    this.informationService.state$.subscribe(state => {
-      if (this.host) {
-        this.open = state !== undefined;
+  constructor(private store: Store<any>) {
 
-        if (!state) {
-          this.host.viewContainerRef.clear();
-        } else {
-          this.events.filter(ev => ev.id !== state?.id).forEach(event => {
-            event.active = false;
-          });
-        }
+    this.store.dispatch(timelineActions.addEvents({ events: [...this.events] }));
+
+    this.store.select(getCurrentTemplate).subscribe((value) => {
+      console.log('Selected template', value);
+      if (value) {
+        this.loadComponent(componentMap.get(value));
+      } else {
+        this.host?.viewContainerRef.clear();
       }
-
     });
 
-    this.informationService.template$.subscribe(template => {
-      this.loadComponent(template);
+    this.store.select(getCurrentEvent).subscribe((value) => {
+      console.log('current', value);
+      this.open = !!(value);
+
+      if (!this.open) {
+        this.host?.viewContainerRef.clear();
+      } else {
+        // load component template
+      }
     });
   }
 
-  loadComponent(component: Type<any>) {
+  loadComponent(component?: Type<any>) {
     if (this.host) {
       const viewContainerRef = this.host.viewContainerRef;
       viewContainerRef.clear();

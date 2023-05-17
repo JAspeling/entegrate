@@ -3,7 +3,7 @@
     <div class="logo">
       <h6>Entegrate</h6>
       <span class="text-muted">Streamlining your immigration</span>
-  </div>
+    </div>
   </div>
 </nav>
 
@@ -14,7 +14,7 @@
       <fieldset>
         <legend>Information</legend>
         <div class="mb-3">
-          <label for="amountOfPeople" class="form-label">How many people are you brining along?</label>
+          <label for="amountOfPeople" class="form-label">How many people are you bringing along?</label>
           <input type="number" id="amountOfPeople" class="form-control">
         </div>
         <div class="mb-3">
@@ -38,16 +38,17 @@
             <option>Yes</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
       </fieldset>
 
       <hr>
 
       <h3>Your timeline</h3>
-      <ngx-timeline [events]="events"
-                    [enableAnimation]="false"
-                    [eventCustomTemplate]="eventTemplate"
-                    [changeSideInGroup]="NgxTimelineEventChangeSideInGroup.ALL"></ngx-timeline>
+      <ng-container *ngIf="events">
+        <ngx-timeline [events]="events"
+                      [enableAnimation]="false"
+                      [eventCustomTemplate]="eventTemplate"
+                      [changeSideInGroup]="NgxTimelineEventChangeSideInGroup.ALL"></ngx-timeline>
+      </ng-container>
     </div>
     <div class="container-additional" [class.open]="open">
       <div class="content">
