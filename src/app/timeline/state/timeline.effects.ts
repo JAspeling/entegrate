@@ -1,7 +1,7 @@
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { TimelineService } from "../timeline.service";
 import * as TimelineActions from "./timeline.actions";
-import { map, mergeMap } from "rxjs";
+import { catchError, concatMap, map, mergeMap, of } from "rxjs";
 import { Injectable } from "@angular/core";
 
 @Injectable()
@@ -15,6 +15,24 @@ export class TimelineEffects {
       )
     )
   );
+
+  setCurrentEvent$ = createEffect(() => this.actions$.pipe(
+      ofType(TimelineActions.setCurrent),
+      concatMap((action) => this.timelineService.setCurrentId(action.eventId).pipe(
+          map(id => TimelineActions.setCurrentSuccess({ eventId: id })),
+        catchError(error => of(TimelineActions.loadEventsFailure({ error })))
+        )
+      )
+    )
+  )
+
+  getCurrentEvent$ = createEffect(() => this.actions$.pipe(
+      ofType(TimelineActions.getCurrent),
+      mergeMap(() => this.timelineService.getCurrentId().pipe(
+        map(id => TimelineActions.getCurrentSuccess({ eventId: id })),
+      ))
+    )
+  )
 
   constructor(private actions$: Actions, private readonly timelineService: TimelineService) {
 

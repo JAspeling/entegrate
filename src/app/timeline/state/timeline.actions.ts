@@ -25,6 +25,25 @@ export const setCurrent = createAction(
   props<{ eventId: string }>()
 );
 
+export const setCurrentSuccess = createAction(
+  '[Timeline] Set current success',
+  props<{ eventId: string }>()
+)
+
+export const setCurrentFailure = createAction(
+  '[Timeline] Set current failure',
+  props<{ error: string }>()
+)
+
+export const getCurrent = createAction(
+  '[Timeline] Get current'
+);
+
+export const getCurrentSuccess = createAction(
+  '[Timeline] Get current success',
+  props<{ eventId: string }>()
+)
+
 export const clearCurrentEvent = createAction(
   '[Timeline] Clear current event'
 );

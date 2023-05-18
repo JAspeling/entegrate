@@ -64,6 +64,12 @@ export const timelineReducer = createReducer<TimelineState>(
       ...state,
       events: [...action.events]
     })
+  ),
+  on(
+    timelineActions.getCurrentSuccess, (state, action) => ({
+      ...state,
+      currentEventId: action.eventId
+    })
   )
 );
 

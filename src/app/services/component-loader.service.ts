@@ -9,7 +9,7 @@ export class ComponentLoaderService {
     const componentType = componentMap.get(componentName);
 
     if (componentType) {
-      containerRef.clear();
+      containerRef?.clear();
 
       const componentRef = containerRef.createComponent(componentType);
       // You can perform additional operations on the component reference if needed.
