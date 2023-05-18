@@ -22,7 +22,7 @@ export const addEvent = createAction(
 
 export const setCurrent = createAction(
   '[Timeline] Set current',
-  props<{ event: CustomTimelineEvent }>()
+  props<{ eventId: string }>()
 );
 
 export const clearCurrentEvent = createAction(

@@ -4,14 +4,12 @@ import { CustomTimelineEvent } from "../../models/timeline-event.interface";
 
 export interface TimelineState {
   events: CustomTimelineEvent[];
-  currentEventId?: string;
-  currentEvent?: CustomTimelineEvent;
-  currentTemplate?: string;
+  currentEventId: string;
 }
 
 const initialState: TimelineState = {
   events: [],
-  currentEventId: undefined
+  currentEventId: null
 }
 
 const getEventsFeatureState = createFeatureSelector<TimelineState>('timeline');
@@ -32,7 +30,7 @@ export const getCurrentEvent = createSelector(
   getEventsFeatureState,
   getCurrentEventId,
   (state, currentEventId) => {
-    return state.events.find(event => event.id === currentEventId)!;
+    return currentEventId ? state.events.find(event => event.id === currentEventId) : null;
   }
 );
 
@@ -57,15 +55,13 @@ export const timelineReducer = createReducer<TimelineState>(
   on(
     timelineActions.setCurrent, (state, action) => ({
       ...state,
-      currentEvent: action.event,
-      currentEventId: action.event.id,
-      currentTemplate: action.event.template
+      currentEventId: action.eventId
     })
   ),
   on(
     timelineActions.clearCurrentEvent, (state) => ({
       ...state,
-      currentEventId: undefined
+      currentEventId: null
     })
   ),
   on(

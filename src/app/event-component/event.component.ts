@@ -32,7 +32,7 @@ export class EventComponent implements OnInit {
     if (this.active) {
       this.store.dispatch(timelineActions.clearCurrentEvent());
     } else {
-      this.store.dispatch(timelineActions.setCurrent({ event: this.eventInfo }));
+      this.store.dispatch(timelineActions.setCurrent({ eventId: this.eventInfo.id }));
     }
   }
 }

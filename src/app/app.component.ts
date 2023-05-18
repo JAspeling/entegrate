@@ -28,7 +28,7 @@ export class AppComponent {
         if (component) {
           this.componentLoader.loadComponent(component, this.containerRef);
         } else {
-          this.containerRef.clear();
+          this.containerRef?.clear();
         }
       }
     );
