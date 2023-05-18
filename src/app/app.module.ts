@@ -12,6 +12,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducer } from "./state/app.reducer";
 import { unabridgedReducer } from "./unabridged-information/state/unabridged.reducer";
 import { FormsModule } from "@angular/forms";
+import { EffectsModule } from '@ngrx/effects';
+import { TimelineModule } from "./timeline/timeline.module";
 
 @NgModule({
   declarations: [
@@ -21,8 +23,10 @@ import { FormsModule } from "@angular/forms";
     HostDirective
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     NgxTimelineModule,
+
     StoreModule.forRoot({
       'app': appReducer
     }, {
@@ -31,14 +35,15 @@ import { FormsModule } from "@angular/forms";
         strictActionImmutability: false
       }
     }),
-    StoreModule.forFeature('timeline', timelineReducer),
     StoreModule.forFeature('unabridged', unabridgedReducer),
     StoreDevtoolsModule.instrument({
       name: 'Entegrate',
       maxAge: 50,
       logOnly: !isDevMode()
     }),
-    FormsModule
+    EffectsModule.forRoot([]),
+
+    TimelineModule,
   ],
   providers: [
   ],

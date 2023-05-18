@@ -43,7 +43,7 @@
       <hr>
 
       <h3>Your timeline</h3>
-      <ng-container *ngIf="events">
+      <ng-container *ngIf="events$ | async; let events">
         <ngx-timeline [events]="events"
                       [enableAnimation]="false"
                       [eventCustomTemplate]="eventTemplate"

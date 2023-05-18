@@ -40,20 +40,19 @@ export const getCurrentEvent = createSelector(
 export const getCurrentTemplate = createSelector(
   getEventsFeatureState,
   getCurrentEvent,
-  (state, currentEvent ) => currentEvent?.template
+  (state, currentEvent) => currentEvent?.template
 )
 
 export const timelineReducer = createReducer<TimelineState>(
   initialState,
   on(
-    timelineActions.addEvents, (state, action) => ({
+    timelineActions.loadEvents, (state, action) => ({
       ...state,
-      events: [...action.events]
     })
   ),
   on(timelineActions.addEvent, (state, action) => ({
-    ...state,
-    events: [...state.events, action.event]
+      ...state,
+      events: [...state.events, action.event]
     })
   ),
   on(
@@ -68,6 +67,13 @@ export const timelineReducer = createReducer<TimelineState>(
     timelineActions.clearCurrentEvent, (state) => ({
       ...state,
       currentEventId: undefined
-    }))
+    })
+  ),
+  on(
+    timelineActions.loadEventsSuccess, (state, action) => ({
+      ...state,
+      events: [...action.events]
+    })
+  )
 );
 
