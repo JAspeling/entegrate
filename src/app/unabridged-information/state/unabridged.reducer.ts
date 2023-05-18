@@ -1,40 +1,40 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import * as UnabridgedActions from './unabridged.actions';
+import { UnabridgedOptions } from "../models/unabridged-options.interface";
 
 export interface UnabridgedState {
-  markAsDone: boolean;
-  selectedOption?: number
+  options: UnabridgedOptions;
+  error: string;
 }
 
-export const initialState: UnabridgedState = {
-  markAsDone: false,
-  selectedOption: undefined
+const initialState: UnabridgedState = {
+  options: {
+    selectedOption: 0,
+    done: false
+  },
+  error: null
 }
 
 const getUnabridgedFeatureState = createFeatureSelector<UnabridgedState>('unabridged');
 
-export const getMarkAsDone = createSelector(
+export const getUnabridgedOptions = createSelector(
   getUnabridgedFeatureState,
-  state => state.markAsDone
-);
-
-export const getSelectedOption = createSelector(
-  getUnabridgedFeatureState,
-  state => state.selectedOption
-);
+  state => state.options
+)
 
 export const unabridgedReducer = createReducer<UnabridgedState>(
   initialState,
   on(
-    UnabridgedActions.setMarkAsDone, (state, action) => ({
+    UnabridgedActions.updateUnabridgedOptionsSuccess, (state, action) => ({
       ...state,
-      markAsDone: action.markAsDone
+      options: action.options,
+      error: null
     })
   ),
   on(
-    UnabridgedActions.setSelectedOption, (state, action) => ({
+    UnabridgedActions.updateUnabridgedOptionsFailure, (state, action) => ({
       ...state,
-      selectedOption: action.selectedOption
+      error: action.error
     })
   )
 )

@@ -1,42 +1,54 @@
-<h4 class="mt-2">Unabridged Certificates</h4>
-<hr>
-<div class="form-check mb-3">
-  <input class="form-check-input"
-         type="checkbox"
-         id="flexCheckDefault"
-         [(ngModel)]="done"
-         (ngModelChange)="markAsDone($event)"
-         [ngModelOptions]="{standalone: true}">
-  <label class="form-check-label" for="flexCheckDefault">
-    <i>Mark as done!</i>
-  </label>
-</div>
-<p class="fst-italic">In preparation for your move to the Netherlands, you'll need to apply for your <b>unabridged
-  birth</b>
-  and/or <b>marriage certificate</b> from the Department of Home affairs (DHA).
-</p>
+<div class="content" *ngIf="options$ | async as options">
+  <div class="scrollable">
+    <h4 class="mt-2">Unabridged Certificates</h4>
+    <h4 class="mt-2">Unabridged Certificates</h4>
+    <h4 class="mt-2">Unabridged Certificates</h4>
+    <hr>
 
-<h5>Take note!</h5>
-<p>Prevent doing this over the December period or over public holidays if you want to get this done as quickly as
-  possible</p>
-
-<hr>
-
-<h5>Timeline</h5>
-<p>
-  This usually takes <b>between 4 and 8 weeks</b>.
-</p>
-
-
-<div class="mb-3">
-  <h5>Options</h5>
-  <ng-container *ngFor="let option of options; let i = index">
-    <div class="option" [class.selected]="i === selectedOption" (click)="select(i)">
-      <h6>{{option.title}}</h6>
-      <span>{{option.description}}</span>
+    <div class="form-check mb-3" [formGroup]="form">
+      <input class="form-check-input"
+             type="checkbox"
+             id="flexCheckDefault"
+             [formControlName]="'done'">
+      <label class="form-check-label" for="flexCheckDefault">
+        <i>Mark as done!</i>
+      </label>
     </div>
-  </ng-container>
-</div>
+    <p class="fst-italic">In preparation for your move to the Netherlands, you'll need to apply for your <b>unabridged
+      birth</b>
+      and/or <b>marriage certificate</b> from the Department of Home affairs (DHA).
+    </p>
 
-<h5>Cost</h5>
-With your selection, this usually costs <b>around R 5000</b>.
+    <h5>Take note!</h5>
+    <p>Prevent doing this over the December period or over public holidays if you want to get this done as quickly as
+      possible</p>
+
+    <hr>
+
+    <h5>Timeline</h5>
+    <p>
+      This usually takes <b>between 4 and 8 weeks</b>.
+    </p>
+
+
+    <div class="mb-3">
+      <h5>Options</h5>
+      <ng-container *ngFor="let _option of selections; let i = index">
+        <div class="option"
+             [class.selected]="i === form.get('selectedOption').value"
+             (click)="select(i)">
+          <h6>{{_option.title}}</h6>
+          <span>{{_option.description}}</span>
+        </div>
+      </ng-container>
+    </div>
+
+    <h5>Cost</h5>
+    With your selection, this usually costs <b>around R 5000</b>.
+  </div>
+
+  <div class="content-footer">
+    <button type="button" class="btn btn-secondary">Close</button>
+    <button type="button" class="btn btn-primary" (click)="save(options)">Save changes</button>
+  </div>
+</div>

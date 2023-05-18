@@ -15,16 +15,14 @@ import { FormsModule } from "@angular/forms";
 import { EffectsModule } from '@ngrx/effects';
 import { TimelineModule } from "./timeline/timeline.module";
 import { ComponentLoaderService } from "./services/component-loader.service";
+import { UnabridgedModule } from "./unabridged-information/unabridged.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    EventComponent,
-    UnabridgedInformationComponent,
-    HostDirective
+    EventComponent
   ],
   imports: [
-    FormsModule,
     BrowserModule,
     NgxTimelineModule,
 
@@ -36,7 +34,6 @@ import { ComponentLoaderService } from "./services/component-loader.service";
         strictActionImmutability: false
       }
     }),
-    StoreModule.forFeature('unabridged', unabridgedReducer),
     StoreDevtoolsModule.instrument({
       name: 'Entegrate',
       maxAge: 50,
@@ -45,6 +42,7 @@ import { ComponentLoaderService } from "./services/component-loader.service";
     EffectsModule.forRoot([]),
 
     TimelineModule,
+    UnabridgedModule
   ],
   providers: [
     ComponentLoaderService

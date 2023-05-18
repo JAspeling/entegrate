@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { NgxTimelineItem } from "@frxjs/ngx-timeline";
-import { InformationService } from "../services/information-service";
 import { CustomTimelineEvent } from "../models/timeline-event.interface";
 import { Store } from "@ngrx/store";
 import { getCurrentEvent, TimelineState } from "../timeline/state/timeline.reducer";
@@ -14,7 +13,7 @@ export class EventComponent implements OnInit {
   @Input() event: NgxTimelineItem;
   active: boolean = false;
 
-  constructor(private store: Store<TimelineState>, private informationService: InformationService) {
+  constructor(private store: Store<TimelineState>) {
 
   }
 

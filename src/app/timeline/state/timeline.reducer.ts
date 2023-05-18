@@ -42,11 +42,6 @@ export const getCurrentTemplate = createSelector(
 
 export const timelineReducer = createReducer<TimelineState>(
   initialState,
-  on(
-    timelineActions.loadEvents, (state, action) => ({
-      ...state,
-    })
-  ),
   on(timelineActions.addEvent, (state, action) => ({
       ...state,
       events: [...state.events, action.event]
