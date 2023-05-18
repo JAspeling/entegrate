@@ -8,9 +8,8 @@
 </nav>
 
 <div class="container position-relative">
-  <!--  <div class="d-flex align-items-stretch">-->
   <div class="app-content">
-    <div class="container-timeline" [class.open]="open">
+    <div class="container-timeline" [class.open]="!!(currentEvent$ | async)">
       <fieldset>
         <legend>Information</legend>
         <div class="mb-3">
@@ -50,14 +49,13 @@
                       [changeSideInGroup]="NgxTimelineEventChangeSideInGroup.ALL"></ngx-timeline>
       </ng-container>
     </div>
-    <div class="container-additional" [class.open]="open">
+    <div class="container-additional" [class.open]="!!(currentEvent$ | async)">
       <div class="content">
-        <ng-template componentHost></ng-template>
+        <ng-container #containerRef></ng-container>
       </div>
     </div>
   </div>
 
-  <!--  </div>-->
 </div>
 
 <ng-template #eventTemplate let-event=event let-colSidePosition=colSidePosition>

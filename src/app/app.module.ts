@@ -14,6 +14,7 @@ import { unabridgedReducer } from "./unabridged-information/state/unabridged.red
 import { FormsModule } from "@angular/forms";
 import { EffectsModule } from '@ngrx/effects';
 import { TimelineModule } from "./timeline/timeline.module";
+import { ComponentLoaderService } from "./services/component-loader.service";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { TimelineModule } from "./timeline/timeline.module";
     TimelineModule,
   ],
   providers: [
+    ComponentLoaderService
   ],
   bootstrap: [AppComponent]
 })

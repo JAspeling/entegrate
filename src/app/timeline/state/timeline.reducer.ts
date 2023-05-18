@@ -11,8 +11,7 @@ export interface TimelineState {
 
 const initialState: TimelineState = {
   events: [],
-  currentEventId: undefined,
-  currentEvent: undefined
+  currentEventId: undefined
 }
 
 const getEventsFeatureState = createFeatureSelector<TimelineState>('timeline');
@@ -33,7 +32,7 @@ export const getCurrentEvent = createSelector(
   getEventsFeatureState,
   getCurrentEventId,
   (state, currentEventId) => {
-    return state.events.find(event => event.id === currentEventId);
+    return state.events.find(event => event.id === currentEventId)!;
   }
 );
 
