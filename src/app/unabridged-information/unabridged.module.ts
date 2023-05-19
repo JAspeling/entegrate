@@ -4,16 +4,16 @@ import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
-import { unabridgedReducer } from "./state/unabridged.reducer";
 import { IUnabridgedService, UnabridgedLocalService, } from "./unabridged.service";
-import { UnabridgedEffects } from "./state/unabridged.effects";
+import { unabridgedStoreReducer } from "./store/unabridged-store.reducer";
+import { UnabridgedStoreEffects } from "./store/unabridged-store.effects";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    StoreModule.forFeature('unabridged', unabridgedReducer),
-    EffectsModule.forFeature([UnabridgedEffects]),
+    StoreModule.forFeature('unabridged', unabridgedStoreReducer),
+    EffectsModule.forFeature([UnabridgedStoreEffects]),
     ReactiveFormsModule
   ],
   declarations: [UnabridgedInformationComponent],

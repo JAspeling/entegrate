@@ -1,28 +1,28 @@
 import { Injectable } from "@angular/core";
 import { IUnabridgedService } from "../unabridged.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import * as UnabridgedActions from "./unabridged.actions";
-import { catchError, concatMap, map, of } from "rxjs";
+import * as UnabridgedActions from "./unabridged-store.actions";
+import { catchError, concatMap, map, of, share } from "rxjs";
 
 @Injectable()
-export class UnabridgedEffects {
+export class UnabridgedStoreEffects {
   updateOptions$ = createEffect(() => this.actions$
     .pipe(
-      ofType(UnabridgedActions.updateUnabridgedOptions),
+      ofType(UnabridgedActions.updateOptions),
       concatMap((action) =>
         this.unabridgedService.updateOptions(action.options).pipe(
-          map((options) => UnabridgedActions.updateUnabridgedOptionsSuccess({ options })),
-          catchError(error => of(UnabridgedActions.updateUnabridgedOptionsFailure({ error })))
+          map((options) => UnabridgedActions.updateUOptionsSuccess({ options })),
+          catchError(error => of(UnabridgedActions.actionFailure({ error })))
         )
       )
     )
   )
 
   getOptions$ = createEffect(() => this.actions$.pipe(
-    ofType(UnabridgedActions.getUnabridgedOptions),
+    ofType(UnabridgedActions.getOptions),
     concatMap(() => this.unabridgedService.getOptions().pipe(
-      map((options) => UnabridgedActions.getUnabridgedOptionsSuccess({ options })),
-      catchError(error => of(UnabridgedActions.getUnabridgedOptionsFailure({ error })))
+      map((options) => UnabridgedActions.getOptionsSuccess({ options })),
+      catchError(error => of(UnabridgedActions.actionFailure({ error })))
     ))
   ))
 

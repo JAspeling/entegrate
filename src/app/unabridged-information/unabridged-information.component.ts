@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { getUnabridgedOptions, UnabridgedState } from "./state/unabridged.reducer";
 import { Store } from "@ngrx/store";
-import * as UnabridgedActions from './state/unabridged.actions';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { UnabridgedOptions } from "./models/unabridged-options.interface";
 import { filter, Observable, Subscription } from "rxjs";
 import * as timelineActions from "../timeline/state/timeline.actions";
 import { ToastrService } from "ngx-toastr";
-import { UnabridgedEffects } from "./state/unabridged.effects";
+import { UnabridgedState } from "./store/unabridged-store.state";
+import { UnabridgedStoreEffects } from "./store/unabridged-store.effects";
+import { UnabridgedStoreActions, UnabridgedStoreSelectors } from "./store";
 
 @Component({
   selector: 'app-unabridged-information',
@@ -35,24 +35,11 @@ export class UnabridgedInformationComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<UnabridgedState>,
     private toastr: ToastrService,
-    private readonly effect: UnabridgedEffects) {
+    private readonly effect: UnabridgedStoreEffects) {
     this.form = new FormBuilder().group<UnabridgedOptions>({
       done: false,
       selectedOption: 0
     })
-
-    this.store.dispatch(UnabridgedActions.getUnabridgedOptions())
-
-    this.options$ = this.store.select(getUnabridgedOptions);
-
-    this.subscriptions.push(
-      this.store.select(getUnabridgedOptions).subscribe((options) => {
-        this.form.setValue({
-          done: options.done,
-          selectedOption: options.selectedOption
-        })
-      })
-    );
   }
 
   select(index: number) {
@@ -64,7 +51,8 @@ export class UnabridgedInformationComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       if (this.form.dirty) {
         const options = { ...originalOptions, ...this.form.value };
-        this.store.dispatch(UnabridgedActions.updateUnabridgedOptions({ options }));
+        this.store.dispatch(UnabridgedStoreActions.updateOptions({ options }));
+        this.form.markAsPristine();
       }
     }
   }
@@ -79,9 +67,22 @@ export class UnabridgedInformationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(UnabridgedStoreActions.getOptions())
+
+    this.options$ = this.store.select(UnabridgedStoreSelectors.getOptions);
+
+    this.subscriptions.push(
+      this.store.select(UnabridgedStoreSelectors.getOptions).subscribe((options) => {
+        this.form.setValue({
+          done: options.done,
+          selectedOption: options.selectedOption
+        })
+      })
+    );
+
     this.subscriptions.push(
       this.effect.updateOptions$.pipe(
-        filter(action => action.type === '[Unabridged] Update unabridged options success')
+        filter(action => action.type === UnabridgedStoreActions.UnabridgedStoreActions.UpdateOptionsSuccess)
       ).subscribe(() => {
         this.toastr.success(`Updated successfully!`);
       })

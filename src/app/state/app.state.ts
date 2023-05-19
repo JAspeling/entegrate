@@ -1,7 +1,7 @@
 import { Type } from "@angular/core";
 import { UnabridgedInformationComponent } from "../unabridged-information/unabridged-information.component";
 import { TimelineState } from "../timeline/state/timeline.reducer";
-import { UnabridgedState } from "../unabridged-information/state/unabridged.reducer";
+import { UnabridgedState } from "../unabridged-information/store/unabridged-store.state";
 
 export interface AppState {
   name: string
