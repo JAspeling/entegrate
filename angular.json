@@ -51,10 +51,24 @@
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
                 }
+              ]
+            },
+            "github": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
               ],
-              "optimization": false,
               "outputHashing": "all",
-              "baseHref": "https://JAspeling.github.io/entegrate/"
+              "baseHref": "https://JAspeling.github.io/entegrate/",
+              "outputPath": "docs/"
             },
             "development": {
               "buildOptimizer": false,
