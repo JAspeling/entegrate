@@ -6,7 +6,7 @@ import { catchError, concatMap, map, of } from "rxjs";
 
 @Injectable()
 export class UnabridgedEffects {
-  $updateOptions = createEffect(() => this.actions$
+  updateOptions$ = createEffect(() => this.actions$
     .pipe(
       ofType(UnabridgedActions.updateUnabridgedOptions),
       concatMap((action) =>
@@ -18,11 +18,11 @@ export class UnabridgedEffects {
     )
   )
 
-  $getOptions = createEffect(() => this.actions$.pipe(
+  getOptions$ = createEffect(() => this.actions$.pipe(
     ofType(UnabridgedActions.getUnabridgedOptions),
     concatMap(() => this.unabridgedService.getOptions().pipe(
-      map((options) => UnabridgedActions.updateUnabridgedOptionsSuccess({ options })),
-      catchError(error => of(UnabridgedActions.updateUnabridgedOptionsFailure({ error })))
+      map((options) => UnabridgedActions.getUnabridgedOptionsSuccess({ options })),
+      catchError(error => of(UnabridgedActions.getUnabridgedOptionsFailure({ error })))
     ))
   ))
 

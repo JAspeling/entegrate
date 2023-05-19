@@ -6,6 +6,7 @@ import { getCurrentEvent, getCurrentTemplate, getEvents } from "./timeline/state
 import * as timelineActions from "./timeline/state/timeline.actions";
 import { Observable } from "rxjs";
 import { ComponentLoaderService } from "./services/component-loader.service";
+import { AppState } from "./state/app.state";
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit {
   currentEvent$: Observable<CustomTimelineEvent>;
   protected NgxTimelineEventChangeSideInGroup = NgxTimelineEventChangeSideInGroup;
 
-  constructor(private store: Store<any>, private componentLoader: ComponentLoaderService) {
+  constructor(private store: Store<AppState>, private componentLoader: ComponentLoaderService) {
 
     this.store.dispatch(timelineActions.loadEvents());
     this.store.dispatch(timelineActions.getCurrent());

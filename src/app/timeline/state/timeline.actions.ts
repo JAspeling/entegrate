@@ -48,3 +48,6 @@ export const clearCurrentEvent = createAction(
   '[Timeline] Clear current event'
 );
 
+export const clearCurrentEventSuccess = createAction(
+  '[Timeline] Clear current event success'
+);

@@ -36,5 +36,18 @@ export const unabridgedReducer = createReducer<UnabridgedState>(
       ...state,
       error: action.error
     })
+  ),
+  on(
+    UnabridgedActions.getUnabridgedOptionsSuccess, (state, action) => ({
+      ...state,
+      options: action.options,
+      error: null
+    })
+  ),
+  on(
+    UnabridgedActions.getUnabridgedOptionsFailure, (state, action) => ({
+      ...state,
+      error: action.error
+    })
   )
 )

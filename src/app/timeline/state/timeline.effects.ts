@@ -18,9 +18,10 @@ export class TimelineEffects {
 
   setCurrentEvent$ = createEffect(() => this.actions$.pipe(
       ofType(TimelineActions.setCurrent),
-      concatMap((action) => this.timelineService.setCurrentId(action.eventId).pipe(
+      concatMap((action) =>
+        this.timelineService.setCurrentId(action.eventId).pipe(
           map(id => TimelineActions.setCurrentSuccess({ eventId: id })),
-        catchError(error => of(TimelineActions.loadEventsFailure({ error })))
+          catchError(error => of(TimelineActions.loadEventsFailure({ error })))
         )
       )
     )
@@ -31,6 +32,16 @@ export class TimelineEffects {
       mergeMap(() => this.timelineService.getCurrentId().pipe(
         map(id => TimelineActions.getCurrentSuccess({ eventId: id })),
       ))
+    )
+  )
+
+  clearCurrentEvent$ = createEffect(() => this.actions$.pipe(
+      ofType(TimelineActions.clearCurrentEvent),
+      mergeMap(() => this.timelineService.setCurrentId(null)
+        .pipe(
+          map(() => TimelineActions.clearCurrentEventSuccess())
+        )
+      )
     )
   )
 

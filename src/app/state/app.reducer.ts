@@ -1,4 +1,4 @@
-import { createReducer, createSelector, on } from "@ngrx/store";
+import { createReducer, on } from "@ngrx/store";
 import { AppState } from "./app.state";
 import * as AppActions from './app.actions';
 
