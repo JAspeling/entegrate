@@ -14,37 +14,41 @@ import { UnabridgedModule } from "./unabridged-information/unabridged.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
 import { AppEffects } from "./state/app.effects";
+import { ReactiveFormsModule } from "@angular/forms";
+import { ProcessInformationModule } from "./process-information/process-information.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     EventComponent
   ],
-  imports: [
-    BrowserModule,
+    imports: [
+        BrowserModule,
 
-    NgxTimelineModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+        NgxTimelineModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
 
 
-    StoreModule.forRoot({
-      'app': appReducer
-    }, {
-      runtimeChecks: {
-        strictStateImmutability: false,
-        strictActionImmutability: false
-      }
-    }),
-    StoreDevtoolsModule.instrument({
-      name: 'Entegrate',
-      logOnly: !isDevMode()
-    }),
-    EffectsModule.forRoot([AppEffects]),
+        StoreModule.forRoot({
+            'app': appReducer
+        }, {
+            runtimeChecks: {
+                strictStateImmutability: false,
+                strictActionImmutability: false
+            }
+        }),
+        StoreDevtoolsModule.instrument({
+            name: 'Entegrate',
+            logOnly: !isDevMode()
+        }),
+        EffectsModule.forRoot([AppEffects]),
 
-    TimelineModule,
-    UnabridgedModule
-  ],
+        TimelineModule,
+        UnabridgedModule,
+        ProcessInformationModule,
+        ReactiveFormsModule
+    ],
   providers: [
     ComponentLoaderService
   ],
