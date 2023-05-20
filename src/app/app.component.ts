@@ -20,14 +20,8 @@ export class AppComponent implements OnInit {
 
   @ViewChild('containerRef', { read: ViewContainerRef, static: true }) containerRef!: ViewContainerRef;
   events$: Observable<CustomTimelineEvent[]>
-  form: FormGroup;
   currentEvent$: Observable<CustomTimelineEvent>;
   protected NgxTimelineEventChangeSideInGroup = NgxTimelineEventChangeSideInGroup;
-
-  booleanOptions = [
-    { value: true, label: 'Yes' },
-    { value: false, label: 'No' }
-  ]
 
   constructor(private store: Store<AppState>, private componentLoader: ComponentLoaderService) {
 
@@ -36,16 +30,6 @@ export class AppComponent implements OnInit {
     this.events$ = this.store.select(getEvents);
 
     this.currentEvent$ = this.store.select(getCurrentEvent);
-
-    this.form = new FormBuilder().group({
-      amountOfPeople: 1,
-      euCitizen: false,
-      partner: false,
-      children: false,
-      childrenAmount: 0,
-      pets: true,
-      petsAmount: 2,
-    })
   }
 
   ngOnInit(): void {
@@ -58,12 +42,7 @@ export class AppComponent implements OnInit {
       }
     );
 
-    this.isOpen$ = this.store.select(getIsOpen);
   }
 
-  isOpen$: Observable<boolean>;
 
-  toggleOpen() {
-    this.store.dispatch(toggleProcessInformation());
-  }
 }
