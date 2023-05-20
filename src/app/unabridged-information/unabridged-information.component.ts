@@ -24,12 +24,16 @@ export class UnabridgedInformationComponent implements OnInit, OnDestroy {
     {
       title: 'I am doing this myself',
       description: 'You can organize this yourself, but we all know the pains of dealing with the Department of Home affairs. This can slow down your process a bit.',
-      selected: false
+      selected: false,
+      cost: 1500, // Rands, per person. Get the latest cost from the DHA website
+      time: 8 // Weeks
     },
     {
       title: 'I am using a third party',
       description: 'This is a bit more costly, but they tend to get your documents issued faster than if you would do it yourself.',
-      selected: false
+      selected: false,
+      cost: 5000, // Rands, per person. Get the latest cost from the DHA website
+      time: 4 // Weeks
     }
   ]
 
