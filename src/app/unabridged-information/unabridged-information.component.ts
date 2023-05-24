@@ -24,6 +24,7 @@ export class UnabridgedInformationComponent implements OnInit {
 
   isMarried$: Observable<boolean>;
   isMoreThanOne$: Observable<boolean>;
+  includingChildren$: Observable<boolean>;
 
   selections = [
     {
@@ -60,6 +61,7 @@ export class UnabridgedInformationComponent implements OnInit {
 
     this.isMarried$ = this.processInfoStore.select(ProcessInfoSelectors.isMarried);
     this.isMoreThanOne$ = this.processInfoStore.select(ProcessInfoSelectors.isMoreThanOne);
+    this.includingChildren$ = this.processInfoStore.select(ProcessInfoSelectors.includingChildren);
 
     this.getOptions$ = this.store.select(UnabridgedStoreSelectors.getOptions).subscribe((options) => {
       this.form.setValue({

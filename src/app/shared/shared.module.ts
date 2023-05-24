@@ -11,6 +11,8 @@ import { ScrollChangeDirective } from "../directives/scroll-change-directive";
     ],
   exports: [
     ScrollChangeDirective
+  ],
+  providers: [
   ]
 })
 export class SharedModule {

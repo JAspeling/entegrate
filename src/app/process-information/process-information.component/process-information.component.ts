@@ -27,11 +27,13 @@ export class ProcessInformationComponent implements OnInit {
   isOpen$: Observable<boolean>;
   getProcessInformation: Subscription;
   processInformationUpdated: Subscription;
+  formSubscription: Subscription;
 
   booleanOptions = [
     { value: true, label: 'Yes' },
     { value: false, label: 'No' }
   ]
+
   form: FormGroup;
 
   constructor(private toastService: ToastrService, private store: Store<ProcessInformationState>, private effects: ProcessInformationStoreEffects) {
@@ -42,7 +44,7 @@ export class ProcessInformationComponent implements OnInit {
     this.getProcessInformation = this.store.select(ProcessInfoSelectors.getProcessInformation)
       .pipe(
         tap((options) => {
-          this.form.patchValue(options, { onlySelf: true, emitEvent: false });
+          this.form.patchValue(options);
         })
       ).subscribe();
 
@@ -54,12 +56,17 @@ export class ProcessInformationComponent implements OnInit {
 
   }
 
+  get includeChildren(): boolean {
+    return this.form?.get('children')?.value;
+  }
+
+  get includePets(): boolean {
+    return this.form?.get('pets')?.value;
+  }
+
   validateFormGroup(): ValidationErrors {
     return (group: FormGroup): ValidationErrors => {
       // Do any custom validation here.
-
-      this.validateMarried(group);
-      this.validatePartner(group);
 
       return null;
     }
@@ -81,6 +88,7 @@ export class ProcessInformationComponent implements OnInit {
 
   ngOnInit(): void {
     this.isOpen$ = this.store.select(getIsOpen);
+
   }
 
   save() {
@@ -94,31 +102,21 @@ export class ProcessInformationComponent implements OnInit {
   private initializeForm() {
     this.form = new FormBuilder().group({
       ...initialState,
-      peopleCount: new FormControl(0, [NumericValidator.greaterThan(0, "Please enter a valid number of people")])
     }, { validator: this.validateFormGroup() });
 
+    this.formSubscription = this.form.valueChanges.subscribe((value) => {
+      this.setApplicationAmount();
+    });
+
     this.form.get('euCitizenship').disable();
+    this.form.get('peopleCount').disable();
   }
 
-  private validateMarried(group: FormGroup<any>) {
-    const married = group.get('married');
-    const peopleCount = group.get('peopleCount');
+  private setApplicationAmount() {
+    let amount = 1;
+    amount += this.form.get('partner').value ? 1 : 0;
+    amount += this.form.get('children').value ? this.form.get('childrenCount').value : 0;
 
-    if (married.value === true && peopleCount.value < 2) {
-      addError(peopleCount, 'marriedCount', 'You are married, so you need to add your spouse to the application.')
-    } else {
-      removeError(peopleCount, 'marriedCount');
-    }
-  }
-
-  private validatePartner(group: FormGroup) {
-    const partner = group.get('partner');
-    const peopleCount = group.get('peopleCount');
-
-    if (partner.value === true && peopleCount.value < 2) {
-      addError(peopleCount, 'partnerCount', 'You need to add your partner to the application.')
-    } else {
-      removeError(peopleCount, 'partnerCount');
-    }
+    this.form.get('peopleCount').setValue(amount, { emitEvent: false });
   }
 }

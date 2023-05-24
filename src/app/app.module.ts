@@ -53,7 +53,7 @@ import { SharedModule } from "./shared/shared.module";
     ReactiveFormsModule
   ],
   providers: [
-    ComponentLoaderService
+    ComponentLoaderService,
   ],
   bootstrap: [AppComponent]
 })

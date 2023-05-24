@@ -22,3 +22,8 @@ export const isMoreThanOne = createSelector(
   getProcessInformationFeatureState,
   (state) => ((state.children && state.childrenCount > 1) || state.peopleCount > 1),
 )
+
+export const includingChildren = createSelector(
+  getProcessInformationFeatureState,
+  (state) => state.children,
+)
