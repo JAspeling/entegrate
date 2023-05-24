@@ -8,6 +8,8 @@ import { IProcessInformationService, ProcessInformationLocalService } from "./pr
 import { ProcessInformationComponent } from "./process-information.component/process-information.component";
 import { EffectsModule } from "@ngrx/effects";
 import { ProcessInformationStoreEffects } from "./store/process-information-store.effects";
+import { AppModule } from "../app.module";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import { ProcessInformationStoreEffects } from "./store/process-information-stor
     EffectsModule.forFeature([
       ProcessInformationStoreEffects
     ]),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+    SharedModule
   ],
   declarations: [
     ProcessInformationComponent

@@ -19,12 +19,17 @@
         <fieldset [formGroup]="form">
           <legend>Information</legend>
           <div class="mb-3">
-            <label for="amountOfPeople" class="form-label">How many people are you bringing along <b>(including yourself)</b></label>
-            <input [formControlName]="'peopleCount'" type="number" id="amountOfPeople" class="form-control">
+            <label for="peopleCount" class="form-label">How many people are you bringing along <b>(including yourself)</b></label>
+            <input appScrollChange [formControlName]="'peopleCount'" type="number" id="peopleCount" class="form-control">
+            <div *ngIf="touchedControlHasError('peopleCount')"
+                 class="invalid-feedback">
+              {{getFirstError('peopleCount')}}
+            </div>
           </div>
+
           <div class="mb-3">
             <label for="euCitizenship" class="form-label">Do you have EU citizenship?</label>
-            <select id="euCitizenship" formControlName="euCitizenship" class="form-select">
+            <select appScrollChange id="euCitizenship" formControlName="euCitizenship" class="form-select disabled">
               <option *ngFor="let opt of booleanOptions" [ngValue]="opt.value">
                 {{opt.label}}
               </option>
@@ -32,7 +37,7 @@
           </div>
           <div class="mb-3">
             <label for="partner" class="form-label">Are you bringing a partner over?</label>
-            <select [formControlName]="'partner'" id="partner" class="form-select">
+            <select appScrollChange [formControlName]="'partner'" id="partner" class="form-select">
               <option *ngFor="let opt of booleanOptions" [ngValue]="opt.value">
                 {{opt.label}}
               </option>
@@ -40,7 +45,7 @@
           </div>
           <div class="mb-3">
             <label for="married" class="form-label">Are you married?</label>
-            <select [formControlName]="'married'" id="married" class="form-select">
+            <select appScrollChange [formControlName]="'married'" id="married" class="form-select">
               <option *ngFor="let opt of booleanOptions" [ngValue]="opt.value">
                 {{opt.label}}
               </option>
@@ -48,7 +53,7 @@
           </div>
           <div class="mb-3">
             <label for="children" class="form-label">Do you have children coming over?</label>
-            <select [formControlName]="'children'" id="children" class="form-select">
+            <select appScrollChange [formControlName]="'children'" id="children" class="form-select">
               <option *ngFor="let opt of booleanOptions" [ngValue]="opt.value">
                 {{opt.label}}
               </option>
@@ -57,12 +62,12 @@
 
           <div class="mb-3">
             <label for="children_count" class="form-label">How many children are coming over?</label>
-            <input [formControlName]="'childrenCount'" type="number" id="children_count" class="form-control">
+            <input appScrollChange [formControlName]="'childrenCount'" type="number" id="children_count" class="form-control">
           </div>
 
           <div class="mb-3">
             <label for="pets" class="form-label">Do you have pets coming over?</label>
-            <select [formControlName]="'pets'" id="pets" class="form-select">
+            <select appScrollChange [formControlName]="'pets'" id="pets" class="form-select">
               <option *ngFor="let opt of booleanOptions" [ngValue]="opt.value">
                 {{opt.label}}
               </option>
@@ -71,7 +76,7 @@
 
           <div class="mb-3">
             <label for="pets_count" class="form-label">How many pets are you bringing over?</label>
-            <input [formControlName]="'petsCount'" type="number" id="pets_count" class="form-control">
+            <input appScrollChange [formControlName]="'petsCount'" type="number" id="pets_count" class="form-control">
           </div>
         </fieldset>
         <div class="content-footer d-flex justify-content-end">

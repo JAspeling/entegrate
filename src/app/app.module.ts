@@ -16,11 +16,12 @@ import { ToastrModule } from "ngx-toastr";
 import { AppEffects } from "./state/app.effects";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ProcessInformationModule } from "./process-information/process-information.module";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    EventComponent
+    EventComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +44,8 @@ import { ProcessInformationModule } from "./process-information/process-informat
       logOnly: !isDevMode()
     }),
     EffectsModule.forRoot([AppEffects]),
+
+    SharedModule,
 
     TimelineModule,
     UnabridgedModule,

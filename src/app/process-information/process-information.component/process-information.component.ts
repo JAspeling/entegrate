@@ -4,12 +4,19 @@ import { toggleProcessInformation, updateProcessInformation } from "../store/pro
 import { getIsOpen } from "../store/process-information-store.selectors";
 import { Store } from "@ngrx/store";
 import { initialState, ProcessInformationState } from "../store/process-info-store.state";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, ValidationErrors } from "@angular/forms";
 import { IProcessInformation } from "../models/process-information";
 import { ProcessInfoActions, ProcessInfoSelectors } from "../store";
 import { ProcessInformationStoreEffects } from "../store/process-information-store.effects";
 import { ToastrService } from "ngx-toastr";
-import { AutoUnsubscribe } from "../../utils/decorators/auto-unsubscribe";
+import { AutoUnsubscribe } from "../../decorators/auto-unsubscribe";
+import {
+  addError,
+  getFirstErrorFromControl,
+  NumericValidator,
+  removeError,
+  touchedControlHasError
+} from "ng-form-validator-builder";
 
 @Component({
   selector: 'app-process-information',
@@ -28,9 +35,7 @@ export class ProcessInformationComponent implements OnInit {
   form: FormGroup;
 
   constructor(private toastService: ToastrService, private store: Store<ProcessInformationState>, private effects: ProcessInformationStoreEffects) {
-    this.form = new FormBuilder().group<IProcessInformation>({
-      ...initialState
-    })
+    this.initializeForm();
 
     this.store.dispatch(ProcessInfoActions.getProcessInformation());
 
@@ -49,6 +54,27 @@ export class ProcessInformationComponent implements OnInit {
 
   }
 
+  validateFormGroup(): ValidationErrors {
+    return (group: FormGroup): ValidationErrors => {
+      // Do any custom validation here.
+
+      this.validateMarried(group);
+      this.validatePartner(group);
+
+      return null;
+    }
+  }
+
+  touchedControlHasError(controlName: keyof IProcessInformation) {
+    const control = this.form.get(controlName);
+    return touchedControlHasError(control);
+  }
+
+  getFirstError(formControl: keyof IProcessInformation) {
+    const control = this.form.get(formControl);
+    return getFirstErrorFromControl(control);
+  }
+
   toggleOpen() {
     this.store.dispatch(toggleProcessInformation());
   }
@@ -58,6 +84,41 @@ export class ProcessInformationComponent implements OnInit {
   }
 
   save() {
-    this.store.dispatch(updateProcessInformation({ options: this.form.value }));
+    this.form.markAllAsTouched();
+    if (this.form.valid && this.form.dirty) {
+      this.store.dispatch(updateProcessInformation({ options: this.form.value }));
+      this.form.markAsPristine();
+    }
+  }
+
+  private initializeForm() {
+    this.form = new FormBuilder().group({
+      ...initialState,
+      peopleCount: new FormControl(0, [NumericValidator.greaterThan(0, "Please enter a valid number of people")])
+    }, { validator: this.validateFormGroup() });
+
+    this.form.get('euCitizenship').disable();
+  }
+
+  private validateMarried(group: FormGroup<any>) {
+    const married = group.get('married');
+    const peopleCount = group.get('peopleCount');
+
+    if (married.value === true && peopleCount.value < 2) {
+      addError(peopleCount, 'marriedCount', 'You are married, so you need to add your spouse to the application.')
+    } else {
+      removeError(peopleCount, 'marriedCount');
+    }
+  }
+
+  private validatePartner(group: FormGroup) {
+    const partner = group.get('partner');
+    const peopleCount = group.get('peopleCount');
+
+    if (partner.value === true && peopleCount.value < 2) {
+      addError(peopleCount, 'partnerCount', 'You need to add your partner to the application.')
+    } else {
+      removeError(peopleCount, 'partnerCount');
+    }
   }
 }

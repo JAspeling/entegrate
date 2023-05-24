@@ -21,6 +21,14 @@
     <p>Prevent doing this over the December period or over public holidays if you want to get this done as quickly as
       possible</p>
 
+    <div *ngIf="(isMarried$ | async) === true" class="alert alert-warning" role="alert">
+      If you are married to your partner, you will need an <b>Unabridged marriage certificate</b> as well.
+    </div>
+
+    <div *ngIf="(isMoreThanOne$ | async) === true" class="alert alert-warning" role="alert">
+      You will need an <b>unabridged birth certificate</b> for each person coming over.
+    </div>
+
     <hr>
 
     <h5>Timeline</h5>

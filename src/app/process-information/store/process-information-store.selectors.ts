@@ -12,3 +12,13 @@ export const getProcessInformation = createSelector(
   getProcessInformationFeatureState,
   (state) => state
 )
+
+export const isMarried = createSelector(
+  getProcessInformationFeatureState,
+  (state) => state.married,
+)
+
+export const isMoreThanOne = createSelector(
+  getProcessInformationFeatureState,
+  (state) => ((state.children && state.childrenCount > 1) || state.peopleCount > 1),
+)

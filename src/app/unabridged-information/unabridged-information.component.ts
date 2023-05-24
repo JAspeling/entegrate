@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { UnabridgedOptions } from "./models/unabridged-options.interface";
@@ -8,7 +8,9 @@ import { ToastrService } from "ngx-toastr";
 import { UnabridgedState } from "./store/unabridged-store.state";
 import { UnabridgedStoreEffects } from "./store/unabridged-store.effects";
 import { UnabridgedStoreActions, UnabridgedStoreSelectors } from "./store";
-import { AutoUnsubscribe } from "../utils/decorators/auto-unsubscribe";
+import { AutoUnsubscribe } from "../decorators/auto-unsubscribe";
+import { ProcessInformationState } from "../process-information/store/process-info-store.state";
+import { ProcessInfoSelectors } from "../process-information/store";
 
 @Component({
   selector: 'app-unabridged-information',
@@ -19,6 +21,9 @@ export class UnabridgedInformationComponent implements OnInit {
   public selectedOption?: number;
   options$: Observable<UnabridgedOptions>
   form: FormGroup;
+
+  isMarried$: Observable<boolean>;
+  isMoreThanOne$: Observable<boolean>;
 
   selections = [
     {
@@ -39,13 +44,35 @@ export class UnabridgedInformationComponent implements OnInit {
   private getOptions$: Subscription;
   private updateOptions$: Subscription;
 
-  constructor(private store: Store<UnabridgedState>,
+  constructor(private store: Store<UnabridgedState>, private processInfoStore: Store<ProcessInformationState>,
     private toastr: ToastrService,
     private readonly effect: UnabridgedStoreEffects) {
     this.form = new FormBuilder().group<UnabridgedOptions>({
       done: false,
       selectedOption: 0
     })
+  }
+
+  ngOnInit(): void {
+    this.store.dispatch(UnabridgedStoreActions.getOptions())
+
+    this.options$ = this.store.select(UnabridgedStoreSelectors.getOptions);
+
+    this.isMarried$ = this.processInfoStore.select(ProcessInfoSelectors.isMarried);
+    this.isMoreThanOne$ = this.processInfoStore.select(ProcessInfoSelectors.isMoreThanOne);
+
+    this.getOptions$ = this.store.select(UnabridgedStoreSelectors.getOptions).subscribe((options) => {
+      this.form.setValue({
+        done: options.done,
+        selectedOption: options.selectedOption
+      })
+    })
+
+    this.updateOptions$ = this.effect.updateOptions$.pipe(
+      filter(action => action.type === UnabridgedStoreActions.UnabridgedStoreActions.UpdateOptionsSuccess)
+    ).subscribe(() => {
+      this.toastr.success(`Updated successfully!`);
+    });
   }
 
   select(index: number) {
@@ -67,22 +94,4 @@ export class UnabridgedInformationComponent implements OnInit {
     this.store.dispatch(timelineActions.clearCurrentEvent());
   }
 
-  ngOnInit(): void {
-    this.store.dispatch(UnabridgedStoreActions.getOptions())
-
-    this.options$ = this.store.select(UnabridgedStoreSelectors.getOptions);
-
-    this.getOptions$ = this.store.select(UnabridgedStoreSelectors.getOptions).subscribe((options) => {
-      this.form.setValue({
-        done: options.done,
-        selectedOption: options.selectedOption
-      })
-    })
-
-    this.updateOptions$ = this.effect.updateOptions$.pipe(
-      filter(action => action.type === UnabridgedStoreActions.UnabridgedStoreActions.UpdateOptionsSuccess)
-    ).subscribe(() => {
-      this.toastr.success(`Updated successfully!`);
-    });
-  }
 }
