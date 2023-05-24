@@ -6,12 +6,17 @@ import { processInformationReducer } from "./store/process-information-store.red
 import { initialState } from "./store/process-info-store.state";
 import { IProcessInformationService, ProcessInformationLocalService } from "./process-information.service";
 import { ProcessInformationComponent } from "./process-information.component/process-information.component";
+import { EffectsModule } from "@ngrx/effects";
+import { ProcessInformationStoreEffects } from "./store/process-information-store.effects";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     StoreModule.forFeature('processInformation', processInformationReducer),
+    EffectsModule.forFeature([
+      ProcessInformationStoreEffects
+    ]),
     ReactiveFormsModule
   ],
   declarations: [

@@ -7,9 +7,6 @@ import * as timelineActions from "./timeline/state/timeline.actions";
 import { Observable } from "rxjs";
 import { ComponentLoaderService } from "./services/component-loader.service";
 import { AppState } from "./state/app.state";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { toggleProcessInformation } from "./process-information/store/process-information-store.actions";
-import { getIsOpen } from "./process-information/store/process-information-store.selectors";
 
 @Component({
   selector: 'app-root',
@@ -41,8 +38,6 @@ export class AppComponent implements OnInit {
         }
       }
     );
-
   }
-
 
 }

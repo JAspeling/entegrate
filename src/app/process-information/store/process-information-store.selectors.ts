@@ -7,3 +7,8 @@ export const getIsOpen = createSelector(
   getProcessInformationFeatureState,
   (state) => state.isOpen,
 )
+
+export const getProcessInformation = createSelector(
+  getProcessInformationFeatureState,
+  (state) => state
+)

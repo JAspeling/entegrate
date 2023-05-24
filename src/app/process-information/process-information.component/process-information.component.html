@@ -20,11 +20,11 @@
           <legend>Information</legend>
           <div class="mb-3">
             <label for="amountOfPeople" class="form-label">How many people are you bringing along <b>(including yourself)</b></label>
-            <input [formControlName]="'amountOfPeople'" type="number" id="amountOfPeople" class="form-control">
+            <input [formControlName]="'peopleCount'" type="number" id="amountOfPeople" class="form-control">
           </div>
           <div class="mb-3">
             <label for="euCitizenship" class="form-label">Do you have EU citizenship?</label>
-            <select id="euCitizenship" formControlName="euCitizen" class="form-select">
+            <select id="euCitizenship" formControlName="euCitizenship" class="form-select">
               <option *ngFor="let opt of booleanOptions" [ngValue]="opt.value">
                 {{opt.label}}
               </option>
@@ -33,6 +33,14 @@
           <div class="mb-3">
             <label for="partner" class="form-label">Are you bringing a partner over?</label>
             <select [formControlName]="'partner'" id="partner" class="form-select">
+              <option *ngFor="let opt of booleanOptions" [ngValue]="opt.value">
+                {{opt.label}}
+              </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="married" class="form-label">Are you married?</label>
+            <select [formControlName]="'married'" id="married" class="form-select">
               <option *ngFor="let opt of booleanOptions" [ngValue]="opt.value">
                 {{opt.label}}
               </option>
@@ -49,7 +57,7 @@
 
           <div class="mb-3">
             <label for="children_count" class="form-label">How many children are coming over?</label>
-            <input [formControlName]="'childrenAmount'" type="number" id="children_count" class="form-control">
+            <input [formControlName]="'childrenCount'" type="number" id="children_count" class="form-control">
           </div>
 
           <div class="mb-3">
@@ -63,9 +71,12 @@
 
           <div class="mb-3">
             <label for="pets_count" class="form-label">How many pets are you bringing over?</label>
-            <input [formControlName]="'petsAmount'" type="number" id="pets_count" class="form-control">
+            <input [formControlName]="'petsCount'" type="number" id="pets_count" class="form-control">
           </div>
         </fieldset>
+        <div class="content-footer d-flex justify-content-end">
+          <button type="button" class="btn btn-primary " (click)="save()">Save changes</button>
+        </div>
       </div>
     </div>
   </div>

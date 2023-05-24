@@ -5,6 +5,7 @@ export interface ProcessInformationState {
   // This might have a different flow if only one of the people has citizenship
   euCitizenship: boolean;
   partner: boolean;
+  married: boolean;
   children: boolean;
   childrenCount: number;
   pets: boolean;
@@ -12,10 +13,11 @@ export interface ProcessInformationState {
 }
 
 export const initialState: ProcessInformationState = {
-  isOpen: false,
+  isOpen: true,
   peopleCount: 1,
   euCitizenship: false,
   partner: false,
+  married: false,
   children: false,
   childrenCount: 0,
   pets: false,

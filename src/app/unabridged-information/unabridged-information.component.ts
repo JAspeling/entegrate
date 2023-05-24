@@ -8,17 +8,17 @@ import { ToastrService } from "ngx-toastr";
 import { UnabridgedState } from "./store/unabridged-store.state";
 import { UnabridgedStoreEffects } from "./store/unabridged-store.effects";
 import { UnabridgedStoreActions, UnabridgedStoreSelectors } from "./store";
+import { AutoUnsubscribe } from "../utils/decorators/auto-unsubscribe";
 
 @Component({
   selector: 'app-unabridged-information',
   templateUrl: './unabridged-information.component.html'
 })
-export class UnabridgedInformationComponent implements OnInit, OnDestroy {
+@AutoUnsubscribe()
+export class UnabridgedInformationComponent implements OnInit {
   public selectedOption?: number;
   options$: Observable<UnabridgedOptions>
   form: FormGroup;
-
-  subscriptions: Subscription[] = [];
 
   selections = [
     {
@@ -36,6 +36,8 @@ export class UnabridgedInformationComponent implements OnInit, OnDestroy {
       time: 4 // Weeks
     }
   ]
+  private getOptions$: Subscription;
+  private updateOptions$: Subscription;
 
   constructor(private store: Store<UnabridgedState>,
     private toastr: ToastrService,
@@ -65,31 +67,22 @@ export class UnabridgedInformationComponent implements OnInit, OnDestroy {
     this.store.dispatch(timelineActions.clearCurrentEvent());
   }
 
-  ngOnDestroy(): void {
-    console.warn('Destroying unabridged information component');
-    this.subscriptions.forEach((sub) => sub.unsubscribe());
-  }
-
   ngOnInit(): void {
     this.store.dispatch(UnabridgedStoreActions.getOptions())
 
     this.options$ = this.store.select(UnabridgedStoreSelectors.getOptions);
 
-    this.subscriptions.push(
-      this.store.select(UnabridgedStoreSelectors.getOptions).subscribe((options) => {
-        this.form.setValue({
-          done: options.done,
-          selectedOption: options.selectedOption
-        })
+    this.getOptions$ = this.store.select(UnabridgedStoreSelectors.getOptions).subscribe((options) => {
+      this.form.setValue({
+        done: options.done,
+        selectedOption: options.selectedOption
       })
-    );
+    })
 
-    this.subscriptions.push(
-      this.effect.updateOptions$.pipe(
-        filter(action => action.type === UnabridgedStoreActions.UnabridgedStoreActions.UpdateOptionsSuccess)
-      ).subscribe(() => {
-        this.toastr.success(`Updated successfully!`);
-      })
-    )
+    this.updateOptions$ = this.effect.updateOptions$.pipe(
+      filter(action => action.type === UnabridgedStoreActions.UnabridgedStoreActions.UpdateOptionsSuccess)
+    ).subscribe(() => {
+      this.toastr.success(`Updated successfully!`);
+    });
   }
 }

@@ -22,36 +22,37 @@ import { ProcessInformationModule } from "./process-information/process-informat
     AppComponent,
     EventComponent
   ],
-    imports: [
-        BrowserModule,
+  imports: [
+    BrowserModule,
 
-        NgxTimelineModule,
-        BrowserAnimationsModule,
-        ToastrModule.forRoot(),
+    NgxTimelineModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
 
 
-        StoreModule.forRoot({
-            'app': appReducer
-        }, {
-            runtimeChecks: {
-                strictStateImmutability: false,
-                strictActionImmutability: false
-            }
-        }),
-        StoreDevtoolsModule.instrument({
-            name: 'Entegrate',
-            logOnly: !isDevMode()
-        }),
-        EffectsModule.forRoot([AppEffects]),
+    StoreModule.forRoot({
+      'app': appReducer
+    }, {
+      runtimeChecks: {
+        strictStateImmutability: false,
+        strictActionImmutability: false,
+      }
+    }),
+    StoreDevtoolsModule.instrument({
+      name: 'Entegrate',
+      logOnly: !isDevMode()
+    }),
+    EffectsModule.forRoot([AppEffects]),
 
-        TimelineModule,
-        UnabridgedModule,
-        ProcessInformationModule,
-        ReactiveFormsModule
-    ],
+    TimelineModule,
+    UnabridgedModule,
+    ProcessInformationModule,
+    ReactiveFormsModule
+  ],
   providers: [
     ComponentLoaderService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
