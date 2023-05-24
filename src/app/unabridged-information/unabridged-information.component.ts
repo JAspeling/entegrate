@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { UnabridgedOptions } from "./models/unabridged-options.interface";
-import { filter, Observable, Subscription } from "rxjs";
+import { UnabridgedConfig } from "./models/unabridged-options.interface";
+import { combineLatest, filter, map, merge, mergeWith, Observable, Subscription, tap, zip } from "rxjs";
 import * as timelineActions from "../timeline/state/timeline.actions";
 import { ToastrService } from "ngx-toastr";
 import { UnabridgedState } from "./store/unabridged-store.state";
@@ -19,12 +19,15 @@ import { ProcessInfoSelectors } from "../process-information/store";
 @AutoUnsubscribe()
 export class UnabridgedInformationComponent implements OnInit {
   public selectedOption?: number;
-  options$: Observable<UnabridgedOptions>
+  config$: Observable<UnabridgedConfig>
   form: FormGroup;
 
   isMarried$: Observable<boolean>;
   isMoreThanOne$: Observable<boolean>;
   includingChildren$: Observable<boolean>;
+  applicationAmount$: Observable<number>;
+  applicationCost$: Observable<number>;
+  applicationTotalCost$: Observable<number>;
 
   selections = [
     {
@@ -38,7 +41,8 @@ export class UnabridgedInformationComponent implements OnInit {
       title: 'I am using a third party',
       description: 'This is a bit more costly, but they tend to get your documents issued faster than if you would do it yourself.',
       selected: false,
-      cost: 5000, // Rands, per person. Get the latest cost from the DHA website
+      // This is per person, and includes unabridged birth and marriage certificates
+      cost: 2500, // Rands, per person. Get the latest cost from the DHA website
       time: 4 // Weeks
     }
   ]
@@ -48,45 +52,63 @@ export class UnabridgedInformationComponent implements OnInit {
   constructor(private store: Store<UnabridgedState>, private processInfoStore: Store<ProcessInformationState>,
     private toastr: ToastrService,
     private readonly effect: UnabridgedStoreEffects) {
-    this.form = new FormBuilder().group<UnabridgedOptions>({
+    this.form = new FormBuilder().group<UnabridgedConfig>({
       done: false,
-      selectedOption: 0
+      selectedOption: 0,
+      cost: 0,
+      time: 0
     })
   }
 
   ngOnInit(): void {
-    this.store.dispatch(UnabridgedStoreActions.getOptions())
+    this.store.dispatch(UnabridgedStoreActions.getConfig())
 
-    this.options$ = this.store.select(UnabridgedStoreSelectors.getOptions);
+    this.config$ = this.store.select(UnabridgedStoreSelectors.getConfig);
 
     this.isMarried$ = this.processInfoStore.select(ProcessInfoSelectors.isMarried);
     this.isMoreThanOne$ = this.processInfoStore.select(ProcessInfoSelectors.isMoreThanOne);
     this.includingChildren$ = this.processInfoStore.select(ProcessInfoSelectors.includingChildren);
+    this.applicationAmount$ = this.processInfoStore.select(ProcessInfoSelectors.applicationAmount);
+    this.applicationCost$ = this.store.select(UnabridgedStoreSelectors.getCost).pipe(tap((value) => console.log(value)));
+    this.applicationTotalCost$ = combineLatest(this.applicationAmount$, this.config$).pipe(
+      map((value) => value[0] * value[1].cost)
+    );
 
-    this.getOptions$ = this.store.select(UnabridgedStoreSelectors.getOptions).subscribe((options) => {
-      this.form.setValue({
+    this.getOptions$ = this.store.select(UnabridgedStoreSelectors.getConfig).subscribe((options) => {
+      this.form.patchValue({
         done: options.done,
         selectedOption: options.selectedOption
-      })
+      });
     })
 
     this.updateOptions$ = this.effect.updateOptions$.pipe(
-      filter(action => action.type === UnabridgedStoreActions.UnabridgedStoreActions.UpdateOptionsSuccess)
+      filter(action => action.type === UnabridgedStoreActions.actions.UpdateOptionsSuccess)
     ).subscribe(() => {
       this.toastr.success(`Updated successfully!`);
     });
   }
 
   select(index: number) {
-    this.form.get('selectedOption')?.setValue(index);
+
+    // destructure cost and time from the selection
+    const selected: UnabridgedConfig = {
+      cost: this.selections[index].cost,
+      time: this.selections[index].time,
+      selectedOption: index,
+      done: this.form.get('done')?.value,
+    };
+
+    this.form.patchValue(selected);
     this.form.markAsDirty();
+
+    this.store.dispatch(UnabridgedStoreActions.updateLocalCostTime(selected));
   }
 
-  save(originalOptions: UnabridgedOptions): void {
+  save(config: UnabridgedConfig): void {
     if (this.form.valid) {
       if (this.form.dirty) {
-        const options = { ...originalOptions, ...this.form.value };
-        this.store.dispatch(UnabridgedStoreActions.updateOptions({ options }));
+        const options = { ...config, ...this.form.value };
+        this.store.dispatch(UnabridgedStoreActions.updateConfig(options));
         this.form.markAsPristine();
       }
     }

@@ -1,4 +1,6 @@
-export interface UnabridgedOptions {
-  done: boolean;
-  selectedOption: number;
+export interface UnabridgedConfig {
+  selectedOption: number,
+  done: boolean,
+  cost: number,
+  time: number
 }

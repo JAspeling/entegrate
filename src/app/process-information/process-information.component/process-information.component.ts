@@ -4,19 +4,13 @@ import { toggleProcessInformation, updateProcessInformation } from "../store/pro
 import { getIsOpen } from "../store/process-information-store.selectors";
 import { Store } from "@ngrx/store";
 import { initialState, ProcessInformationState } from "../store/process-info-store.state";
-import { FormBuilder, FormControl, FormGroup, ValidationErrors } from "@angular/forms";
+import { FormBuilder, FormGroup, ValidationErrors } from "@angular/forms";
 import { IProcessInformation } from "../models/process-information";
 import { ProcessInfoActions, ProcessInfoSelectors } from "../store";
 import { ProcessInformationStoreEffects } from "../store/process-information-store.effects";
 import { ToastrService } from "ngx-toastr";
 import { AutoUnsubscribe } from "../../decorators/auto-unsubscribe";
-import {
-  addError,
-  getFirstErrorFromControl,
-  NumericValidator,
-  removeError,
-  touchedControlHasError
-} from "ng-form-validator-builder";
+import { getFirstErrorFromControl, touchedControlHasError } from "ng-form-validator-builder";
 
 @Component({
   selector: 'app-process-information',

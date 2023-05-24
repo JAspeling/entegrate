@@ -8,10 +8,10 @@ import { catchError, concatMap, map, of, share } from "rxjs";
 export class UnabridgedStoreEffects {
   updateOptions$ = createEffect(() => this.actions$
     .pipe(
-      ofType(UnabridgedActions.updateOptions),
+      ofType(UnabridgedActions.updateConfig),
       concatMap((action) =>
-        this.unabridgedService.updateOptions(action.options).pipe(
-          map((options) => UnabridgedActions.updateUOptionsSuccess({ options })),
+        this.unabridgedService.updateOptions(action).pipe(
+          map((options) => UnabridgedActions.updateConfigSuccess(options)),
           catchError(error => of(UnabridgedActions.actionFailure({ error })))
         )
       )
@@ -19,9 +19,9 @@ export class UnabridgedStoreEffects {
   )
 
   getOptions$ = createEffect(() => this.actions$.pipe(
-    ofType(UnabridgedActions.getOptions),
+    ofType(UnabridgedActions.getConfig),
     concatMap(() => this.unabridgedService.getOptions().pipe(
-      map((options) => UnabridgedActions.getOptionsSuccess({ options })),
+      map((options) => UnabridgedActions.getConfigSuccess(options)),
       catchError(error => of(UnabridgedActions.actionFailure({ error })))
     ))
   ))

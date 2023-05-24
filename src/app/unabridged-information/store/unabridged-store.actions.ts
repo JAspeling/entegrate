@@ -1,35 +1,41 @@
 import { createAction, props } from "@ngrx/store";
-import { UnabridgedOptions } from "../models/unabridged-options.interface";
+import { UnabridgedConfig } from "../models/unabridged-options.interface";
 
-export enum UnabridgedStoreActions {
+export enum actions {
   ActionSuccess = '[Unabridged] Action success',
   ActionFailure = '[Unabridged] Action failure',
   GetOptions = '[Unabridged] Get unabridged options',
   UpdateOptions = '[Unabridged] Update unabridged options',
   UpdateOptionsSuccess = '[Unabridged] Update unabridged options success',
+  UpdateLocalCostTime = '[Unabridged] Update local cost time'
 }
 
 // CRUD on options
-export const getOptions = createAction(
-  UnabridgedStoreActions.GetOptions
+export const getConfig = createAction(
+  actions.GetOptions
 )
 
-export const getOptionsSuccess = createAction(
-  UnabridgedStoreActions.ActionSuccess,
-  props<{ options: UnabridgedOptions }>()
+export const getConfigSuccess = createAction(
+  actions.ActionSuccess,
+  props<{ selectedOption: number, done: boolean }>()
 )
 
 export const actionFailure = createAction(
-  UnabridgedStoreActions.ActionFailure,
+  actions.ActionFailure,
   props<{ error: string }>()
 )
 
-export const updateOptions = createAction(
-  UnabridgedStoreActions.UpdateOptions,
-  props<{ options: UnabridgedOptions }>()
+export const updateConfig = createAction(
+  actions.UpdateOptions,
+  props<UnabridgedConfig>()
 )
 
-export const updateUOptionsSuccess = createAction(
-  UnabridgedStoreActions.UpdateOptionsSuccess,
-  props<{ options: UnabridgedOptions }>()
+export const updateConfigSuccess = createAction(
+  actions.UpdateOptionsSuccess,
+  props<UnabridgedConfig>()
 )
+
+export const updateLocalCostTime = createAction(
+  actions.UpdateLocalCostTime,
+  props<UnabridgedConfig>(),
+);

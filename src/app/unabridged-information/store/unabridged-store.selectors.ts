@@ -3,7 +3,17 @@ import { UnabridgedState } from "./unabridged-store.state";
 
 const getUnabridgedFeatureState = createFeatureSelector<UnabridgedState>('unabridged');
 
-export const getOptions = createSelector(
+export const getConfig = createSelector(
   getUnabridgedFeatureState,
-  state => state.options
+  (state) => ({
+    selectedOption: state.selectedOption,
+    done: state.done,
+    cost: state.cost,
+    time: state.time
+  })
+)
+
+export const getCost = createSelector(
+  getUnabridgedFeatureState,
+  (state) => state.cost
 )

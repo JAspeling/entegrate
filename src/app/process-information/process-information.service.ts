@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { IProcessInformation } from "./models/process-information";
-import { UnabridgedOptions } from "../unabridged-information/models/unabridged-options.interface";
 import { initialState } from "./store/process-info-store.state";
 
 export abstract class IProcessInformationService {

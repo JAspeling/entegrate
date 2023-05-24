@@ -27,3 +27,17 @@ export const includingChildren = createSelector(
   getProcessInformationFeatureState,
   (state) => state.children,
 )
+
+export const applicationAmount = createSelector(
+  getProcessInformationFeatureState,
+  (state) => {
+    let count = 1;
+    if (state.partner) {
+      count++;
+    }
+    if (state.children) {
+      count += state.childrenCount;
+    }
+    return count;
+  },
+)

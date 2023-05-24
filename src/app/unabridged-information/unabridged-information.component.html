@@ -1,4 +1,4 @@
-<div class="content" *ngIf="options$ | async as options">
+<div class="content" *ngIf="config$ | async as config">
   <div class="scrollable">
     <h4 class="mt-2">Unabridged Certificates</h4>
     <hr>
@@ -55,11 +55,11 @@
     </div>
 
     <h5>Cost</h5>
-    With your selection, this usually costs <b>around R 5000</b>.
+    With your selection, this usually costs <b>around R {{applicationTotalCost$ | async}}</b>.
   </div>
 
   <div class="content-footer">
     <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-    <button type="button" class="btn btn-primary" (click)="save(options)">Save changes</button>
+    <button type="button" class="btn btn-primary" (click)="save(config)">Save changes</button>
   </div>
 </div>
