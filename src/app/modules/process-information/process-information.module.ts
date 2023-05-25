@@ -5,11 +5,10 @@ import { StoreModule } from "@ngrx/store";
 import { processInformationReducer } from "./store/process-information-store.reducer";
 import { initialState } from "./store/process-info-store.state";
 import { IProcessInformationService, ProcessInformationLocalService } from "./process-information.service";
-import { ProcessInformationComponent } from "./process-information.component/process-information.component";
+import { ProcessInformationComponent } from "./process-information.component";
 import { EffectsModule } from "@ngrx/effects";
 import { ProcessInformationStoreEffects } from "./store/process-information-store.effects";
-import { AppModule } from "../app.module";
-import { SharedModule } from "../shared/shared.module";
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   imports: [

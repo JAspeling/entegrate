@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { NgxTimelineItem } from "@frxjs/ngx-timeline";
-import { CustomTimelineEvent } from "../models/timeline-event.interface";
+import { CustomTimelineEvent } from "../../shared/models/timeline-event.interface";
 import { Store } from "@ngrx/store";
 import { getCurrentEvent, TimelineState } from "../timeline/state/timeline.reducer";
 import * as timelineActions from "../timeline/state/timeline.actions";

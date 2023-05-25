@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { CustomTimelineEvent } from "../../models/timeline-event.interface";
+import { CustomTimelineEvent } from "../../../shared/models/timeline-event.interface";
 
 export const loadEvents = createAction(
   '[Timeline] Load events'

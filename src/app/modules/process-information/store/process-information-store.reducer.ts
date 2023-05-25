@@ -1,7 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import { initialState } from "./process-info-store.state";
 import {
-  getProcessInformation, getProcessInformationSuccess,
+  getProcessInformationSuccess,
   toggleProcessInformation,
   updateProcessInformation
 } from "./process-information-store.actions";

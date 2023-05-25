@@ -1,4 +1,4 @@
-import { componentMap } from "../state/app.state";
+import { componentMap } from "../../state/app.state";
 import { Injectable, ViewContainerRef } from "@angular/core";
 
 @Injectable()

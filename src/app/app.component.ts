@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { NgxTimelineEventChangeSideInGroup } from "@frxjs/ngx-timeline";
-import { CustomTimelineEvent } from "./models/timeline-event.interface";
+import { CustomTimelineEvent } from "./shared/models/timeline-event.interface";
 import { Store } from "@ngrx/store";
-import { getCurrentEvent, getCurrentTemplate, getEvents } from "./timeline/state/timeline.reducer";
-import * as timelineActions from "./timeline/state/timeline.actions";
+import { getCurrentEvent, getCurrentTemplate, getEvents } from "./modules/timeline/state/timeline.reducer";
+import * as timelineActions from "./modules/timeline/state/timeline.actions";
 import { Observable } from "rxjs";
-import { ComponentLoaderService } from "./services/component-loader.service";
+import { ComponentLoaderService } from "./shared/services/component-loader.service";
 import { AppState } from "./state/app.state";
 
 @Component({
@@ -14,8 +14,8 @@ import { AppState } from "./state/app.state";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
   @ViewChild('containerRef', { read: ViewContainerRef, static: true }) containerRef!: ViewContainerRef;
+
   events$: Observable<CustomTimelineEvent[]>
   currentEvent$: Observable<CustomTimelineEvent>;
   protected NgxTimelineEventChangeSideInGroup = NgxTimelineEventChangeSideInGroup;

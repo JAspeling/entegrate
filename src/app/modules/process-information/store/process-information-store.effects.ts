@@ -1,12 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { IProcessInformationService } from "../process-information.service";
-import {
-  getProcessInformation,
-  getProcessInformationSuccess,
-  updateProcessInformation
-} from "./process-information-store.actions";
-import { concatMap, map, share, take } from "rxjs";
+import { concatMap, map } from "rxjs";
 import { ProcessInfoActions } from "./index";
 
 @Injectable()

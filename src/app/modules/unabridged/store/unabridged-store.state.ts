@@ -1,4 +1,4 @@
-import { CostTimeInterface } from "../../models/cost-time.interface";
+import { CostTimeInterface } from "../../../shared/models/cost-time.interface";
 
 export interface UnabridgedState extends CostTimeInterface {
   options: CostTimeInterface;

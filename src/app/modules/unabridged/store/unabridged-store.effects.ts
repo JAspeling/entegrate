@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { IUnabridgedService } from "../unabridged.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as UnabridgedActions from "./unabridged-store.actions";
-import { catchError, concatMap, map, of, share } from "rxjs";
+import { catchError, concatMap, map, of } from "rxjs";
 
 @Injectable()
 export class UnabridgedStoreEffects {

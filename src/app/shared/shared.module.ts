@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { ScrollChangeDirective } from "../directives/scroll-change-directive";
+import { ScrollChangeDirective } from "./directives/scroll-change-directive";
 
 @NgModule({
   imports: [

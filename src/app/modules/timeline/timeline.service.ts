@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { CustomTimelineEvent } from "../models/timeline-event.interface";
+import { CustomTimelineEvent } from "../../shared/models/timeline-event.interface";
 import { Observable, of } from "rxjs";
 import { timelineData } from "./timeline.data";
 

@@ -1,6 +1,6 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import * as timelineActions from "./timeline.actions";
-import { CustomTimelineEvent } from "../../models/timeline-event.interface";
+import { CustomTimelineEvent } from "../../../shared/models/timeline-event.interface";
 
 export interface TimelineState {
   events: CustomTimelineEvent[];
