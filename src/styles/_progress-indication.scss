@@ -1,0 +1,88 @@
+.path {
+  position: relative;
+  width: 450px;
+  height: 50px;
+  background: #2c2c2c;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 5px;
+
+  .pac-progress {
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: #2c2c2cf5;
+    top: 0;
+    transition: left 1.4s ease;
+    // Pacman width + padding + current progress percentage.
+    left: calc(30px + 15px - 100%); // Plus the current percentage of the progress.
+  }
+
+  .pac-dots {
+    content: "";
+    position: absolute;
+    display: block;
+    border-top: 12px dotted white;
+    width: 90%;
+
+    margin-top: -6px;
+    top: 50%;
+    left: 5%;
+  }
+
+  .pacman {
+    position: absolute;
+    z-index: 99;
+    top: 50%;
+    left: 15px;
+
+    transition: left 1.4s ease;
+
+    &.pause {
+      &::before, &::after {
+        animation-play-state: paused;
+      }
+    }
+
+    &::before, &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      height: 0;
+      width: 0;
+      border: 15px solid yellow;
+      margin-top: -15px;
+      border-radius: 50%;
+
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+
+      transition: left 1s ease;
+
+      animation: mouthTop 0.7s ease infinite;
+    }
+
+    &::after {
+      // margin-left: 65px;
+
+      border-color: yellow;
+      border-right-color: transparent;
+      border-top-color: transparent;
+      animation: mouthBottom 0.7s ease infinite;
+    }
+  }
+}
+
+@keyframes mouthTop {
+  50% {
+    transform: rotate(43deg);
+  }
+}
+
+@keyframes mouthBottom {
+  50% {
+    transform: rotate(-43deg);
+  }
+}

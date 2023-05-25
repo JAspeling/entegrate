@@ -17,6 +17,7 @@ import { AppEffects } from "./state/app.effects";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ProcessInformationModule } from "./modules/process-information/process-information.module";
 import { SharedModule } from "./shared/shared.module";
+import { TimeIndicatorModule } from "./modules/time-indicator/time-indicator.module";
 
 @NgModule({
   declarations: [
@@ -25,11 +26,11 @@ import { SharedModule } from "./shared/shared.module";
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
 
     NgxTimelineModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot(),
-
 
     StoreModule.forRoot({
       'app': appReducer
@@ -45,12 +46,12 @@ import { SharedModule } from "./shared/shared.module";
     }),
     EffectsModule.forRoot([AppEffects]),
 
-    SharedModule,
 
+    SharedModule,
     TimelineModule,
     UnabridgedModule,
     ProcessInformationModule,
-    ReactiveFormsModule
+    TimeIndicatorModule,
   ],
   providers: [
     ComponentLoaderService,
