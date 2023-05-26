@@ -37,7 +37,8 @@ export const timelineData = [
     ]
   }, {
     id: '2',
-    title: 'Event 2',
+    title: 'Apostille Documents',
+    template: 'ApostilleComponent',
     timestamp: new Date(),
   }, {
     id: '3',

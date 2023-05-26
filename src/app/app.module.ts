@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ProcessInformationModule } from "./modules/process-information/process-information.module";
 import { SharedModule } from "./shared/shared.module";
 import { TimeIndicatorModule } from "./modules/time-indicator/time-indicator.module";
+import { ApostilleModule } from "./modules/apostille/apostille.module";
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { TimeIndicatorModule } from "./modules/time-indicator/time-indicator.mod
     UnabridgedModule,
     ProcessInformationModule,
     TimeIndicatorModule,
+    ApostilleModule
   ],
   providers: [
     ComponentLoaderService,
