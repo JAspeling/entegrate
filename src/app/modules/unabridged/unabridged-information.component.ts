@@ -66,7 +66,9 @@ export class UnabridgedInformationComponent implements OnInit {
         tap((config) => {
           this.form.patchValue({
             done: config.done,
-            selectedOption: config.selectedOption
+            selectedOption: config.selectedOption,
+            time: config.time,
+            cost: config.cost
           })
         })
       );
@@ -79,13 +81,6 @@ export class UnabridgedInformationComponent implements OnInit {
     this.applicationTotalCost$ = combineLatest(this.applicationAmount$, this.config$).pipe(
       map((value) => value[0] * value[1].cost)
     );
-
-    // this.getOptions$ = this.store.select(UnabridgedStoreSelectors.getConfig).subscribe((options) => {
-    //   this.form.patchValue({
-    //     done: options.done,
-    //     selectedOption: options.selectedOption
-    //   });
-    // })
 
     this.updateOptions$ = this.effect.updateOptions$.pipe(
       filter(action => action.type === '[Unabridged] Update unabridged options success')

@@ -3,7 +3,6 @@ import { Store } from "@ngrx/store";
 import { AppState } from "../../state/app.state";
 import { getCurrentTime, getTotalTime } from "../../state/app.selectors";
 import { combineLatest, map, Observable, tap } from "rxjs";
-import { UnabridgedState } from "../unabridged/store/unabridged-store.state";
 
 @Component({
   selector: 'app-time-indicator',
@@ -19,7 +18,7 @@ export class TimeIndicatorComponent {
   currentTime$: Observable<number>;
   timeRemaining$: Observable<number>;
 
-  constructor(private appStore: Store<AppState>, private unabridgedStore: Store<UnabridgedState>) {
+  constructor(private appStore: Store<AppState>) {
     this.totalTime$ = this.appStore.select(getTotalTime);
     this.currentTime$ = this.appStore.select(getCurrentTime);
 
@@ -41,18 +40,20 @@ export class TimeIndicatorComponent {
   }
 
   move(currentProgress: number) {
-    if (this.pacman?.nativeElement) {
-      this.pacman.nativeElement.classList.toggle('pause');
-      let progress = 0;
-
-      progress = this.pathWidth * (currentProgress / 100);
-      this.pacman.nativeElement.style.left = `calc(20px + ${progress}px)`;
-      this.progress.nativeElement.style.left = `calc(20px + ${progress}px - 100%)`;
-
-      setTimeout(() => {
+    requestAnimationFrame(() => {
+      if (this.pacman?.nativeElement) {
         this.pacman.nativeElement.classList.toggle('pause');
-      }, 1000)
-    }
+        let progress = 0;
+
+        progress = this.pathWidth * (currentProgress / 100);
+        this.pacman.nativeElement.style.left = `calc(20px + ${progress}px)`;
+        this.progress.nativeElement.style.left = `calc(30px + ${progress}px - 100%)`;
+
+        setTimeout(() => {
+          this.pacman.nativeElement.classList.toggle('pause');
+        }, 1000)
+      }
+    })
 
   }
 }
