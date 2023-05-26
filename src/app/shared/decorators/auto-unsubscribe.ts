@@ -10,7 +10,6 @@ export function AutoUnsubscribe(): ClassDecorator {
       const subscriptions: Subscription[] = this[subscriptionsKey];
 
       if (subscriptions) {
-        console.log(`Unsubscribing ${subscriptions.length} from subscriptions`);
         for (const subscription of subscriptions) {
           if (subscription && !subscription.closed) {
             subscription.unsubscribe();
