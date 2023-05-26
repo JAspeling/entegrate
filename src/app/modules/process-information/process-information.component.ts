@@ -96,6 +96,7 @@ export class ProcessInformationComponent implements OnInit {
   private initializeForm() {
     this.form = new FormBuilder().group({
       ...initialState,
+      peopleCount: 0
     }, { validator: this.validateFormGroup() });
 
     this.formSubscription = this.form.valueChanges.subscribe((value) => {

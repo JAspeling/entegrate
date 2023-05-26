@@ -21,10 +21,6 @@
           <div class="mb-3">
             <label for="peopleCount" class="form-label">Amount of people for application <b>(including yourself)</b></label>
             <input  [formControlName]="'peopleCount'" type="number" id="peopleCount" class="form-control">
-            <div *ngIf="touchedControlHasError('peopleCount')"
-                 class="invalid-feedback">
-              {{getFirstError('peopleCount')}}
-            </div>
           </div>
 
           <div class="mb-3">

@@ -20,7 +20,7 @@ export const isMarried = createSelector(
 
 export const isMoreThanOne = createSelector(
   getProcessInformationFeatureState,
-  (state) => ((state.children && state.childrenCount > 1) || state.peopleCount > 1),
+  (state) => ((state.children && state.childrenCount > 1) || state.partner === true),
 )
 
 export const includingChildren = createSelector(

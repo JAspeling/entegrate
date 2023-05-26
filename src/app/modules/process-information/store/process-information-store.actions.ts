@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { IProcessInformation } from "../models/process-information";
+import { ProcessInformationState } from "./process-info-store.state";
 
 export enum ProcessInformationActionTypes {
   Toggle = '[Process Information] Toggle Process Information',
@@ -23,5 +24,5 @@ export const getProcessInformation = createAction(
 
 export const getProcessInformationSuccess = createAction(
   ProcessInformationActionTypes.GetSuccess,
-  props<{ options: IProcessInformation }>()
+  props<{ options: ProcessInformationState }>()
 )

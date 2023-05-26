@@ -1,19 +1,19 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { IProcessInformation } from "./models/process-information";
-import { initialState } from "./store/process-info-store.state";
+import { initialState, ProcessInformationState } from "./store/process-info-store.state";
 
 export abstract class IProcessInformationService {
   abstract updateOptions(options: IProcessInformation): Observable<IProcessInformation>;
 
-  abstract getOptions(): Observable<IProcessInformation>;
+  abstract getOptions(): Observable<ProcessInformationState>;
 }
 
 @Injectable()
 export class ProcessInformationLocalService implements IProcessInformationService {
-  getOptions(): Observable<IProcessInformation> {
+  getOptions(): Observable<ProcessInformationState> {
     const options = localStorage.getItem('processInformation');
-    let result: IProcessInformation;
+    let result: ProcessInformationState;
 
     if (!options) {
       // Initialize it with the default values
