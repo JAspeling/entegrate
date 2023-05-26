@@ -24,12 +24,11 @@ export class UnabridgedStoreEffects {
   updateConfigSuccess$ = createEffect(() => this.actions$.pipe(
       ofType(UnabridgedActions.updateConfigSuccess, UnabridgedActions.getConfigSuccess),
       tap((action) => {
-        if (action.done) {
-          this.appStore.dispatch(AppActions.updateCurrentTime({ currentTime: action.time }))
-        } else {
-          this.appStore.dispatch(AppActions.updateTotalTime({ totalTime: action.time }))
-          this.appStore.dispatch(AppActions.updateCurrentTime({ currentTime: 0 }))
-        }
+        this.appStore.dispatch(AppActions.updateCurrentTime({
+          component: 'unabridged',
+          currentTime: action.done ? action.time : 0
+        }))
+        this.appStore.dispatch(AppActions.updateTotalTime({ component: 'unabridged', totalTime: action.time }))
       })
     ), { dispatch: false }
   )

@@ -61,8 +61,6 @@ export class UnabridgedInformationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(UnabridgedStoreActions.getConfig())
-
     this.config$ = this.store.select(UnabridgedStoreSelectors.getConfig);
 
     this.isMarried$ = this.processInfoStore.select(ProcessInfoSelectors.isMarried);

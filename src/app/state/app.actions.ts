@@ -12,12 +12,12 @@ export const getAppName = createAction(
 
 export const updateTotalTime = createAction(
   actions.UpdateTotalTime,
-  props<{ totalTime: number }>()
+  props<{ component: string, totalTime: number }>()
 )
 
 export const updateCurrentTime = createAction(
   actions.UpdateCurrentTime,
-  props<{ currentTime: number }>()
+  props<{ component: string, currentTime: number }>()
 )
 
 //TODO: These will have to be emitted per feature to keep track of the time per feature.

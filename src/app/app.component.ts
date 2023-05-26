@@ -7,6 +7,10 @@ import * as timelineActions from "./modules/timeline/state/timeline.actions";
 import { Observable } from "rxjs";
 import { ComponentLoaderService } from "./shared/services/component-loader.service";
 import { AppState } from "./state/app.state";
+import { UnabridgedState } from "./modules/unabridged/store/unabridged-store.state";
+import { UnabridgedStoreActions } from "./modules/unabridged/store";
+import { ApostilleState } from "./modules/apostille/store/apostille.state";
+import { ApostilleActions } from "./modules/apostille/store";
 
 @Component({
   selector: 'app-root',
@@ -20,10 +24,16 @@ export class AppComponent implements OnInit {
   currentEvent$: Observable<CustomTimelineEvent>;
   protected NgxTimelineEventChangeSideInGroup = NgxTimelineEventChangeSideInGroup;
 
-  constructor(private store: Store<AppState>, private componentLoader: ComponentLoaderService) {
+  constructor(private store: Store<AppState>,
+    private unabridgedStore: Store<UnabridgedState>,
+    private apostilleStore: Store<ApostilleState>,
+    private componentLoader: ComponentLoaderService) {
 
     this.store.dispatch(timelineActions.loadEvents());
     this.store.dispatch(timelineActions.getCurrent());
+    this.unabridgedStore.dispatch(UnabridgedStoreActions.getConfig());
+    this.apostilleStore.dispatch(ApostilleActions.getSaved());
+
     this.events$ = this.store.select(getEvents);
 
     this.currentEvent$ = this.store.select(getCurrentEvent);

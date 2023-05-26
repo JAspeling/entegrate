@@ -1,12 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
-import { AppState } from "./app.state";
+import { AppState, initialState } from "./app.state";
 import { AppActions } from "./index";
-
-const initialState: AppState = {
-  name: 'Entegrate',
-  totalTime: 0,
-  currentTime: 0
-}
 
 export const appReducer = createReducer(
   initialState,
@@ -16,15 +10,23 @@ export const appReducer = createReducer(
     })
   ),
   on(
-    AppActions.updateTotalTime, (state, action): AppState => ({
-      ...state,
-      totalTime: action.totalTime
-    })
+    AppActions.updateTotalTime, (state, action): AppState => {
+      const newTime = { ...state.time };
+      newTime[`${action.component}_total`] = action.totalTime;
+      return {
+        ...state,
+        time: newTime
+      };
+    }
   ),
   on(
-    AppActions.updateCurrentTime, (state, action): AppState => ({
-      ...state,
-      currentTime: action.currentTime
-    })
+    AppActions.updateCurrentTime, (state, action): AppState => {
+      const newTime = { ...state.time };
+      newTime[`${action.component}_current`] = action.currentTime;
+      return {
+        ...state,
+        time: newTime
+      }
+    }
   )
 )

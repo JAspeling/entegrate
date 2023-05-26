@@ -19,6 +19,7 @@ import { ProcessInformationModule } from "./modules/process-information/process-
 import { SharedModule } from "./shared/shared.module";
 import { TimeIndicatorModule } from "./modules/time-indicator/time-indicator.module";
 import { ApostilleModule } from "./modules/apostille/apostille.module";
+import { PoliceClearanceModule } from "./modules/police-clearance/police-clearance.module";
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ApostilleModule } from "./modules/apostille/apostille.module";
     UnabridgedModule,
     ProcessInformationModule,
     TimeIndicatorModule,
-    ApostilleModule
+    ApostilleModule,
+    PoliceClearanceModule
   ],
   providers: [
     ComponentLoaderService,

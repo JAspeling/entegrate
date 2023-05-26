@@ -39,10 +39,12 @@ export const timelineData = [
     id: '2',
     title: 'Apostille Documents',
     template: 'ApostilleComponent',
+    description: 'The apostille is a validation stamp ensuring that a particular document is recognized in certain foreign countries. IE Netherlands',
     timestamp: new Date(),
   }, {
     id: '3',
-    title: 'Event 3',
+    title: 'Police Clearance',
+    template: 'PoliceClearanceComponent',
     timestamp: new Date(),
   }, {
     id: '4',
