@@ -16,7 +16,7 @@ export const initialState: UnabridgedState = {
   },
   selectedOption: 0,
   done: false,
-  time: 0,
-  cost: 0,
+  time: 8,
+  cost: 1500,
   error: null
 }

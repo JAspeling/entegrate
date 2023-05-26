@@ -7,7 +7,6 @@ import { StoreModule } from "@ngrx/store";
 import { IUnabridgedService, UnabridgedLocalService, } from "./unabridged.service";
 import { unabridgedStoreReducer } from "./store/unabridged-store.reducer";
 import { UnabridgedStoreEffects } from "./store/unabridged-store.effects";
-import { initialState } from "./store/unabridged-store.state";
 
 @NgModule({
   imports: [
@@ -27,14 +26,5 @@ import { initialState } from "./store/unabridged-store.state";
 })
 export class UnabridgedModule {
   constructor() {
-    this.init();
   }
-
-  init() {
-    console.log('Initializing Unabridged Store');
-    if (localStorage.getItem('unabridgedOptions') === null) {
-      localStorage.setItem('unabridgedOptions', JSON.stringify(initialState.options));
-    }
-  }
-
 }
