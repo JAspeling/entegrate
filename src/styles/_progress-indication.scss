@@ -1,3 +1,12 @@
+.timeline-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+}
+
 .path {
   position: relative;
   width: 450px;
@@ -13,7 +22,7 @@
     display: block;
     height: 100%;
     width: 100%;
-    background: #2c2c2cf5;
+    background: rgba(44, 44, 44, 0.97);
     top: 0;
     transition: left 1.4s ease;
     // Pacman width + padding + current progress percentage.

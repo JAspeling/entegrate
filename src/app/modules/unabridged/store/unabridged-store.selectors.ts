@@ -17,3 +17,13 @@ export const getCost = createSelector(
   getUnabridgedFeatureState,
   (state) => state.cost
 )
+
+export const getDone = createSelector(
+  getUnabridgedFeatureState,
+  (state) => state.done
+)
+
+export const getTime = createSelector(
+  getUnabridgedFeatureState,
+  (state) => state.time
+)

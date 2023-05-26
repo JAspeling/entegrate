@@ -1,4 +1,9 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { AppState } from "../../state/app.state";
+import { getCurrentTime, getTotalTime } from "../../state/app.selectors";
+import { combineLatest, map, Observable, tap } from "rxjs";
+import { UnabridgedState } from "../unabridged/store/unabridged-store.state";
 
 @Component({
   selector: 'app-time-indicator',
@@ -10,6 +15,24 @@ export class TimeIndicatorComponent {
   @ViewChild('pacman') pacman: ElementRef<HTMLDivElement>;
 
   currentProgress = 0;
+  totalTime$: Observable<number>;
+  currentTime$: Observable<number>;
+  timeRemaining$: Observable<number>;
+
+  constructor(private appStore: Store<AppState>, private unabridgedStore: Store<UnabridgedState>) {
+    this.totalTime$ = this.appStore.select(getTotalTime);
+    this.currentTime$ = this.appStore.select(getCurrentTime);
+
+
+    this.timeRemaining$ = combineLatest(this.totalTime$, this.currentTime$)
+      .pipe(
+        map((value) => ({ totalTime: value[0], currentTime: value[1] })),
+        tap((value) => {
+          this.move(value.currentTime / value.totalTime * 100);
+        }),
+        map((value) => value.totalTime - value.currentTime)
+      );
+  }
 
   get pathWidth(): number {
     return this.path.nativeElement.clientWidth
@@ -17,30 +40,19 @@ export class TimeIndicatorComponent {
       - 15 // 15px is the width of the pacman
   }
 
-  move(number: number) {
-    // left: calc(30px + 15px - 100%);
-    this.pacman.nativeElement.classList.toggle('pause');
-    // this.currentProgress += number;
-
-    // Set to a random number between 0 and 100
-    this.currentProgress = Math.floor(Math.random() * 100);
-
-    let progress = 0;
-
-    if (this.currentProgress >= 100) {
-      // Restart pacman, but we dont want this.
-      // Move it to the end instead.
-      this.currentProgress = 100;
-
-    }
-
-    progress = this.pathWidth * (this.currentProgress / 100);
-    this.pacman.nativeElement.style.left = `calc(20px + ${progress}px)`;
-    this.progress.nativeElement.style.left = `calc(20px + ${progress}px - 100%)`;
-
-    setTimeout(() => {
+  move(currentProgress: number) {
+    if (this.pacman?.nativeElement) {
       this.pacman.nativeElement.classList.toggle('pause');
-    }, 1000)
+      let progress = 0;
+
+      progress = this.pathWidth * (currentProgress / 100);
+      this.pacman.nativeElement.style.left = `calc(20px + ${progress}px)`;
+      this.progress.nativeElement.style.left = `calc(20px + ${progress}px - 100%)`;
+
+      setTimeout(() => {
+        this.pacman.nativeElement.classList.toggle('pause');
+      }, 1000)
+    }
 
   }
 }

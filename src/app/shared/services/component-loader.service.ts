@@ -1,5 +1,5 @@
-import { componentMap } from "../../state/app.state";
 import { Injectable, ViewContainerRef } from "@angular/core";
+import { componentMap } from "../models/component-map";
 
 @Injectable()
 export class ComponentLoaderService {

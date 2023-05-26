@@ -3,5 +3,7 @@
   <div class="pac-progress" #progress></div>
   <div class="pacman pause" #pacman></div>
 </div>
-
-<button (click)="move(10)">Move</button>
+<div class="d-flex justify-content-center">
+  <span class="text-center w-100">{{timeRemaining$ | async}} weeks to go (out of {{totalTime$ | async}})</span>
+</div>
+<!--<button (click)="move(10)">Move</button>-->
