@@ -61,7 +61,15 @@ export class UnabridgedInformationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.config$ = this.store.select(UnabridgedStoreSelectors.getConfig);
+    this.config$ = this.store.select(UnabridgedStoreSelectors.getConfig)
+      .pipe(
+        tap((config) => {
+          this.form.patchValue({
+            done: config.done,
+            selectedOption: config.selectedOption
+          })
+        })
+      );
 
     this.isMarried$ = this.processInfoStore.select(ProcessInfoSelectors.isMarried);
     this.isMoreThanOne$ = this.processInfoStore.select(ProcessInfoSelectors.isMoreThanOne);
@@ -72,15 +80,15 @@ export class UnabridgedInformationComponent implements OnInit {
       map((value) => value[0] * value[1].cost)
     );
 
-    this.getOptions$ = this.store.select(UnabridgedStoreSelectors.getConfig).subscribe((options) => {
-      this.form.patchValue({
-        done: options.done,
-        selectedOption: options.selectedOption
-      });
-    })
+    // this.getOptions$ = this.store.select(UnabridgedStoreSelectors.getConfig).subscribe((options) => {
+    //   this.form.patchValue({
+    //     done: options.done,
+    //     selectedOption: options.selectedOption
+    //   });
+    // })
 
     this.updateOptions$ = this.effect.updateOptions$.pipe(
-      filter(action => action.type === UnabridgedStoreActions.actions.UpdateOptionsSuccess)
+      filter(action => action.type === '[Unabridged] Update unabridged options success')
     ).subscribe(() => {
       this.toastr.success(`Updated successfully!`);
     });

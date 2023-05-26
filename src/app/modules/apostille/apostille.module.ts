@@ -6,6 +6,7 @@ import { apostilleReducer } from "./store/apostille.reducer";
 import { ApostilleEffects } from "./store/apostille-effects";
 import { EffectsModule } from "@ngrx/effects";
 import { ApostilleService, IApostilleService } from "./apostille-service";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { ApostilleService, IApostilleService } from "./apostille-service";
 
     StoreModule.forFeature('apostille', apostilleReducer),
     EffectsModule.forFeature([ApostilleEffects]),
+    ReactiveFormsModule,
   ],
   providers: [
     {

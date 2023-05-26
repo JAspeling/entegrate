@@ -3,6 +3,7 @@ import { ApostilleState } from "./apostille.state";
 
 export enum actions {
   Update = '[Apostille] Update',
+  UpdateSuccess = '[Apostille] Update success',
   GetSaved = '[Apostille] Get saved',
   ActionSuccess = '[Apostille] Action success',
 }
@@ -20,3 +21,9 @@ export const update = createAction(
   actions.Update,
   props<ApostilleState>()
 )
+
+export const updateSuccess = createAction(
+  actions.UpdateSuccess,
+  props<ApostilleState>()
+)
+

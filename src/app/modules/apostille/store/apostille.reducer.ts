@@ -8,8 +8,14 @@ export const apostilleReducer = createReducer<ApostilleState>(
       ...state,
     })
   ),
-  on(ApostilleActions.getSavedSuccess, (state) => ({
+  on(ApostilleActions.getSavedSuccess, (state, action) => ({
       ...state,
+      ...action
+    })
+  ),
+  on(ApostilleActions.updateSuccess, (state, action) => ({
+      ...state,
+      ...action
     })
   )
 );
