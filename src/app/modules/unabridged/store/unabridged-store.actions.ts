@@ -17,7 +17,7 @@ export const getConfig = createAction(
 
 export const getConfigSuccess = createAction(
   actions.ActionSuccess,
-  props<{ selectedOption: number, done: boolean }>()
+  props<UnabridgedConfig>()
 )
 
 export const actionFailure = createAction(
