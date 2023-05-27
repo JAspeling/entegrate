@@ -7,15 +7,17 @@ import { StoreModule } from "@ngrx/store";
 import { IUnabridgedService, UnabridgedLocalService, } from "./unabridged.service";
 import { unabridgedStoreReducer } from "./store/unabridged-store.reducer";
 import { UnabridgedStoreEffects } from "./store/unabridged-store.effects";
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    StoreModule.forFeature('unabridged', unabridgedStoreReducer),
-    EffectsModule.forFeature([UnabridgedStoreEffects]),
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        StoreModule.forFeature('unabridged', unabridgedStoreReducer),
+        EffectsModule.forFeature([UnabridgedStoreEffects]),
+        ReactiveFormsModule,
+        SharedModule
+    ],
   declarations: [UnabridgedInformationComponent],
   providers: [
     {

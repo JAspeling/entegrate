@@ -1,65 +1,49 @@
-<div class="content" *ngIf="config$ | async as config">
-  <div class="scrollable">
-    <h4 class="mt-2">Unabridged Certificates</h4>
-    <hr>
+<app-additional [config]="config$ | async"
+                [form]="form"
+                (save)="save($event)"
+                [title]="'Unabridged certificates'">
+  <p class="fst-italic">In preparation for your move to the Netherlands, you'll need to apply for your <b>unabridged
+    birth</b>
+    and/or <b>marriage certificate</b> from the Department of Home affairs (DHA).
+  </p>
 
-    <div class="form-check mb-3" [formGroup]="form">
-      <input class="form-check-input"
-             type="checkbox"
-             id="flexCheckDefault"
-             [formControlName]="'done'">
-      <label class="form-check-label" for="flexCheckDefault">
-        <i>Mark as done!</i>
-      </label>
-    </div>
-    <p class="fst-italic">In preparation for your move to the Netherlands, you'll need to apply for your <b>unabridged
-      birth</b>
-      and/or <b>marriage certificate</b> from the Department of Home affairs (DHA).
-    </p>
+  <h5>Take note!</h5>
+  <p>Prevent doing this over the December period or over public holidays if you want to get this done as quickly as
+    possible</p>
 
-    <h5>Take note!</h5>
-    <p>Prevent doing this over the December period or over public holidays if you want to get this done as quickly as
-      possible</p>
-
-    <div *ngIf="(isMarried$ | async) === true" class="alert alert-warning" role="alert">
-      If you are married to your partner, you will need an <b>Unabridged marriage certificate</b> as well.
-    </div>
-
-    <div *ngIf="(isMoreThanOne$ | async) === true" class="alert alert-warning" role="alert">
-      You will need an <b>unabridged birth certificate</b> for each person coming over.
-      <span *ngIf="includingChildren$ | async"><i>* Including each child.</i></span>
-    </div>
-
-    <hr>
-
-    <h5>Timeline</h5>
-    <p>
-      This usually takes <b>between 4 and 8 weeks</b>.
-    </p>
-
-
-    <div class="mb-3">
-      <h5>Options</h5>
-      <ng-container *ngFor="let _option of selections; let i = index">
-        <div class="option"
-             [class.selected]="i === form.get('selectedOption').value"
-             (click)="select(i)">
-          <h6>{{_option.title}}</h6>
-          <span>{{_option.description}}</span>
-          <br>
-          <b>Cost: </b><span>R {{_option.cost}}</span>
-          <br>
-          <b>Time: </b><span>{{_option.time}} week(s)</span>
-        </div>
-      </ng-container>
-    </div>
-
-    <h5>Cost</h5>
-    With your selection, this usually costs <b>around R {{applicationTotalCost$ | async}}</b>.
+  <div *ngIf="(isMarried$ | async) === true" class="alert alert-warning" role="alert">
+    If you are married to your partner, you will need an <b>Unabridged marriage certificate</b> as well.
   </div>
 
-  <div class="content-footer">
-    <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-    <button type="button" class="btn btn-primary" (click)="save(config)">Save changes</button>
+  <div *ngIf="(isMoreThanOne$ | async) === true" class="alert alert-warning" role="alert">
+    You will need an <b>unabridged birth certificate</b> for each person coming over.
+    <span *ngIf="includingChildren$ | async"><i>* Including each child.</i></span>
   </div>
-</div>
+
+  <hr>
+
+  <h5>Timeline</h5>
+  <p>
+    This usually takes <b>between 4 and 8 weeks</b>.
+  </p>
+
+
+  <div class="mb-3">
+    <h5>Options</h5>
+    <ng-container *ngFor="let _option of selections; let i = index">
+      <div class="option"
+           [class.selected]="i === form.get('selectedOption').value"
+           (click)="select(i)">
+        <h6>{{_option.title}}</h6>
+        <span>{{_option.description}}</span>
+        <br>
+        <b>Cost: </b><span>R {{_option.cost}}</span>
+        <br>
+        <b>Time: </b><span>{{_option.time}} week(s)</span>
+      </div>
+    </ng-container>
+  </div>
+
+  <h5>Cost</h5>
+  With your selection, this usually costs <b>around R {{applicationTotalCost$ | async}}</b>.
+</app-additional>
