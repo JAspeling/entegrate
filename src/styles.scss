@@ -6,7 +6,7 @@
 @import 'ngx-toastr/toastr-bs5-alert';
 
 :root {
-   --bs-body-font-family: 'Montserrat';
+  --bs-body-font-family: 'Montserrat';
 }
 
 @import './styles/timeline';
@@ -16,36 +16,35 @@
 $nav-height: 80px;
 
 .invalid-feedback {
-  display: block!important;
+  display: block !important;
 }
 
 nav {
   &.navbar {
-    height: $nav-height!important;
+    height: $nav-height !important;
   }
 }
 
 .center-icon-container {
-  position: relative!important;
-  background: var(--bs-body-bg)!important;
+  position: relative !important;
+  background: var(--bs-body-bg) !important;
 }
 
 .items-container {
-  min-width: max(20rem, 90%)!important;
+  min-width: max(20rem, 90%) !important;
 }
 
 .event-outer-container {
-  margin: 0!important;
-  padding: 0 1rem!important;
+  margin: 0 !important;
+  padding: 0 1rem !important;
 }
-
 
 
 // Event
 .event-custom {
   border-radius: 5px;
   // Create a default box shadow
-  box-shadow: 4px 4px 5px 0 rgba(0,0,0,0.2);
+  box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.2);
   background: #2c2c2c;
   padding: 0.5rem;
   margin-top: 0.5rem;
@@ -56,12 +55,23 @@ nav {
 
   &.completed {
     border-color: #198754;
+
+    .header {
+      color: #198754;
+    }
+
+    color: rgb(117, 183, 152);
+
+    hr {
+      color: #198754;
+    }
   }
 
   &:hover {
     // Create a hover box shadow
-    box-shadow: 0 0 10px 2px rgba(0,0,0,0.4);
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.4);
   }
+
   &.active {
     border: 2px solid #FFA500;
   }
@@ -70,7 +80,7 @@ nav {
 
 ::-webkit-scrollbar {
   width: 8px;
-  box-shadow: inset 0 0 10px 2px rgba(0,0,0,0.25);
+  box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.25);
 }
 
 ::-webkit-scrollbar-thumb {

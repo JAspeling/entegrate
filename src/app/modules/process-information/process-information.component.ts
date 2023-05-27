@@ -5,12 +5,11 @@ import { getIsOpen } from "./store/process-information-store.selectors";
 import { Store } from "@ngrx/store";
 import { initialState, ProcessInformationState } from "./store/process-info-store.state";
 import { FormBuilder, FormGroup, ValidationErrors } from "@angular/forms";
-import { IProcessInformation } from "./models/process-information";
 import { ProcessInfoActions, ProcessInfoSelectors } from "./store";
 import { ProcessInformationStoreEffects } from "./store/process-information-store.effects";
 import { ToastrService } from "ngx-toastr";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
-import { getFirstErrorFromControl, touchedControlHasError } from "ng-form-validator-builder";
+import { ofType } from "@ngrx/effects";
 
 @Component({
   selector: 'app-process-information',
@@ -43,7 +42,9 @@ export class ProcessInformationComponent implements OnInit {
       ).subscribe();
 
     this.processInformationUpdated =
-      this.effects.update$.pipe(tap(() => {
+      this.effects.update$.pipe(
+        ofType(ProcessInfoActions.updateProcessInformationSuccess),
+        tap(() => {
           this.toastService.success('Updated');
         })
       ).subscribe();
@@ -66,29 +67,19 @@ export class ProcessInformationComponent implements OnInit {
     }
   }
 
-  touchedControlHasError(controlName: keyof IProcessInformation) {
-    const control = this.form.get(controlName);
-    return touchedControlHasError(control);
-  }
-
-  getFirstError(formControl: keyof IProcessInformation) {
-    const control = this.form.get(formControl);
-    return getFirstErrorFromControl(control);
-  }
-
   toggleOpen() {
     this.store.dispatch(toggleProcessInformation());
   }
 
   ngOnInit(): void {
     this.isOpen$ = this.store.select(getIsOpen);
-
   }
 
-  save() {
+  save(event: any) {
+    event.preventDefault()
     this.form.markAllAsTouched();
     if (this.form.valid && this.form.dirty) {
-      this.store.dispatch(updateProcessInformation({ options: this.form.value }));
+      this.store.dispatch(updateProcessInformation(this.form.value ));
       this.form.markAsPristine();
     }
   }

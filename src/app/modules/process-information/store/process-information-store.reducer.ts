@@ -18,13 +18,13 @@ export const processInformationReducer = createReducer(
   on(
     updateProcessInformation, (state, action): any => ({
       ...state,
-      ...action.options
+      ...action
     })
   ),
   on(
     getProcessInformationSuccess, (state, action): any => ({
       ...state,
-      ...action.options
+      ...action
     })
   )
 )

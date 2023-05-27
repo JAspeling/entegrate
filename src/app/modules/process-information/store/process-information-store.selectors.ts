@@ -1,35 +1,35 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { ProcessInformationState } from "./process-info-store.state";
 
-const getProcessInformationFeatureState = createFeatureSelector<ProcessInformationState>('processInformation');
+const featureSelector = createFeatureSelector<ProcessInformationState>('processInformation');
 
 export const getIsOpen = createSelector(
-  getProcessInformationFeatureState,
+  featureSelector,
   (state) => state.isOpen,
 )
 
 export const getProcessInformation = createSelector(
-  getProcessInformationFeatureState,
+  featureSelector,
   (state) => state
 )
 
 export const isMarried = createSelector(
-  getProcessInformationFeatureState,
+  featureSelector,
   (state) => state.married,
 )
 
 export const isMoreThanOne = createSelector(
-  getProcessInformationFeatureState,
+  featureSelector,
   (state) => ((state.children && state.childrenCount > 1) || state.partner === true),
 )
 
 export const includingChildren = createSelector(
-  getProcessInformationFeatureState,
+  featureSelector,
   (state) => state.children,
 )
 
 export const applicationAmount = createSelector(
-  getProcessInformationFeatureState,
+  featureSelector,
   (state) => {
     let count = 1;
     if (state.partner) {
