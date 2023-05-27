@@ -6,6 +6,7 @@ export enum actions {
   UpdateSuccess = '[Apostille] Update success',
   GetSaved = '[Apostille] Get saved',
   ActionSuccess = '[Apostille] Action success',
+  SetId = '[Apostille] Set Id'
 }
 
 export const getSaved = createAction(
@@ -27,3 +28,7 @@ export const updateSuccess = createAction(
   props<ApostilleState>()
 )
 
+export const setId = createAction(
+  actions.SetId,
+  props<{ id: string }>()
+)

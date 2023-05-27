@@ -6,6 +6,7 @@ export enum actions {
   GetSavedSuccess = '[Police Clearance] Get Saved Success',
   Update = '[Police Clearance] Update',
   UpdateSuccess = '[Police Clearance] Update Success',
+  SetId = '[Police Clearance] Set Id',
 }
 
 export const getSaved = createAction(
@@ -27,3 +28,7 @@ export const updateSuccess = createAction(
   props<PoliceClearanceState>()
 )
 
+export const setId = createAction(
+  actions.SetId,
+  props<{ id: string }>()
+)

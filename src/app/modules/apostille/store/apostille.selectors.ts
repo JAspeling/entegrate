@@ -22,3 +22,11 @@ export const getCost = createSelector(
   getFeatureSelector,
   (state) => state.cost
 )
+
+export const getState = createSelector(
+  getFeatureSelector,
+  (state: ApostilleState) => ({
+    id: state.id,
+    done: state.done,
+  })
+)

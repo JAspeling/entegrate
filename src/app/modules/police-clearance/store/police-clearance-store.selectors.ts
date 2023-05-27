@@ -8,3 +8,10 @@ export const getConfig = createSelector(
   (state: PoliceClearanceState) => state
 )
 
+export const getState = createSelector(
+  featureSelector,
+  (state: PoliceClearanceState) => ({
+    id: state.id,
+    done: state.done,
+  })
+)

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { UnabridgedConfig } from "./models/unabridged-options.interface";
-import { combineLatest, filter, map, Observable, Subscription, tap } from "rxjs";
+import { combineLatest, map, Observable, Subscription, tap } from "rxjs";
 import * as timelineActions from "../timeline/state/timeline.actions";
 import { ToastrService } from "ngx-toastr";
 import { UnabridgedState } from "./store/unabridged-store.state";
@@ -11,6 +11,7 @@ import { UnabridgedStoreActions, UnabridgedStoreSelectors } from "./store";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
 import { ProcessInformationState } from "../process-information/store/process-info-store.state";
 import { ProcessInfoSelectors } from "../process-information/store";
+import { ofType } from "@ngrx/effects";
 
 @Component({
   selector: 'app-unabridged-information',
@@ -46,7 +47,6 @@ export class UnabridgedInformationComponent implements OnInit {
       time: 4 // Weeks
     }
   ]
-  private getOptions$: Subscription;
   private updateOptions$: Subscription;
 
   constructor(private store: Store<UnabridgedState>, private processInfoStore: Store<ProcessInformationState>,
@@ -83,7 +83,7 @@ export class UnabridgedInformationComponent implements OnInit {
     );
 
     this.updateOptions$ = this.effect.updateOptions$.pipe(
-      filter(action => action.type === '[Unabridged] Update unabridged options success')
+      ofType(UnabridgedStoreActions.updateConfigSuccess)
     ).subscribe(() => {
       this.toastr.success(`Updated successfully!`);
     });

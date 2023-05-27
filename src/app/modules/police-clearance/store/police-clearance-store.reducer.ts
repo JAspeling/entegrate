@@ -5,7 +5,7 @@ import { PoliceClearanceActions } from "./index";
 export const policeClearanceReducer = createReducer(
   initialState,
   on(PoliceClearanceActions.getSaved, (state) => ({
-      ...state,
+    ...state,
   })),
   on(PoliceClearanceActions.getSavedSuccess, (state, action) => ({
       ...state,
@@ -16,6 +16,11 @@ export const policeClearanceReducer = createReducer(
     PoliceClearanceActions.updateSuccess, (state, action) => ({
       ...state,
       ...action
+    })
+  ),
+  on(PoliceClearanceActions.setId, (state, action) => ({
+      ...state,
+      id: action.id
     })
   )
 )

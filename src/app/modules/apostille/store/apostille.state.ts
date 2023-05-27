@@ -1,4 +1,5 @@
 export interface ApostilleState {
+  id?: string;
   time: number;
   cost: number;
   done: boolean;

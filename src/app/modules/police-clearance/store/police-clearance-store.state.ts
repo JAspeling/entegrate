@@ -1,4 +1,5 @@
 export interface PoliceClearanceState {
+  id?: string;
   time: number;
   cost: number;
   done: boolean;

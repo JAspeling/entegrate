@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { PoliceClearanceActions } from "./index";
-import { concatMap, map, tap } from "rxjs";
+import { PoliceClearanceActions, PoliceClearanceSelectors } from "./index";
+import { concatMap, map, mergeMap, tap } from "rxjs";
 import { IPoliceClearanceService } from "../police-clearance.service";
 import { AppActions } from "../../../state";
 import { AppState } from "../../../state/app.state";
@@ -18,15 +18,18 @@ export class PoliceClearanceStoreEffects {
       ),
       tap((action) => {
         // emit to the appState
-        this.appStore.dispatch(AppActions.updateCurrentTime({
+        this.store.dispatch(AppActions.updateCurrentTime({
           component: 'police-clearance',
           currentTime: action.done ? action.time : 0
         }));
-        this.appStore.dispatch(AppActions.updateTotalTime({
+        this.store.dispatch(AppActions.updateTotalTime({
           component: 'police-clearance', totalTime: action.time
         }));
-        this.appStore.dispatch(TimelineActions.updateEvent({  id: '3', done: action.done }));
-      })
+      }),
+      mergeMap((action) => this.store.select(PoliceClearanceSelectors.getState)),
+      tap(state =>
+        this.store.dispatch(TimelineActions.updateEvent({  id: state.id, done: state.done }))
+      )
     ), { dispatch: false }
   );
 
@@ -36,7 +39,7 @@ export class PoliceClearanceStoreEffects {
       concatMap((action) => this.service.update(action)
         .pipe(
           tap((options) => {
-            this.appStore.dispatch(TimelineActions.updateEvent({  id: '3', done: action.done }));
+            this.store.dispatch(TimelineActions.updateEvent({  id: '3', done: action.done }));
           }),
           map((options) => PoliceClearanceActions.updateSuccess(options))
         )
@@ -55,7 +58,20 @@ export class PoliceClearanceStoreEffects {
     )
   )
 
+  setId$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(TimelineActions.loadEventsSuccess),
+      tap((events) =>
+        this.store.dispatch(PoliceClearanceActions.setId({
+          id: events.events
+            .find((event) => event.title.toLowerCase() === 'police clearance')
+            .id
+        }))
+      )
+    ), { dispatch: false }
+  )
+
   constructor(private readonly actions$: Actions, private service: IPoliceClearanceService,
-    private appStore: Store<AppState>) {
+    private store: Store<AppState>) {
   }
 }

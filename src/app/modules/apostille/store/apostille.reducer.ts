@@ -17,5 +17,10 @@ export const apostilleReducer = createReducer<ApostilleState>(
       ...state,
       ...action
     })
+  ),
+  on(ApostilleActions.setId, (state, action) => ({
+      ...state,
+      id: action.id
+    })
   )
 );

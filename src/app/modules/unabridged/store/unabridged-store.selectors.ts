@@ -1,10 +1,10 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { UnabridgedState } from "./unabridged-store.state";
 
-const getUnabridgedFeatureState = createFeatureSelector<UnabridgedState>('unabridged');
+const featureSelector = createFeatureSelector<UnabridgedState>('unabridged');
 
 export const getConfig = createSelector(
-  getUnabridgedFeatureState,
+  featureSelector,
   (state) => ({
     selectedOption: state.selectedOption,
     done: state.done,
@@ -14,16 +14,24 @@ export const getConfig = createSelector(
 )
 
 export const getCost = createSelector(
-  getUnabridgedFeatureState,
+  featureSelector,
   (state) => state.cost
 )
 
 export const getDone = createSelector(
-  getUnabridgedFeatureState,
+  featureSelector,
   (state) => state.done
 )
 
 export const getTime = createSelector(
-  getUnabridgedFeatureState,
+  featureSelector,
   (state) => state.time
+)
+
+export const getState = createSelector(
+  featureSelector,
+  (state: UnabridgedState) => ({
+    id: state.id,
+    done: state.done,
+  })
 )
