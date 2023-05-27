@@ -4,10 +4,10 @@ import { PoliceClearanceActions } from "./index";
 
 export const policeClearanceReducer = createReducer(
   initialState,
-  on(PoliceClearanceActions.getSaved, (state) => ({
+  on(PoliceClearanceActions.getConfig, (state) => ({
     ...state,
   })),
-  on(PoliceClearanceActions.getSavedSuccess, (state, action) => ({
+  on(PoliceClearanceActions.getConfigSuccess, (state, action) => ({
       ...state,
       ...action
     })

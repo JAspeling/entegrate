@@ -13,7 +13,7 @@ export class PoliceClearanceStoreEffects {
   getOrUpdateSuccess$ = createEffect(() => this.actions$
     .pipe(
       ofType(
-        PoliceClearanceActions.getSavedSuccess,
+        PoliceClearanceActions.getConfigSuccess,
         PoliceClearanceActions.updateSuccess
       ),
       tap((action) => {
@@ -38,9 +38,6 @@ export class PoliceClearanceStoreEffects {
       ofType(PoliceClearanceActions.update),
       concatMap((action) => this.service.update(action)
         .pipe(
-          tap((options) => {
-            this.store.dispatch(TimelineActions.updateEvent({  id: '3', done: action.done }));
-          }),
           map((options) => PoliceClearanceActions.updateSuccess(options))
         )
       )
@@ -49,10 +46,10 @@ export class PoliceClearanceStoreEffects {
 
   get$ = createEffect(() => this.actions$
     .pipe(
-      ofType(PoliceClearanceActions.getSaved),
+      ofType(PoliceClearanceActions.getConfig),
       concatMap(() => this.service.getSaved()
         .pipe(
-          map((options) => PoliceClearanceActions.getSavedSuccess(options))
+          map((options) => PoliceClearanceActions.getConfigSuccess(options))
         )
       )
     )

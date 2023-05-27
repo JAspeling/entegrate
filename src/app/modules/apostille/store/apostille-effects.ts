@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { getSaved, getSavedSuccess, update, updateSuccess } from "./apostille.actions";
+import { getConfig, getConfigSuccess, update, updateSuccess } from "./apostille.actions";
 import { concatMap, map, mergeMap, tap } from "rxjs";
 import { AppActions } from "../../../state";
 import { AppState } from "../../../state/app.state";
@@ -12,7 +12,7 @@ import { ApostilleActions, ApostilleSelectors } from "./index";
 @Injectable()
 export class ApostilleEffects {
   getOrUpdateSuccess$ = createEffect(() => this.actions$.pipe(
-      ofType(getSavedSuccess, updateSuccess),
+      ofType(getConfigSuccess, updateSuccess),
       tap((action) => {
         // emit to the appState
         this.store.dispatch(AppActions.updateCurrentTime({
@@ -43,10 +43,10 @@ export class ApostilleEffects {
 
   get$ = createEffect(() => this.actions$
     .pipe(
-      ofType(getSaved),
+      ofType(getConfig),
       concatMap(() => this.apostilleService.getSaved()
         .pipe(
-          map((options) => getSavedSuccess(options))
+          map((options) => getConfigSuccess(options))
         )
       )
     )

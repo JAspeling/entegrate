@@ -1,0 +1,21 @@
+<div class="content" *ngIf="(config$ | async) as config">
+  <div class="scrollable">
+    <h4 class="mt-2">Gather Documents</h4>
+    <hr>
+
+    <div class="form-check mb-3" [formGroup]="form">
+      <input class="form-check-input"
+             type="checkbox"
+             id="flexCheckDefault"
+             [formControlName]="'done'">
+      <label class="form-check-label" for="flexCheckDefault">
+        <i>Mark as done!</i>
+      </label>
+    </div>
+  </div>
+
+  <div class="content-footer">
+    <button type="button" class="btn btn-secondary">Close</button>
+    <button type="button" class="btn btn-primary" (click)="save(config)">Save changes</button>
+  </div>
+</div>

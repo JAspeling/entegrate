@@ -4,11 +4,11 @@ import { ApostilleActions } from "./index";
 
 export const apostilleReducer = createReducer<ApostilleState>(
   initialState,
-  on(ApostilleActions.getSaved, (state) => ({
+  on(ApostilleActions.getConfig, (state) => ({
       ...state,
     })
   ),
-  on(ApostilleActions.getSavedSuccess, (state, action) => ({
+  on(ApostilleActions.getConfigSuccess, (state, action) => ({
       ...state,
       ...action
     })

@@ -2,19 +2,19 @@ import { createAction, props } from "@ngrx/store";
 import { PoliceClearanceState } from "./police-clearance-store.state";
 
 export enum actions {
-  GetSaved = '[Police Clearance] Get Saved',
-  GetSavedSuccess = '[Police Clearance] Get Saved Success',
+  GetConfig = '[Police Clearance] Get Config',
+  GetConfigSuccess = '[Police Clearance] Get Config Success',
   Update = '[Police Clearance] Update',
   UpdateSuccess = '[Police Clearance] Update Success',
   SetId = '[Police Clearance] Set Id',
 }
 
-export const getSaved = createAction(
-  actions.GetSaved
+export const getConfig = createAction(
+  actions.GetConfig
 )
 
-export const getSavedSuccess = createAction(
-  actions.GetSavedSuccess,
+export const getConfigSuccess = createAction(
+  actions.GetConfigSuccess,
   props<PoliceClearanceState>()
 )
 

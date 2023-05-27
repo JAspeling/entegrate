@@ -2,7 +2,15 @@ import { CustomTimelineEvent } from "../../shared/models/timeline-event.interfac
 
 export const timelineData: CustomTimelineEvent[] = [
   {
-    id: '6',
+    id: 'gather',
+    done: false,
+    title: 'Gather Documents',
+    template: 'GatherDocumentsComponent',
+    description: 'You will need to get get some documents ready to kick off the process',
+    timestamp: new Date(),
+  },
+  {
+    id: '1',
     done: false,
     template: 'UnabridgedInformationComponent',
     title: 'Unabridged certificates',
@@ -49,6 +57,7 @@ export const timelineData: CustomTimelineEvent[] = [
     id: '3',
     done: false,
     title: 'Police Clearance',
+    description: 'You’ll need to apply for your police clearance certificate from the South African Police Service',
     template: 'PoliceClearanceComponent',
     timestamp: new Date(),
   }, {

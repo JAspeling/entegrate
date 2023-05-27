@@ -20,6 +20,7 @@ import { SharedModule } from "./shared/shared.module";
 import { TimeIndicatorModule } from "./modules/time-indicator/time-indicator.module";
 import { ApostilleModule } from "./modules/apostille/apostille.module";
 import { PoliceClearanceModule } from "./modules/police-clearance/police-clearance.module";
+import { GatherDocumentsModule } from "./modules/gather-documents/gather-documents.module";
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { PoliceClearanceModule } from "./modules/police-clearance/police-clearan
 
 
     SharedModule,
+    GatherDocumentsModule,
     TimelineModule,
     UnabridgedModule,
     ProcessInformationModule,
