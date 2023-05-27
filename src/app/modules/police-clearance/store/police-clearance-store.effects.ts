@@ -6,10 +6,11 @@ import { IPoliceClearanceService } from "../police-clearance.service";
 import { AppActions } from "../../../state";
 import { AppState } from "../../../state/app.state";
 import { Store } from "@ngrx/store";
+import { TimelineActions } from "../../timeline/state";
 
 @Injectable()
 export class PoliceClearanceStoreEffects {
-  updateOrRetrieveSuccess$ = createEffect(() => this.actions$
+  getOrUpdateSuccess$ = createEffect(() => this.actions$
     .pipe(
       ofType(
         PoliceClearanceActions.getSavedSuccess,
@@ -20,10 +21,11 @@ export class PoliceClearanceStoreEffects {
         this.appStore.dispatch(AppActions.updateCurrentTime({
           component: 'police-clearance',
           currentTime: action.done ? action.time : 0
-        }))
+        }));
         this.appStore.dispatch(AppActions.updateTotalTime({
           component: 'police-clearance', totalTime: action.time
-        }))
+        }));
+        this.appStore.dispatch(TimelineActions.updateEvent({  id: '3', done: action.done }));
       })
     ), { dispatch: false }
   );
@@ -33,6 +35,9 @@ export class PoliceClearanceStoreEffects {
       ofType(PoliceClearanceActions.update),
       concatMap((action) => this.service.update(action)
         .pipe(
+          tap((options) => {
+            this.appStore.dispatch(TimelineActions.updateEvent({  id: '3', done: action.done }));
+          }),
           map((options) => PoliceClearanceActions.updateSuccess(options))
         )
       )

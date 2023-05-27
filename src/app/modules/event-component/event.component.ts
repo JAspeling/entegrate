@@ -31,7 +31,6 @@ export class EventComponent {
   }
 
   get eventInfo(): CustomTimelineEvent {
-    console.log(this.event);
     return this.event?.eventInfo as CustomTimelineEvent;
   }
 

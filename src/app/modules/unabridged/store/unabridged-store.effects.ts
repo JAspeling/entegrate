@@ -22,7 +22,7 @@ export class UnabridgedStoreEffects {
     )
   )
 
-  updateConfigSuccess$ = createEffect(() => this.actions$.pipe(
+  getOrUpdateConfigSuccess$ = createEffect(() => this.actions$.pipe(
       ofType(UnabridgedActions.updateConfigSuccess, UnabridgedActions.getConfigSuccess),
       tap((action) => {
         this.appStore.dispatch(AppActions.updateCurrentTime({
