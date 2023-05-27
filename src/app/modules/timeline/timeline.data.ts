@@ -66,5 +66,12 @@ export const timelineData: CustomTimelineEvent[] = [
     title: 'Flight tickets',
     description: `You'll need to book your flight tickets.`,
     timestamp: new Date(),
+  },
+  {
+    id: 'pets',
+    done: false,
+    title: 'Pets',
+    description: `We all love our furry little friends, but they can be a bit of a hassle to get them to the Netherlands. You'll need to get them ready for the trip.`,
+    timestamp: new Date(),
   }
 ]
