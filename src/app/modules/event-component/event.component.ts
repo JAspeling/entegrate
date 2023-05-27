@@ -1,31 +1,40 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { NgxTimelineItem } from "@frxjs/ngx-timeline";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { NgxTimelineItem, NgxTimelineItemPosition } from "@frxjs/ngx-timeline";
 import { CustomTimelineEvent } from "../../shared/models/timeline-event.interface";
 import { Store } from "@ngrx/store";
-import { getCurrentEvent, TimelineState } from "../timeline/state/timeline.reducer";
 import * as timelineActions from "../timeline/state/timeline.actions";
+import { TimelineState } from "../timeline/state/timeline.state";
+import { TimelineSelectors } from "../timeline/state";
+import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
+import { tap } from "rxjs";
 
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EventComponent implements OnInit {
+@AutoUnsubscribe()
+export class EventComponent {
   @Input() event: NgxTimelineItem;
-  active: boolean = false;
+  active: boolean;
+
+  itemPosition = NgxTimelineItemPosition;
+
+  currentEventId$ = this.store.select(TimelineSelectors.getCurrentEventId)
+    .pipe(
+      tap((currentEventId) => {
+        this.active = currentEventId === this.eventInfo.id;
+      })
+    )
 
   constructor(private store: Store<TimelineState>) {
-
   }
 
   get eventInfo(): CustomTimelineEvent {
+    console.log(this.event);
     return this.event?.eventInfo as CustomTimelineEvent;
   }
 
-  ngOnInit() {
-    this.store.select(getCurrentEvent).subscribe((value) => {
-      this.active = value?.id === this.eventInfo.id;
-    });
-  }
 
   toggle() {
     if (this.active) {

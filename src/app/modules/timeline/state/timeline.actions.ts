@@ -1,53 +1,73 @@
 import { createAction, props } from "@ngrx/store";
 import { CustomTimelineEvent } from "../../../shared/models/timeline-event.interface";
 
+export enum actions {
+  LoadEvents = '[Timeline] Load events',
+  LoadEventsSuccess = '[Timeline] Load events success',
+  LoadEventsFailure = '[Timeline] Load events failure',
+  AddEvent = '[Timeline] Add event',
+  SetCurrent = '[Timeline] Set current',
+  SetCurrentSuccess = '[Timeline] Set current success',
+  SetCurrentFailure = '[Timeline] Set current failure',
+  GetCurrent = '[Timeline] Get current',
+  GetCurrentSuccess = '[Timeline] Get current success',
+  ClearCurrentEvent = '[Timeline] Clear current event',
+  ClearCurrentEventSuccess = '[Timeline] Clear current event success',
+  UpdateEvent = '[Timeline] Update event',
+}
+
 export const loadEvents = createAction(
-  '[Timeline] Load events'
+  actions.LoadEvents
 );
 
 export const loadEventsSuccess = createAction(
-  '[Timeline] Load Events Success',
+  actions.LoadEventsSuccess,
   props<{ events: CustomTimelineEvent[] }>()
 );
 
 export const loadEventsFailure = createAction(
-  '[Timeline] Load Events Fail',
+  actions.LoadEventsFailure,
   props<{ error: string }>()
 );
 
 export const addEvent = createAction(
-  '[Timeline] Add event',
+  actions.AddEvent,
   props<{ event: CustomTimelineEvent }>()
 );
 
 export const setCurrent = createAction(
-  '[Timeline] Set current',
+  actions.SetCurrent,
   props<{ eventId: string }>()
 );
 
 export const setCurrentSuccess = createAction(
-  '[Timeline] Set current success',
+  actions.SetCurrentSuccess,
   props<{ eventId: string }>()
 )
 
 export const setCurrentFailure = createAction(
-  '[Timeline] Set current failure',
+  actions.SetCurrentFailure,
   props<{ error: string }>()
 )
 
 export const getCurrent = createAction(
-  '[Timeline] Get current'
+  actions.GetCurrent
 );
 
 export const getCurrentSuccess = createAction(
-  '[Timeline] Get current success',
+  actions.GetCurrentSuccess,
   props<{ eventId: string }>()
 )
 
 export const clearCurrentEvent = createAction(
-  '[Timeline] Clear current event'
+  actions.ClearCurrentEvent
 );
 
 export const clearCurrentEventSuccess = createAction(
-  '[Timeline] Clear current event success'
+  actions.ClearCurrentEventSuccess
 );
+
+export const updateEvent = createAction(
+  actions.UpdateEvent,
+  props<{ id: string, done: boolean }>()
+)

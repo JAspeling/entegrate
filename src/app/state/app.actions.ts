@@ -4,6 +4,7 @@ export enum actions {
   GetAppName = '[App] Get app name',
   UpdateTotalTime = '[App] Update total time',
   UpdateCurrentTime = '[App] Update current time',
+  UpdateEvent = '[App] Update event'
 }
 
 export const getAppName = createAction(
@@ -19,5 +20,3 @@ export const updateCurrentTime = createAction(
   actions.UpdateCurrentTime,
   props<{ component: string, currentTime: number }>()
 )
-
-//TODO: These will have to be emitted per feature to keep track of the time per feature.

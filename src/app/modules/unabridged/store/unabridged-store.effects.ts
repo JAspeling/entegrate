@@ -6,6 +6,7 @@ import { catchError, concatMap, map, of, tap } from "rxjs";
 import { AppState } from "../../../state/app.state";
 import { Store } from "@ngrx/store";
 import { AppActions } from "../../../state";
+import { TimelineActions } from "../../timeline/state";
 
 @Injectable()
 export class UnabridgedStoreEffects {
@@ -28,7 +29,8 @@ export class UnabridgedStoreEffects {
           component: 'unabridged',
           currentTime: action.done ? action.time : 0
         }))
-        this.appStore.dispatch(AppActions.updateTotalTime({ component: 'unabridged', totalTime: action.time }))
+        this.appStore.dispatch(AppActions.updateTotalTime({ component: 'unabridged', totalTime: action.time }));
+        this.appStore.dispatch(TimelineActions.updateEvent({  id: '1', done: action.done }));
       })
     ), { dispatch: false }
   )

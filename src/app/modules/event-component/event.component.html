@@ -1,4 +1,7 @@
-<div class="event-custom" [class.active]="active" (click)="toggle()">
+<div class="event-custom"
+     [class.active]="(currentEventId$ | async) === eventInfo.id"
+     [class.completed]="eventInfo.done"
+     (click)="toggle()">
   <div class="header">
     <h6 class="mt-1 mb-0">
       {{eventInfo.title}}
@@ -8,4 +11,10 @@
   <div class="event-content small">
     {{eventInfo.description}}
   </div>
+</div>
+
+<div *ngIf="eventInfo.done" class="d-flex"
+     [class.justify-content-end]="event.position === itemPosition.ON_LEFT"
+     [class.justify-content-start]="event.position === itemPosition.ON_RIGHT">
+  <i><span class="mt-1 text-success-emphasis">Completed!</span></i>
 </div>

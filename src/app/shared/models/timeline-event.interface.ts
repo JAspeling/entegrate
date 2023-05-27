@@ -12,6 +12,7 @@ export interface CustomTimelineEvent extends NgxTimelineEvent {
   cost?: Metric;
 
   alternatives?: CustomTimelineEvent[],
+  done?: boolean;
 
   template?: string;
 }

@@ -1,6 +1,9 @@
-export const timelineData = [
+import { CustomTimelineEvent } from "../../shared/models/timeline-event.interface";
+
+export const timelineData: CustomTimelineEvent[] = [
   {
     id: '1',
+    done: false,
     template: 'UnabridgedInformationComponent',
     title: 'Unabridged certificates',
     description: 'You’ll need to apply for your unabridged birth and/or marriage certificate from the Department of Home Affairs',
@@ -37,17 +40,20 @@ export const timelineData = [
     ]
   }, {
     id: '2',
+    done: false,
     title: 'Apostille Documents',
     template: 'ApostilleComponent',
     description: 'The apostille is a validation stamp ensuring that a particular document is recognized in certain foreign countries. IE Netherlands',
     timestamp: new Date(),
   }, {
     id: '3',
+    done: false,
     title: 'Police Clearance',
     template: 'PoliceClearanceComponent',
     timestamp: new Date(),
   }, {
     id: '4',
+    done: false,
     title: 'Event 4',
     timestamp: new Date(),
   }
