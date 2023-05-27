@@ -25,8 +25,6 @@ MIT
 @ngrx/store-devtools
 MIT
 
-ng-form-validator-builder
-
 ngx-toastr
 MIT
 The MIT License (MIT)
