@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { IPoliceClearanceService, PoliceClearanceService } from "./police-clearance.service";
 import { EffectsModule } from "@ngrx/effects";
 import { PoliceClearanceStoreEffects } from "./store/police-clearance-store.effects";
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { PoliceClearanceStoreEffects } from "./store/police-clearance-store.effe
 
     StoreModule.forFeature('police-clearance', policeClearanceReducer),
     EffectsModule.forFeature([PoliceClearanceStoreEffects]),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [
     {

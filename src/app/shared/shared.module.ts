@@ -1,19 +1,23 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ScrollChangeDirective } from "./directives/scroll-change-directive";
+import { AdditionalTemplateComponent } from "./additional-template.component";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   declarations: [
-    ScrollChangeDirective
-    ],
-  exports: [
-    ScrollChangeDirective
+    ScrollChangeDirective,
+    AdditionalTemplateComponent
   ],
-  providers: [
-  ]
+  exports: [
+    ScrollChangeDirective,
+    AdditionalTemplateComponent
+  ],
+  providers: []
 })
 export class SharedModule {
 

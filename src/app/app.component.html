@@ -22,6 +22,33 @@
                       [eventCustomTemplate]="eventTemplate"
                       [changeSideInGroup]="NgxTimelineEventChangeSideInGroup.ALL"></ngx-timeline>
       </ng-container>
+
+      <h2>Todo</h2>
+
+      <h5>Pets</h5>
+      <ul>
+        <li>Whole shebang on bringing pets over. Dogs vs cats</li>
+      </ul>
+
+      <h5>Flight information</h5>
+      <ul>
+        <li>Preferences in flights</li>
+        <li>Stopover information</li>
+      </ul>
+
+      <h5>Netherlands Arrival</h5>
+      <ul>
+        <li>Finding a home</li>
+        <li>Sim card</li>
+        <li>Public transport</li>
+        <li>Apps to help you get around</li>
+      </ul>
+
+      <h5>Checklist from ABN AMRO</h5>
+      <ul>
+        <li>Bank account</li>
+      </ul>
+
     </div>
     <div class="container-additional" [class.open]="!!(currentEvent$ | async)">
       <ng-container #containerRef></ng-container>

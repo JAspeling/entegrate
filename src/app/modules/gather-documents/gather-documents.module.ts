@@ -7,6 +7,7 @@ import { GatherDocsService, IGatherDocsService } from "./gather-document.service
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { EffectsModule } from "@ngrx/effects";
 import { GatherDocumentsEffects } from "./store/gather-documents.effects";
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   declarations: [GatherDocumentsComponent],
@@ -19,7 +20,8 @@ import { GatherDocumentsEffects } from "./store/gather-documents.effects";
     StoreModule.forFeature('gatherDocuments', GatherDocumentsReducer),
     EffectsModule.forFeature([GatherDocumentsEffects]),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   exports: [GatherDocumentsComponent],
   providers: [

@@ -61,9 +61,10 @@ export const timelineData: CustomTimelineEvent[] = [
     template: 'PoliceClearanceComponent',
     timestamp: new Date(),
   }, {
-    id: '4',
+    id: 'flight',
     done: false,
-    title: 'Event 4',
+    title: 'Flight tickets',
+    description: `You'll need to book your flight tickets.`,
     timestamp: new Date(),
   }
 ]
