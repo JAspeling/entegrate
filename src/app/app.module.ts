@@ -21,6 +21,7 @@ import { TimeIndicatorModule } from "./modules/time-indicator/time-indicator.mod
 import { ApostilleModule } from "./modules/apostille/apostille.module";
 import { PoliceClearanceModule } from "./modules/police-clearance/police-clearance.module";
 import { GatherDocumentsModule } from "./modules/gather-documents/gather-documents.module";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { GatherDocumentsModule } from "./modules/gather-documents/gather-documen
 
     NgxTimelineModule,
     ToastrModule.forRoot(),
+    NgbModule,
 
     StoreModule.forRoot({
       'app': appReducer
@@ -57,7 +59,8 @@ import { GatherDocumentsModule } from "./modules/gather-documents/gather-documen
     ProcessInformationModule,
     TimeIndicatorModule,
     ApostilleModule,
-    PoliceClearanceModule
+    PoliceClearanceModule,
+    NgbModule
   ],
   providers: [
     ComponentLoaderService,

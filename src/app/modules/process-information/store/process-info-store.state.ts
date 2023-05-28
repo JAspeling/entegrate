@@ -1,3 +1,5 @@
+import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
+
 export interface ProcessInformationState {
   isOpen: boolean;
 
@@ -11,6 +13,7 @@ export interface ProcessInformationState {
   petsCount: number;
   cost?: number;
   time?: number;
+  startDate?: NgbDateStruct;
 }
 
 export const initialState: ProcessInformationState = {
@@ -21,5 +24,6 @@ export const initialState: ProcessInformationState = {
   children: false,
   childrenCount: 0,
   pets: false,
-  petsCount: 0
+  petsCount: 0,
+  startDate: null,
 }

@@ -9,19 +9,21 @@ import { ProcessInformationComponent } from "./process-information.component";
 import { EffectsModule } from "@ngrx/effects";
 import { ProcessInformationStoreEffects } from "./store/process-information-store.effects";
 import { SharedModule } from "../../shared/shared.module";
+import { NgbInputDatepicker } from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    StoreModule.forFeature('processInformation', processInformationReducer),
-    EffectsModule.forFeature([
-      ProcessInformationStoreEffects
-    ]),
-    ReactiveFormsModule,
+    imports: [
+        CommonModule,
+        FormsModule,
+        StoreModule.forFeature('processInformation', processInformationReducer),
+        EffectsModule.forFeature([
+            ProcessInformationStoreEffects
+        ]),
+        ReactiveFormsModule,
 
-    SharedModule
-  ],
+        SharedModule,
+        NgbInputDatepicker
+    ],
   declarations: [
     ProcessInformationComponent
   ],

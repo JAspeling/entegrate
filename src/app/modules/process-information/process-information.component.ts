@@ -79,7 +79,7 @@ export class ProcessInformationComponent implements OnInit {
     event.preventDefault()
     this.form.markAllAsTouched();
     if (this.form.valid && this.form.dirty) {
-      this.store.dispatch(updateProcessInformation(this.form.value ));
+      this.store.dispatch(updateProcessInformation(this.form.value));
       this.form.markAsPristine();
     }
   }
@@ -87,7 +87,8 @@ export class ProcessInformationComponent implements OnInit {
   private initializeForm() {
     this.form = new FormBuilder().group({
       ...initialState,
-      peopleCount: 0
+      peopleCount: 0,
+      startDate: [new Date(), []],
     }, { validator: this.validateFormGroup() });
 
     this.formSubscription = this.form.valueChanges.subscribe((value) => {

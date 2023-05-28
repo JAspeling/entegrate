@@ -18,6 +18,22 @@
       <div class="accordion-body">
         <fieldset [formGroup]="form">
           <legend>Information</legend>
+
+          <div class="col-12 mb-3">
+            <label for="peopleCount" class="form-label">When did you start your immigration journey?</label>
+            <div class="input-group">
+              <input
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="dp"
+                [formControlName]="'startDate'"
+                ngbDatepicker
+                #d="ngbDatepicker"
+              />
+              <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"></button>
+            </div>
+          </div>
+
           <div class="mb-3">
             <label for="peopleCount" class="form-label">Amount of people for application <b>(including yourself)</b></label>
             <input  [formControlName]="'peopleCount'" type="number" id="peopleCount" class="form-control">

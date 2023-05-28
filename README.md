@@ -16,7 +16,7 @@ expect to be done with the process.
 
 ## See it in action
 
-head over to [the hosted app](https://jaspeling.github.io/entegrate/) to play 
+Head over to [the hosted app](https://jaspeling.github.io/entegrate/) to play 
 around with it.
 
 ## ⚠️ Desktop only ⚠️

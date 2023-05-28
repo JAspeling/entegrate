@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'ngx-toastr/toastr';
 
+
+@import 'bootstrap-icons/font/bootstrap-icons';
 @import 'bootstrap/scss/bootstrap.scss';
 
 @import 'ngx-toastr/toastr-bs5-alert';
@@ -35,7 +37,17 @@ $nav-height: 80px;
   }
 }
 
+ngb-datepicker .bg-light {
+  background-color:inherit!important
+}
 
+.ngb-dp-header {
+  background-color: var(--bs-dark) !important;
+}
+
+.ngb-dp-weekdays {
+  background-color: var(--bs-dark) !important;
+}
 
 nav {
   &.navbar {
@@ -129,3 +141,6 @@ nav {
 
   transition: left 0.5s ease-in-out;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
