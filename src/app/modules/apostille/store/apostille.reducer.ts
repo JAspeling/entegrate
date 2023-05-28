@@ -22,5 +22,10 @@ export const apostilleReducer = createReducer<ApostilleState>(
       ...state,
       id: action.id
     })
+  ),
+  on(ApostilleActions.updateLocal, (state, action) => ({
+      ...state,
+      ...action
+    })
   )
 );

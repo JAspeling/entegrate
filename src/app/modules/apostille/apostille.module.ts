@@ -8,16 +8,20 @@ import { EffectsModule } from "@ngrx/effects";
 import { ApostilleService, IApostilleService } from "./apostille-service";
 import { ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../../shared/shared.module";
+import { BrowserAnimationsModule, NoopAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
-    imports: [
-        CommonModule,
+  imports: [
+    CommonModule,
 
-        StoreModule.forFeature('apostille', apostilleReducer),
-        EffectsModule.forFeature([ApostilleEffects]),
-        ReactiveFormsModule,
-        SharedModule,
-    ],
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+
+    StoreModule.forFeature('apostille', apostilleReducer),
+    EffectsModule.forFeature([ApostilleEffects]),
+    ReactiveFormsModule,
+    SharedModule,
+  ],
   providers: [
     {
       provide: IApostilleService,

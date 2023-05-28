@@ -11,7 +11,6 @@ import { TimelineActions } from "../modules/timeline/state";
       <div class="scrollable">
         <h4 class="mt-2">{{title}}</h4>
         <hr>
-
         <div class="form-check mb-3" [formGroup]="form">
           <input class="form-check-input"
                  type="checkbox"

@@ -1,5 +1,91 @@
 <app-additional [config]="config$ | async"
-  [title]="'Apostille documents'"
-  (save)="save($event)">
+                [form]="form"
+                [title]="'Apostille documents'"
+                (save)="save($event)">
+  <p class="fst-italic">
+    The Netherlands, like many other countries, has specific requirements for immigration, including
+    the authentication and legalization of certain documents. This process helps ensure the authenticity
+    and validity of the submitted documents.
+  </p>
+
+  <h5>Timeline</h5>
+  <p>
+    This usually takes <b>between 4 and 6 weeks</b>.
+  </p>
+  <hr>
+
+  <h5>Get your original documents</h5>
+  <p>
+    You need to use your original documents for this. Photocopies or scanned copies are not acceptable for
+    apostille purposes. <i>The documents retrieved via the Unabridged step would suffice.</i>
+  </p>
+
+  <hr>
+  <h5>Options</h5>
+  <ng-container *ngFor="let _option of selections; let i = index">
+    <div class="option"
+         [class.selected]="i === form.get('selectedOption').value"
+         (click)="select(i)">
+      <h6>{{_option.title}}</h6>
+      <span>{{_option.description}}</span>
+      <br>
+      <b>Cost: </b><span>R {{_option.cost}}</span>
+      <br>
+      <b>Time: </b><span>{{_option.time}} week(s)</span>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="form.get('selectedOption').value === 0">
+    <h5 class="mt-3">Guidelines for doing it yourself</h5>
+
+    <section class="alternate">
+      <h6>Department of Home Affairs</h6>
+      <p>
+        Go to the nearest South African Department of Home Affairs office or the office responsible for
+        issuing these documents. They will have the necessary forms and information on the process.
+      </p>
+    </section>
+
+    <section class="alternate">
+      <h6>Application form</h6>
+      <p>
+        Fill out the application form for an apostille on the specific document(s) you require. Provide
+        accurate information and ensure that all fields are correctly filled.
+      </p>
+    </section>
+
+    <section class="alternate">
+      <h6>Pay the fee</h6>
+      <p>
+        There may be a fee associated with obtaining the apostille. The exact amount will vary, so check
+        with the relevant authority for the current fee schedule. Make the payment as required.
+      </p>
+    </section>
+
+    <section class="alternate">
+      <h6>Submit the application</h6>
+      <p>
+        Submit the completed application form, along with the original birth certificate and/or marriage
+        certificate, and any other requested documents, to the Department of Home Affairs.
+      </p>
+    </section>
+
+    <section class="alternate">
+      <h6>Wait for processing</h6>
+      <p>
+        The processing time for apostilles can vary, so it's advisable to inquire about the estimated
+        processing time when submitting the application. It could take several weeks to receive the
+        apostilled documents.
+      </p>
+    </section>
+
+    <section class="alternate">
+      <h6>Collect the documents</h6>
+      <p>
+        Once the apostilles are issued, you can collect the documents from the Department of Home Affairs.
+        Ensure that you receive the original documents with the apostille attached.
+      </p>
+    </section>
+  </ng-container>
 
 </app-additional>

@@ -9,7 +9,6 @@
   <p>
     This usually takes only a few days. You can get it all done in <b>one day</b>.
   </p>
-
   <hr>
 
   <h5>Get these documents ready</h5>
@@ -19,28 +18,39 @@
     <li>Passport photos</li>
   </ul>
 
-  <h5>Passport</h5>
-  You are leaving South Africa, and for that, you need a valid passport. This is something that can easily
-  slip your mind!
-  <div class="mt-2 alert alert-warning" role="alert">
-    <p>Make sure your passport is valid for <b>more than 6 months</b> upon arrival. If your passport is valid
-    for less than a year, I suggest you get it renewed.</p>
+  <section class="alternate">
+    <h5>Passport</h5>
+    You are leaving South Africa, and for that, you need a valid passport. This is something that can easily
+    slip your mind!
+    <div class="mt-2 alert alert-warning" role="alert">
+      <p>Make sure your passport is valid for <b>more than 6 months</b> upon arrival. If your passport is valid
+        for less than a year, I suggest you get it renewed.</p>
 
-    <ng-container *ngIf="(isMoreThanOne$ | async) === true">
-      <i>*Please make sure that the passports are up to date for everyone coming along.</i>
-    </ng-container>
-  </div>
+      <ng-container *ngIf="(isMoreThanOne$ | async) === true">
+        <i>*Please make sure that the passports are up to date for everyone coming along.</i>
+      </ng-container>
+    </div>
+  </section>
 
-  <h5 class="mt-3">Education certificate</h5>
-  This will have to be submitted to Entelect. Just make sure you have copies of your degree, or Higher education
-  certificate(s) so that they are ready upon request.
+  <section class="alternate">
+    <h5 class="mt-3">Education certificate</h5>
+    This will have to be submitted to Entelect. Just make sure you have copies of your degree, or Higher education
+    certificate(s) so that they are ready upon request.
+  </section>
 
-  <h5 class="mt-3">Passport photos</h5>
-  <p>You will need these <b>when you go to the embassy</b> There is a <a target="_blank" href="https://www.netherlandsworldwide.nl/passport-id-card/getting-photo/south-africa">specific format</a> that Netherlands require
-  for these photos. Kodak is aware of these requirements, so head over there and <b>make sure to ask them for the format that
-  the Netherlands require</b></p>
+  <section class="alternate">
+    <h5 class="mt-3">Passport photos</h5>
+    <p>You will need these <b>when you go to the embassy</b> There is a <a target="_blank"
+                                                                           href="https://www.netherlandsworldwide.nl/passport-id-card/getting-photo/south-africa">specific
+      format</a> that Netherlands require
+      for these photos. Kodak is aware of these requirements, so head over there and <b>make sure to ask them for the
+        format that
+        the Netherlands require</b></p>
 
-  <p>You will also be able to use these in the Netherlands when applying for your drivers license, so you can get 6 - 10 passport photos per person</p>
+    <p>You will also be able to use these in the Netherlands when applying for your drivers license, so you can get 6 -
+      10
+      passport photos per person</p>
+  </section>
 
 
 </app-additional>
