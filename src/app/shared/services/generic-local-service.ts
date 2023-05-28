@@ -2,9 +2,11 @@ import { Observable, of } from "rxjs";
 
 export abstract class GenericLocalService<T> {
   update(action: T): Observable<T> {
-    localStorage.setItem(this.storeName, JSON.stringify(action))
-    return of(action);
-
+    const result: any = { ...action };
+    delete result.id;
+    delete result.type;
+    localStorage.setItem(this.storeName, JSON.stringify(result))
+    return of(result);
   }
 
   getSaved(): Observable<T> {

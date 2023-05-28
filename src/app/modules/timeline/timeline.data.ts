@@ -8,9 +8,15 @@ export const timelineData: CustomTimelineEvent[] = [
     template: 'GatherDocumentsComponent',
     description: 'You will need to get get some documents ready to kick off the process',
     timestamp: new Date(),
-  },
-  {
-    id: '1',
+  }, {
+    id: 'police',
+    done: false,
+    title: 'Police Clearance',
+    description: 'You’ll need to apply for your police clearance certificate from the South African Police Service',
+    template: 'PoliceClearanceComponent',
+    timestamp: new Date(),
+  }, {
+    id: 'unabridged',
     done: false,
     template: 'UnabridgedInformationComponent',
     title: 'Unabridged certificates',
@@ -47,18 +53,11 @@ export const timelineData: CustomTimelineEvent[] = [
       },
     ]
   }, {
-    id: '2',
+    id: 'apostille',
     done: false,
     title: 'Apostille Documents',
     template: 'ApostilleComponent',
     description: 'The apostille is a validation stamp ensuring that a particular document is recognized in certain foreign countries. IE Netherlands',
-    timestamp: new Date(),
-  }, {
-    id: '3',
-    done: false,
-    title: 'Police Clearance',
-    description: 'You’ll need to apply for your police clearance certificate from the South African Police Service',
-    template: 'PoliceClearanceComponent',
     timestamp: new Date(),
   }, {
     id: 'flight',
@@ -66,8 +65,7 @@ export const timelineData: CustomTimelineEvent[] = [
     title: 'Flight tickets',
     description: `You'll need to book your flight tickets.`,
     timestamp: new Date(),
-  },
-  {
+  }, {
     id: 'pets',
     done: false,
     title: 'Pets',

@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { UnabridgedConfig } from "../models/unabridged-options.interface";
+import { UnabridgedState } from "./unabridged-store.state";
 
 export enum actions {
   ActionSuccess = '[Unabridged] Action success',
@@ -18,7 +18,7 @@ export const getConfig = createAction(
 
 export const getConfigSuccess = createAction(
   actions.ActionSuccess,
-  props<UnabridgedConfig>()
+  props<UnabridgedState>()
 )
 
 export const actionFailure = createAction(
@@ -28,17 +28,17 @@ export const actionFailure = createAction(
 
 export const updateConfig = createAction(
   actions.UpdateOptions,
-  props<UnabridgedConfig>()
+  props<UnabridgedState>()
 )
 
 export const updateConfigSuccess = createAction(
   actions.UpdateOptionsSuccess,
-  props<UnabridgedConfig>()
+  props<UnabridgedState>()
 )
 
 export const updateLocalCostTime = createAction(
   actions.UpdateLocalCostTime,
-  props<UnabridgedConfig>(),
+  props<UnabridgedState>(),
 );
 
 export const setId = createAction(

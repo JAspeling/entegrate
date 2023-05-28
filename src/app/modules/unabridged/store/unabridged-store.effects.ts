@@ -15,7 +15,7 @@ export class UnabridgedStoreEffects {
     .pipe(
       ofType(UnabridgedActions.updateConfig),
       concatMap((action) =>
-        this.unabridgedService.updateOptions(action).pipe(
+        this.unabridgedService.update(action).pipe(
           map((options) => UnabridgedActions.updateConfigSuccess(options)),
           catchError(error => of(UnabridgedActions.actionFailure({ error })))
         )
@@ -41,7 +41,7 @@ export class UnabridgedStoreEffects {
 
   getOptions$ = createEffect(() => this.actions$.pipe(
     ofType(UnabridgedActions.getConfig),
-    concatMap(() => this.unabridgedService.getOptions().pipe(
+    concatMap(() => this.unabridgedService.getSaved().pipe(
       map((options) => UnabridgedActions.getConfigSuccess(options)),
       catchError(error => of(UnabridgedActions.actionFailure({ error })))
     ))

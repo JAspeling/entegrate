@@ -92,11 +92,11 @@ export class UnabridgedInformationComponent implements OnInit {
   select(index: number) {
 
     // destructure cost and time from the selection
-    const selected: UnabridgedConfig = {
+    const selected = {
       cost: this.selections[index].cost,
       time: this.selections[index].time,
       selectedOption: index,
-      done: this.form.get('done')?.value,
+      done: !!this.form.get('done')?.value,
     };
 
     this.form.patchValue(selected);

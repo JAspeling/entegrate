@@ -7,19 +7,10 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
 import { ApostilleEffects } from "./store/apostille-effects";
 import { ToastrService } from "ngx-toastr";
-import { animate, state, style, transition, trigger } from "@angular/animations";
 
 @Component({
   selector: 'app-apostille',
-  templateUrl: './apostille.component.html',
-  animations: [
-    trigger('expandAnimation', [
-      state('void', style({ transform: 'scaleY(0)', transformOrigin: 'top' })),
-      state('*', style({ transform: 'scaleY(1)', transformOrigin: 'top' })),
-      transition(':enter', animate('0.3s ease')),
-      transition(':leave', animate('0.3s ease'))
-    ])
-  ]
+  templateUrl: './apostille.component.html'
 })
 @AutoUnsubscribe()
 export class ApostilleComponent implements OnInit {

@@ -9,6 +9,8 @@ export interface ProcessInformationState {
   childrenCount: number;
   pets: boolean;
   petsCount: number;
+  cost?: number;
+  time?: number;
 }
 
 export const initialState: ProcessInformationState = {
