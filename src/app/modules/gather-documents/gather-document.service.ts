@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
-import { GenericService } from "../../shared/services/generic-io-service";
 import { GatherDocsState, initialState } from "./store/gather-documents.state";
+import { GenericLocalService } from "../../shared/services/generic-local-service";
 
-export abstract class IGatherDocsService extends GenericService<GatherDocsState> {}
+export abstract class IGatherDocsService extends GenericLocalService<GatherDocsState> {}
 
 @Injectable()
-export class GatherDocsService extends GenericService<GatherDocsState> {
+export class GatherDocsService extends GenericLocalService<GatherDocsState> {
   override  storeName: string = 'gather-docs';
   override initialState: GatherDocsState = initialState;
 }

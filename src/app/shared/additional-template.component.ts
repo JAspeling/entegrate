@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { Store } from "@ngrx/store";
+import { AppState } from "../state/app.state";
+import { TimelineActions } from "../modules/timeline/state";
 
 @Component({
   selector: 'app-additional',
@@ -23,7 +26,7 @@ import { FormGroup } from "@angular/forms";
       </div>
 
       <div class="content-footer">
-        <button type="button" class="btn btn-secondary">Close</button>
+        <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
         <button type="button" class="btn btn-primary" (click)="onSave(config)">Save changes</button>
       </div>
     </div>
@@ -36,11 +39,15 @@ export class AdditionalTemplateComponent<T> {
   @Input() form: FormGroup;
   @Input() title: string;
 
-  constructor() {
+  constructor(public store: Store<AppState>) {
 
   }
 
   onSave(config: T) {
     this.save.emit(config);
+  }
+
+  onClose() {
+    this.store.dispatch(TimelineActions.clearCurrentEvent());
   }
 }

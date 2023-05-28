@@ -7,15 +7,17 @@ import { ApostilleEffects } from "./store/apostille-effects";
 import { EffectsModule } from "@ngrx/effects";
 import { ApostilleService, IApostilleService } from "./apostille-service";
 import { ReactiveFormsModule } from "@angular/forms";
+import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
+    imports: [
+        CommonModule,
 
-    StoreModule.forFeature('apostille', apostilleReducer),
-    EffectsModule.forFeature([ApostilleEffects]),
-    ReactiveFormsModule,
-  ],
+        StoreModule.forFeature('apostille', apostilleReducer),
+        EffectsModule.forFeature([ApostilleEffects]),
+        ReactiveFormsModule,
+        SharedModule,
+    ],
   providers: [
     {
       provide: IApostilleService,

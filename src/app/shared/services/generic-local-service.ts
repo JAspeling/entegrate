@@ -1,6 +1,6 @@
 import { Observable, of } from "rxjs";
 
-export abstract class GenericService<T> {
+export abstract class GenericLocalService<T> {
   update(action: T): Observable<T> {
     localStorage.setItem(this.storeName, JSON.stringify(action))
     return of(action);
