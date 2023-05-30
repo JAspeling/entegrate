@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { CustomTimelineEvent } from "../../../shared/models/timeline-event.interface";
+import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
 
 export enum actions {
   LoadEvents = '[Timeline] Load events',
@@ -14,6 +15,8 @@ export enum actions {
   ClearCurrentEvent = '[Timeline] Clear current event',
   ClearCurrentEventSuccess = '[Timeline] Clear current event success',
   UpdateEvent = '[Timeline] Update event',
+  UpdateEvents = '[Timeline] Update events',
+  UpdateTimestamps = '[Timeline] Update timestamps',
 }
 
 export const loadEvents = createAction(
@@ -69,5 +72,15 @@ export const clearCurrentEventSuccess = createAction(
 
 export const updateEvent = createAction(
   actions.UpdateEvent,
-  props<{ id: string, done: boolean }>()
+  props<CustomTimelineEvent>()
+)
+
+export const updateEvents = createAction(
+  actions.UpdateEvents,
+  props<{ events: CustomTimelineEvent[] }>()
+)
+
+export const updateTimestamps = createAction(
+  actions.UpdateTimestamps,
+  props<{ initialDate: NgbDateStruct }>()
 )

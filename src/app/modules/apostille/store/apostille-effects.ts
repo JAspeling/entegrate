@@ -22,10 +22,12 @@ export class ApostilleEffects {
         this.store.dispatch(AppActions.updateTotalTime({ component: 'apostille', totalTime: action.time }))
         this.store.dispatch(TimelineActions.updateEvent({  id: action.id, done: action.done }));
       }),
+      // Update the state in the event.
       mergeMap((action) => this.store.select(ApostilleSelectors.getState)),
       tap(state =>
-        this.store.dispatch(TimelineActions.updateEvent({  id: state.id, done: state.done }))
+        this.store.dispatch(TimelineActions.updateEvent({  id: state.id, done: state.done, time: state.time }))
       )
+      // TODO: Might have to emit the duration here.
     ),
     { dispatch: false }
   )
@@ -48,6 +50,7 @@ export class ApostilleEffects {
         .pipe(
           map((options) => getConfigSuccess(options))
         )
+        // TODO: Might have to emit the duration here.
       )
     )
   )

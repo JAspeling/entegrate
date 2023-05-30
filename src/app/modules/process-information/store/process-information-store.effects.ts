@@ -56,7 +56,7 @@ export class ProcessInformationStoreEffects {
   constructor(private actions$: Actions,
     private service: IProcessInformationService,
     private readonly store: Store<AppState>
-    ) {
+  ) {
 
   }
 }

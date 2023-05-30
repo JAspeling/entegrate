@@ -10,6 +10,8 @@ import { ProcessInformationStoreEffects } from "./store/process-information-stor
 import { ToastrService } from "ngx-toastr";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
 import { ofType } from "@ngrx/effects";
+import { TimelineActions } from "../timeline/state";
+import { TimelineService } from "../timeline/timeline.service";
 
 @Component({
   selector: 'app-process-information',
@@ -29,7 +31,10 @@ export class ProcessInformationComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private toastService: ToastrService, private store: Store<ProcessInformationState>, private effects: ProcessInformationStoreEffects) {
+  constructor(private toastService: ToastrService,
+    private readonly timelineService: TimelineService,
+    private store: Store<ProcessInformationState>,
+    private effects: ProcessInformationStoreEffects) {
     this.initializeForm();
 
     this.store.dispatch(ProcessInfoActions.getProcessInformation());
@@ -38,14 +43,16 @@ export class ProcessInformationComponent implements OnInit {
       .pipe(
         tap((options) => {
           this.form.patchValue(options);
+          this.store.dispatch(TimelineActions.updateTimestamps({ initialDate: this.form.value.startDate }))
         })
       ).subscribe();
 
     this.processInformationUpdated =
       this.effects.update$.pipe(
         ofType(ProcessInfoActions.updateProcessInformationSuccess),
-        tap(() => {
+        tap((action) => {
           this.toastService.success('Updated');
+          this.store.dispatch(TimelineActions.updateTimestamps({ initialDate: this.form.value.startDate }))
         })
       ).subscribe();
 

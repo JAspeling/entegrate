@@ -19,7 +19,7 @@ export const getCurrentEvent = createSelector(
   getEventsFeatureState,
   getCurrentEventId,
   (state, currentEventId) => {
-    return currentEventId ? state.events.find(event => event.id === currentEventId) : null;
+    return currentEventId ? state.events?.find(event => event.id === currentEventId) : null;
   }
 );
 

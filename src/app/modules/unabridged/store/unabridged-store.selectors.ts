@@ -33,5 +33,6 @@ export const getState = createSelector(
   (state: UnabridgedState) => ({
     id: state.id,
     done: state.done,
+    time: state.time,
   })
 )

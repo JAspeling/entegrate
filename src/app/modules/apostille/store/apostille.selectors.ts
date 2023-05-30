@@ -28,5 +28,6 @@ export const getState = createSelector(
   (state: ApostilleState) => ({
     id: state.id,
     done: state.done,
+    time: state.time,
   })
 )

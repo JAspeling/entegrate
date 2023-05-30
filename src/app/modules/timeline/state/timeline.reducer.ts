@@ -32,12 +32,20 @@ export const timelineReducer = createReducer<TimelineState>(
   on(
     TimelineActions.updateEvent, (state, action) => ({
       ...state,
-      events: state.events.map(event => event.id === action.id
+      events: state.events?.map(event => event.id === action.id
         ? {
           ...event,
-          done: action.done
+          done: action.done,
+          time: action.time ? action.time : event.time,
+          timestamp: action.timestamp || event.timestamp
         }
         : event)
+    })
+  ),
+  on(
+    TimelineActions.updateEvents, (state, action) => ({
+      ...state,
+      events: action.events
     })
   )
 );

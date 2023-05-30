@@ -15,6 +15,8 @@ export interface CustomTimelineEvent extends NgxTimelineEvent {
   done?: boolean;
 
   template?: string;
+
+  time?: number;
 }
 
 export interface Metric {

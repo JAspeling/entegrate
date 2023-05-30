@@ -5,8 +5,9 @@ import { timelineData } from "./timeline.data";
 
 @Injectable()
 export class TimelineService {
+
   getProducts(): Observable<CustomTimelineEvent[]>  {
-    return of(timelineData);
+    return of( timelineData);
   }
 
   getCurrentId(): Observable<string> {

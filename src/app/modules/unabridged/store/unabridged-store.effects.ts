@@ -34,7 +34,7 @@ export class UnabridgedStoreEffects {
       }),
       mergeMap((action) => this.store.select(UnabridgedStoreSelectors.getState)),
       tap(state =>
-        this.store.dispatch(TimelineActions.updateEvent({  id: state.id, done: state.done }))
+        this.store.dispatch(TimelineActions.updateEvent({  id: state.id, done: state.done, time: state.time }))
       )
     ), { dispatch: false }
   )
