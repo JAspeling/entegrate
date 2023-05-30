@@ -8,6 +8,8 @@ export const timelineData: CustomTimelineEvent[] = [
     template: 'GatherDocumentsComponent',
     description: 'You will need to get get some documents ready to kick off the process',
     timestamp: new Date(),
+    dependsOn: [],
+    concurrent: true,
   }, {
     id: 'police',
     done: false,
@@ -15,6 +17,8 @@ export const timelineData: CustomTimelineEvent[] = [
     description: 'You’ll need to apply for your police clearance certificate from the South African Police Service',
     template: 'PoliceClearanceComponent',
     timestamp: new Date(),
+    dependsOn: [],
+    concurrent: true,
   }, {
     id: 'unabridged',
     done: false,
@@ -51,7 +55,9 @@ export const timelineData: CustomTimelineEvent[] = [
           average: 0
         }
       },
-    ]
+    ],
+    dependsOn: [],
+    concurrent: true,
   }, {
     id: 'apostille',
     done: false,
@@ -59,17 +65,23 @@ export const timelineData: CustomTimelineEvent[] = [
     template: 'ApostilleComponent',
     description: 'The apostille is a validation stamp ensuring that a particular document is recognized in certain foreign countries. IE Netherlands',
     timestamp: new Date(),
+    dependsOn: ['Unabridged certificates'],
+    concurrent: false,
   }, {
     id: 'flight',
     done: false,
     title: 'Flight tickets',
     description: `You'll need to book your flight tickets.`,
     timestamp: new Date(),
+    dependsOn: [],
+    concurrent: true,
   }, {
     id: 'pets',
     done: false,
     title: 'Pets',
     description: `We all love our furry little friends, but they can be a bit of a hassle to get them to the Netherlands. You'll need to get them ready for the trip.`,
     timestamp: new Date(),
+    dependsOn: [],
+    concurrent: true,
   }
 ]

@@ -25,12 +25,6 @@
 
       <h2>Todo</h2>
 
-      <h5>Timeline changes</h5>
-      <ul>
-        <li>Timeline duration per feature needs to be synced up to the events. <code>In progress</code></li>
-        <li>Update the timelines whenever the duration of a task changes.</li>
-      </ul>
-
       <h5>Apostille docs</h5>
       <ul>
         <li>Highlight the difference between Dirco and High court</li>
@@ -39,7 +33,7 @@
 
       <h5>Pets</h5>
       <ul>
-        <li>Whole shebang on bringing pets over. Dogs vs cats</li>
+        <li>Whole shebang on bringing pets over. Dogs vs cats <code>In progress</code></li>
       </ul>
 
       <h5>MVV application (long-stay visa)</h5>
@@ -84,8 +78,15 @@
 
 <ng-template #dateTemplate let-item=item>
   <div>
-    <p>
+    <span>
       {{item?.time || 0}} week{{item?.time !== 1 ? 's' : ''}}
-    </p>
+    </span><br>
+    <span *ngIf="item.dependsOn?.length > 0">
+      <i>Depends on
+      <span *ngFor="let dependent of item.dependsOn">
+        {{dependent}}{{dependent === item.dependsOn[item.dependsOn.length - 1] ? "" : ", "}}
+      </span>
+      </i>
+    </span>
   </div>
 </ng-template>

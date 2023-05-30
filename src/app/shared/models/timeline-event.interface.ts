@@ -10,6 +10,7 @@ export interface CustomTimelineEvent extends NgxTimelineEvent {
    * The cost of the event in Rands
    */
   cost?: Metric;
+  concurrent?: boolean;
 
   alternatives?: CustomTimelineEvent[],
   done?: boolean;
@@ -17,6 +18,7 @@ export interface CustomTimelineEvent extends NgxTimelineEvent {
   template?: string;
 
   time?: number;
+  dependsOn?: string[];
 }
 
 export interface Metric {
