@@ -89,7 +89,6 @@ export class TimelineEffects {
         return this.updateEventDates(value.events, startDate, value.index)
       }),
       map((events) => TimelineActions.updateEvents({ events }))
-
     )
   )
 
@@ -99,13 +98,10 @@ export class TimelineEffects {
   }
 
   private addWeeks(date: Date, weeks: number): Date {
-    console.log('Current: ', date, 'weeks', weeks);
     const newDate = new Date(date);
     newDate.setUTCHours(0, 0, 0, 0);
     const currentDay = newDate.getDate();
     newDate.setDate(currentDay + (weeks * 7));
-
-    console.log('New:     ', newDate);
     return newDate;
   }
 

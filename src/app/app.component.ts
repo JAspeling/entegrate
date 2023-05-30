@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
   events$: Observable<CustomTimelineEvent[]>
   currentEvent$: Observable<CustomTimelineEvent>;
-  protected NgxTimelineEventChangeSideInGroup = NgxTimelineEventChangeSideInGroup;
+  ngxTimelineEventChangeSideInGroup = NgxTimelineEventChangeSideInGroup;
 
   constructor(private store: Store<AppState>,
 

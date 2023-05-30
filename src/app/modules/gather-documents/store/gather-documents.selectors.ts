@@ -13,5 +13,6 @@ export const getState = createSelector(
   state => ({
     id: state.id,
     done: state.done,
+    time: state.time
   })
 )

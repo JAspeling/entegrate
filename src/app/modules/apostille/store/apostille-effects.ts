@@ -20,7 +20,6 @@ export class ApostilleEffects {
           currentTime: action.done ? action.time : 0
         }))
         this.store.dispatch(AppActions.updateTotalTime({ component: 'apostille', totalTime: action.time }))
-        this.store.dispatch(TimelineActions.updateEvent({  id: action.id, done: action.done }));
       }),
       // Update the state in the event.
       mergeMap((action) => this.store.select(ApostilleSelectors.getState)),

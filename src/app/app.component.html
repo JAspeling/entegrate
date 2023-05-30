@@ -20,8 +20,7 @@
         <ngx-timeline [events]="events"
                       [enableAnimation]="false"
                       [eventCustomTemplate]="eventTemplate"
-                      [dateInstantCustomTemplate]="dateTemplate"
-                      [changeSideInGroup]="NgxTimelineEventChangeSideInGroup.ALL"></ngx-timeline>
+                      [dateInstantCustomTemplate]="dateTemplate"></ngx-timeline>
       </ng-container>
 
       <h2>Todo</h2>
@@ -86,7 +85,7 @@
 <ng-template #dateTemplate let-item=item>
   <div>
     <p>
-      {{item?.time || 0}} weeks
+      {{item?.time || 0}} week{{item?.time !== 1 ? 's' : ''}}
     </p>
   </div>
 </ng-template>

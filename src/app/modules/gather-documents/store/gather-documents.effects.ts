@@ -50,7 +50,7 @@ export class GatherDocumentsEffects {
       }),
       mergeMap((action) => this.store.select(GatherDocsSelectors.getState)),
       tap(state =>
-        this.store.dispatch(TimelineActions.updateEvent({  id: state.id, done: state.done }))
+        this.store.dispatch(TimelineActions.updateEvent({  id: state.id, done: state.done, time: state.time }))
       )
     ), { dispatch: false }
   );

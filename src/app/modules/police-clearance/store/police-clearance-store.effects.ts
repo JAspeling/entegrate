@@ -28,7 +28,7 @@ export class PoliceClearanceStoreEffects {
       }),
       mergeMap((action) => this.store.select(PoliceClearanceSelectors.getState)),
       tap(state =>
-        this.store.dispatch(TimelineActions.updateEvent({  id: state.id, done: state.done }))
+        this.store.dispatch(TimelineActions.updateEvent({  id: state.id, done: state.done, time: state.time }))
       )
     ), { dispatch: false }
   );
