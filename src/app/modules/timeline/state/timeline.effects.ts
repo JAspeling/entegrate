@@ -62,6 +62,37 @@ export class TimelineEffects {
     map((events) => TimelineActions.updateEvents({ events }))
   ))
 
+  updateEvent$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(TimelineActions.updateEvent),
+      mergeMap((action) => this.store.select(TimelineSelectors.getEvents)
+        .pipe(
+          take(1),
+          distinctUntilChanged(),
+          map((events) => {
+            const event = events.find(event => event.id === action.id);
+            return {
+              events,
+              event,
+              index: events.indexOf(event)
+            }
+          })
+        )
+      ),
+      map((value) => {
+        // Update all the consecutive events, including this one.
+        const startDate = {
+          year: value.event.timestamp.getFullYear(),
+          month: value.event.timestamp.getMonth() + 1,
+          day: value.event.timestamp.getDate()
+        }
+        return this.updateEventDates(value.events, startDate, value.index)
+      }),
+      map((events) => TimelineActions.updateEvents({ events }))
+
+    )
+  )
+
   constructor(private actions$: Actions,
     private readonly timelineService: TimelineService, private readonly store: Store<AppState>) {
 
@@ -78,10 +109,10 @@ export class TimelineEffects {
     return newDate;
   }
 
-  private updateEventDates(events: any[], startDate: NgbDateStruct): CustomTimelineEvent[] {
+  private updateEventDates(events: any[], startDate: NgbDateStruct, currentIndex = 0): CustomTimelineEvent[] {
     const copied = [...events];
-    for (let index = 0; index < copied.length; index++) {
-      if (index === 0) {
+    for (let index = currentIndex; index < copied.length - currentIndex; index++) {
+      if (index === currentIndex) {
         const timestamp = new Date(startDate.year, startDate.month - 1, startDate.day);
         timestamp.setUTCHours(0, 0, 0, 0);
         copied[index] = {
