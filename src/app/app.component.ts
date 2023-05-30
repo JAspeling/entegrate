@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { NgxTimelineEventChangeSideInGroup } from "@frxjs/ngx-timeline";
+import { NgxDateFormat, NgxTimelineEventChangeSideInGroup } from "@frxjs/ngx-timeline";
 import { CustomTimelineEvent } from "./shared/models/timeline-event.interface";
 import { Store } from "@ngrx/store";
 import * as timelineActions from "./modules/timeline/state/timeline.actions";
@@ -19,6 +19,8 @@ import { GatherDocsActions } from "./modules/gather-documents/store";
 })
 export class AppComponent implements OnInit {
   @ViewChild('containerRef', { read: ViewContainerRef, static: true }) containerRef!: ViewContainerRef;
+
+  ngxDateFormat = NgxDateFormat;
 
   events$: Observable<CustomTimelineEvent[]>
   currentEvent$: Observable<CustomTimelineEvent>;

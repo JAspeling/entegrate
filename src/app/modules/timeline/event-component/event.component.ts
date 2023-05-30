@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { NgxTimelineItem, NgxTimelineItemPosition } from "@frxjs/ngx-timeline";
-import { CustomTimelineEvent } from "../../shared/models/timeline-event.interface";
+import { CustomTimelineEvent } from "../../../shared/models/timeline-event.interface";
 import { Store } from "@ngrx/store";
-import * as timelineActions from "../timeline/state/timeline.actions";
-import { TimelineState } from "../timeline/state/timeline.state";
-import { TimelineSelectors } from "../timeline/state";
-import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
+import * as timelineActions from "../state/timeline.actions";
+import { TimelineState } from "../state/timeline.state";
+import { TimelineSelectors } from "../state";
+import { AutoUnsubscribe } from "../../../shared/decorators/auto-unsubscribe";
 import { tap } from "rxjs";
 
 @Component({

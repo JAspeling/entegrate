@@ -20,6 +20,7 @@
         <ngx-timeline [events]="events"
                       [enableAnimation]="false"
                       [eventCustomTemplate]="eventTemplate"
+                      [dateInstantCustomTemplate]="dateTemplate"
                       [changeSideInGroup]="NgxTimelineEventChangeSideInGroup.ALL"></ngx-timeline>
       </ng-container>
 
@@ -27,8 +28,8 @@
 
       <h5>Timeline changes</h5>
       <ul>
-        <li>Make the time per task reflect on the timeline. <code>In progress</code></li>
         <li>Timeline duration per feature needs to be synced up to the events. <code>In progress</code></li>
+        <li>Update the timelines whenever the duration of a task changes.</li>
       </ul>
 
       <h5>Apostille docs</h5>
@@ -80,4 +81,12 @@
 
 <ng-template #eventTemplate let-event=event let-colSidePosition=colSidePosition>
   <app-event [event]="event"></app-event>
+</ng-template>
+
+<ng-template #dateTemplate let-item=item>
+  <div>
+    <p>
+      {{item?.time || 0}} weeks
+    </p>
+  </div>
 </ng-template>

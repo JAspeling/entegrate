@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { NgxTimelineModule } from "@frxjs/ngx-timeline";
-import { EventComponent } from "./modules/event-component/event.component";
+import { EventComponent } from "./modules/timeline/event-component/event.component";
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducer } from "./state/app.reducer";
