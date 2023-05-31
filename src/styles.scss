@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'ngx-toastr/toastr';
 
-
 @import 'bootstrap-icons/font/bootstrap-icons';
 @import 'bootstrap/scss/bootstrap.scss';
 
@@ -38,7 +37,7 @@ $nav-height: 80px;
 }
 
 ngb-datepicker .bg-light {
-  background-color:inherit!important
+  background-color: inherit !important
 }
 
 .ngb-dp-header {
@@ -52,6 +51,34 @@ ngb-datepicker .bg-light {
 nav {
   &.navbar {
     height: $nav-height !important;
+  }
+}
+
+ngx-timeline {
+
+  .col-event {
+
+    &.col-left, &.col-right {
+      .left, .right {
+        flex-direction: column;
+      }
+    }
+
+    &.col-left {
+      .left {
+        &.hour {
+          align-items: flex-end;
+        }
+      }
+    }
+
+    &.col-right {
+      .right {
+        &.hour {
+          align-items: flex-start;
+        }
+      }
+    }
   }
 }
 
@@ -71,8 +98,8 @@ nav {
 
 
 .items-container {
-  margin-top: 0!important;
-  padding-top: 0!important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 // Event

@@ -1,10 +1,16 @@
 import { initialState, MvvState } from "./mvv.state";
 import { createReducer, on } from "@ngrx/store";
-import { ApostilleActions } from "../../apostille/store";
+import { MvvActions } from "./index";
 
 export const mvvReducer = createReducer<MvvState>(initialState,
-  on(ApostilleActions.getConfig, (state) => ({
+  on(MvvActions.getConfigSuccess, (state, action) => ({
       ...state,
+      ...action
+    })
+  ),
+  on(MvvActions.updateSuccess, (state, action) => ({
+      ...state,
+      ...action
     })
   )
 )

@@ -25,6 +25,8 @@ import { ApostilleComponent } from "./modules/apostille/apostille.component";
 import { PoliceClearanceComponent } from "./modules/police-clearance/police-clearance.component";
 import { GatherDocumentsComponent } from "./modules/gather-documents/gather-documents.component";
 import { TimeIndicatorComponent } from "./modules/time-indicator/time-indicator.component";
+import { IMvvService, LocalMvvService } from "./modules/mvv/mvv-service";
+import { MvvComponent } from "./modules/mvv/mvv.component";
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { TimeIndicatorComponent } from "./modules/time-indicator/time-indicator.
     PoliceClearanceComponent,
     GatherDocumentsComponent,
     TimeIndicatorComponent,
+    MvvComponent,
 
     StoreModule.forRoot({
       'app': appReducer
@@ -72,6 +75,7 @@ import { TimeIndicatorComponent } from "./modules/time-indicator/time-indicator.
     { provide: IPoliceClearanceService, useClass: PoliceClearanceService },
     { provide: IUnabridgedService, useClass: UnabridgedLocalService },
     { provide: IApostilleService, useClass: ApostilleService },
+    { provide: IMvvService, useClass: LocalMvvService },
   ],
   bootstrap: [AppComponent]
 })

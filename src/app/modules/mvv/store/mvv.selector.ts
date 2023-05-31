@@ -7,3 +7,12 @@ export const getConfig = createSelector(
   featureSelector,
   (state) => state
 )
+
+export const getState = createSelector(
+  featureSelector,
+  (state: MvvState) => ({
+    id: state.id,
+    done: state.done,
+    time: state.time,
+  })
+)

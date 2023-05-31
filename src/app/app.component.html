@@ -77,16 +77,14 @@
 </ng-template>
 
 <ng-template #dateTemplate let-item=item>
-  <div>
-    <span>
-      {{item?.time || 0}} week{{item?.time !== 1 ? 's' : ''}}
-    </span><br>
-    <span *ngIf="item.dependsOn?.length > 0">
-      <i>Depends on
-      <span *ngFor="let dependent of item.dependsOn">
-        <b>{{dependent}}{{dependent === item.dependsOn[item.dependsOn.length - 1] ? "" : ", "}}</b>
-      </span>
-      </i>
+  <span>
+    {{item?.time || 0}} week{{item?.time !== 1 ? 's' : ''}}
+  </span>
+  <span class="small" *ngIf="item.dependsOn?.length > 0">
+    <i>Depends on
+    <span *ngFor="let dependent of item.dependsOn">
+      <b>{{dependent}}{{dependent === item.dependsOn[item.dependsOn.length - 1] ? "" : ", "}}</b>
     </span>
-  </div>
+    </i>
+  </span>
 </ng-template>
