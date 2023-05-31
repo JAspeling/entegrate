@@ -1,7 +1,7 @@
 import { CostTimeInterface } from "../../../shared/models/cost-time.interface";
 
 export interface UnabridgedState extends CostTimeInterface {
-  id?: string;
+  id: string;
   options?: CostTimeInterface;
   selectedOption: number;
   done: boolean;
@@ -9,6 +9,7 @@ export interface UnabridgedState extends CostTimeInterface {
 }
 
 export const initialState: UnabridgedState = {
+  id: 'unabridged',
   options: {
     cost: 0,
     time: 0

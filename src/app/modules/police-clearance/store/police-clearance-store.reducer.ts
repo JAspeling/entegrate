@@ -18,9 +18,5 @@ export const policeClearanceReducer = createReducer(
       ...action
     })
   ),
-  on(PoliceClearanceActions.setId, (state, action) => ({
-      ...state,
-      id: action.id
-    })
-  )
+
 )

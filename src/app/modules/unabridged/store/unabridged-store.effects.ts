@@ -47,19 +47,6 @@ export class UnabridgedStoreEffects {
     ))
   ))
 
-  setId$ = createEffect(() => this.actions$
-    .pipe(
-      ofType(TimelineActions.loadEventsSuccess),
-      tap((events) =>
-        this.store.dispatch(UnabridgedActions.setId({
-          id: events.events
-            .find((event) => event.title.toLowerCase() === 'unabridged certificates')
-            .id
-        }))
-      )
-    ), { dispatch: false }
-  )
-
   constructor(private readonly actions$: Actions,
     private readonly unabridgedService: IUnabridgedService,
     private readonly store: Store<AppState>) {

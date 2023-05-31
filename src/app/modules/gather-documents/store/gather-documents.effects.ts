@@ -55,19 +55,6 @@ export class GatherDocumentsEffects {
     ), { dispatch: false }
   );
 
-  setId$ = createEffect(() => this.actions$
-    .pipe(
-      ofType(TimelineActions.loadEventsSuccess),
-      tap((events) =>
-        this.store.dispatch(GatherDocsActions.setId({
-          id: events.events
-            .find((event) => event.title.toLowerCase() === 'gather documents')
-            .id
-        }))
-      )
-    ), { dispatch: false }
-  )
-
   constructor(private actions$: Actions,
     private store: Store<AppState>,
     private readonly service: IGatherDocsService) {

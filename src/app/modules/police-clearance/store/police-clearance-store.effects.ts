@@ -55,19 +55,6 @@ export class PoliceClearanceStoreEffects {
     )
   )
 
-  setId$ = createEffect(() => this.actions$
-    .pipe(
-      ofType(TimelineActions.loadEventsSuccess),
-      tap((events) =>
-        this.store.dispatch(PoliceClearanceActions.setId({
-          id: events.events
-            .find((event) => event.title.toLowerCase() === 'police clearance')
-            .id
-        }))
-      )
-    ), { dispatch: false }
-  )
-
   constructor(private readonly actions$: Actions, private service: IPoliceClearanceService,
     private store: Store<AppState>) {
   }

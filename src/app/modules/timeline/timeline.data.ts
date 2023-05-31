@@ -2,7 +2,7 @@ import { CustomTimelineEvent } from "../../shared/models/timeline-event.interfac
 
 export const timelineData: CustomTimelineEvent[] = [
   {
-    id: 'gather',
+    id: 'gather-docs',
     done: false,
     title: 'Gather Documents',
     template: 'GatherDocumentsComponent',
@@ -11,7 +11,7 @@ export const timelineData: CustomTimelineEvent[] = [
     dependsOn: [],
     concurrent: true,
   }, {
-    id: 'police',
+    id: 'police-clearance',
     done: false,
     title: 'Police Clearance',
     description: 'You’ll need to apply for your police clearance certificate from the South African Police Service',

@@ -93,6 +93,7 @@ export class UnabridgedInformationComponent implements OnInit {
 
     // destructure cost and time from the selection
     const selected = {
+      ...this.form.value,
       cost: this.selections[index].cost,
       time: this.selections[index].time,
       selectedOption: index,

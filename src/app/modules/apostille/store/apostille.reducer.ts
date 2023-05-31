@@ -18,11 +18,6 @@ export const apostilleReducer = createReducer<ApostilleState>(
       ...action
     })
   ),
-  on(ApostilleActions.setId, (state, action) => ({
-      ...state,
-      id: action.id
-    })
-  ),
   on(ApostilleActions.updateLocal, (state, action) => ({
       ...state,
       ...action

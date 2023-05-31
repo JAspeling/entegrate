@@ -40,8 +40,3 @@ export const updateLocalCostTime = createAction(
   actions.UpdateLocalCostTime,
   props<UnabridgedState>(),
 );
-
-export const setId = createAction(
-  actions.SetId,
-  props<{ id: string }>()
-)

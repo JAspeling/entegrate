@@ -27,9 +27,4 @@ export const unabridgedStoreReducer = createReducer<UnabridgedState>(
       error: null
     })
   ),
-  on(UnabridgedActions.setId, (state, action) => ({
-      ...state,
-      id: action.id
-    })
-  )
 )

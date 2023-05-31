@@ -17,10 +17,5 @@ export const GatherDocumentsReducer = createReducer(
       ...state,
       ...action
     })
-  ),
-  on(GatherDocsActions.setId, (state, action) => ({
-      ...state,
-      id: action.id
-    })
   )
 )

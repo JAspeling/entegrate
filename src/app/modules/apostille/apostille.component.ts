@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { ApostilleState } from "./store/apostille.state";
+import { ApostilleState, initialState } from "./store/apostille.state";
 import { ApostilleActions, ApostilleSelectors } from "./store";
 import { Observable, Subscription, tap } from "rxjs";
 import { FormBuilder, FormGroup } from "@angular/forms";
@@ -65,6 +65,7 @@ export class ApostilleComponent implements OnInit {
   select(index: number): void {
     // destructure cost and time from the selection
     const selected = {
+      ...this.form.value,
       cost: NaN, //this.selections[index].cost,
       time: this.selections[index].time,
       selectedOption: index,
@@ -79,10 +80,7 @@ export class ApostilleComponent implements OnInit {
 
   private initializeForm() {
     this.form = new FormBuilder().group<ApostilleState>({
-      selectedOption: 0,
-      done: false,
-      cost: 0,
-      time: 4
+      ...initialState
     })
   }
 }

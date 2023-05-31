@@ -1,5 +1,5 @@
 export interface ApostilleState {
-  id?: string;
+  id: string;
   time: number;
   cost: number;
   done: boolean;
@@ -7,6 +7,7 @@ export interface ApostilleState {
 }
 
 export const initialState: ApostilleState = {
+  id: 'apostille',
   selectedOption: 0,
   done: false,
   time: 4,

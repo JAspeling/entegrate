@@ -27,7 +27,4 @@ export const updateConfigSuccess = createAction(
   actions.UpdateConfigSuccess,
   props<GatherDocsState>()
 )
-export const setId = createAction(
-  actions.SetId,
-  props<{ id: string }>()
-)
+

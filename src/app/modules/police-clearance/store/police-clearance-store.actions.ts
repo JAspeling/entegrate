@@ -27,8 +27,3 @@ export const updateSuccess = createAction(
   actions.UpdateSuccess,
   props<PoliceClearanceState>()
 )
-
-export const setId = createAction(
-  actions.SetId,
-  props<{ id: string }>()
-)

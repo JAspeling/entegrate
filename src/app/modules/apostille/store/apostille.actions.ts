@@ -33,8 +33,3 @@ export const updateLocal = createAction(
   actions.UpdateLocal,
   props<ApostilleState>()
 )
-
-export const setId = createAction(
-  actions.SetId,
-  props<{ id: string }>()
-)

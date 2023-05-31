@@ -7,7 +7,7 @@ import { AppState } from "../../../state/app.state";
 import { Store } from "@ngrx/store";
 import { IApostilleService } from "../apostille-service";
 import { TimelineActions } from "../../timeline/state";
-import { ApostilleActions, ApostilleSelectors } from "./index";
+import { ApostilleSelectors } from "./index";
 
 @Injectable()
 export class ApostilleEffects {
@@ -52,19 +52,6 @@ export class ApostilleEffects {
         // TODO: Might have to emit the duration here.
       )
     )
-  )
-
-  setId$ = createEffect(() => this.actions$
-    .pipe(
-      ofType(TimelineActions.loadEventsSuccess),
-      tap((events) =>
-        this.store.dispatch(ApostilleActions.setId({
-          id: events.events
-            .find((event) => event.title.toLowerCase() === 'apostille documents')
-            .id
-        }))
-      )
-    ), { dispatch: false }
   )
 
   constructor(private readonly actions$: Actions,
