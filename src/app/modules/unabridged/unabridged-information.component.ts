@@ -12,10 +12,20 @@ import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
 import { ProcessInformationState } from "../process-information/store/process-info-store.state";
 import { ProcessInfoSelectors } from "../process-information/store";
 import { ofType } from "@ngrx/effects";
+import { UnabridgedStoreModule } from "./store/unabridged-store.module";
+import { CommonModule } from "@angular/common";
+import { AdditionalTemplateComponent } from "../../shared/additional-template.component";
 
 @Component({
   selector: 'app-unabridged-information',
-  templateUrl: './unabridged-information.component.html'
+  templateUrl: './unabridged-information.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+
+    UnabridgedStoreModule,
+    AdditionalTemplateComponent
+  ]
 })
 @AutoUnsubscribe()
 export class UnabridgedInformationComponent implements OnInit {

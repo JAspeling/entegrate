@@ -5,10 +5,19 @@ import { Store } from "@ngrx/store";
 import { GatherDocsActions, GatherDocsSelectors } from "./store";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { ProcessInfoSelectors } from "../process-information/store";
+import { CommonModule } from "@angular/common";
+import { GatherDocumentsStoreModule } from "./store/gather-documents.store.module";
+import { AdditionalTemplateComponent } from "../../shared/additional-template.component";
 
 @Component({
   selector: 'app-gather-documents',
   templateUrl: './gather-documents.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    GatherDocumentsStoreModule,
+    AdditionalTemplateComponent
+  ],
 })
 export class GatherDocumentsComponent {
   form: FormGroup;

@@ -7,10 +7,26 @@ import { Subscription, tap } from "rxjs";
 import { PoliceClearanceStoreEffects } from "./store/police-clearance-store.effects";
 import { ToastrService } from "ngx-toastr";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
+import { CommonModule } from "@angular/common";
+import { PoliceClearanceStoreModule } from "./store/police-clearance-store.module";
+import { IPoliceClearanceService, PoliceClearanceService } from "./police-clearance.service";
+import { AdditionalTemplateComponent } from "../../shared/additional-template.component";
 
 @Component({
   selector: 'app-police-clearance',
   templateUrl: './police-clearance.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    PoliceClearanceStoreModule,
+    AdditionalTemplateComponent
+  ],
+  providers: [
+    {
+      provide: IPoliceClearanceService,
+      useClass: PoliceClearanceService
+    }
+  ],
 })
 @AutoUnsubscribe()
 export class PoliceClearanceComponent {

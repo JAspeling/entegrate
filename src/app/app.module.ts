@@ -10,18 +10,21 @@ import { appReducer } from "./state/app.reducer";
 import { EffectsModule } from '@ngrx/effects';
 import { TimelineModule } from "./modules/timeline/timeline.module";
 import { ComponentLoaderService } from "./shared/services/component-loader.service";
-import { UnabridgedModule } from "./modules/unabridged/unabridged.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
-import { AppEffects } from "./state/app.effects";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ProcessInformationModule } from "./modules/process-information/process-information.module";
 import { SharedModule } from "./shared/shared.module";
-import { TimeIndicatorModule } from "./modules/time-indicator/time-indicator.module";
-import { ApostilleModule } from "./modules/apostille/apostille.module";
-import { PoliceClearanceModule } from "./modules/police-clearance/police-clearance.module";
-import { GatherDocumentsModule } from "./modules/gather-documents/gather-documents.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { GatherDocsService, IGatherDocsService } from "./modules/gather-documents/gather-document.service";
+import { IPoliceClearanceService, PoliceClearanceService } from "./modules/police-clearance/police-clearance.service";
+import { IUnabridgedService, UnabridgedLocalService } from "./modules/unabridged/unabridged.service";
+import { ApostilleService, IApostilleService } from "./modules/apostille/apostille-service";
+import { UnabridgedInformationComponent } from "./modules/unabridged/unabridged-information.component";
+import { ApostilleComponent } from "./modules/apostille/apostille.component";
+import { PoliceClearanceComponent } from "./modules/police-clearance/police-clearance.component";
+import { GatherDocumentsComponent } from "./modules/gather-documents/gather-documents.component";
+import { TimeIndicatorComponent } from "./modules/time-indicator/time-indicator.component";
 
 @NgModule({
   declarations: [
@@ -37,6 +40,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ToastrModule.forRoot(),
     NgbModule,
 
+    UnabridgedInformationComponent,
+    ApostilleComponent,
+    PoliceClearanceComponent,
+    GatherDocumentsComponent,
+    TimeIndicatorComponent,
+
     StoreModule.forRoot({
       'app': appReducer
     }, {
@@ -49,21 +58,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       name: 'Entegrate',
       logOnly: !isDevMode()
     }),
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot(),
 
 
     SharedModule,
-    GatherDocumentsModule,
     TimelineModule,
-    UnabridgedModule,
     ProcessInformationModule,
-    TimeIndicatorModule,
-    ApostilleModule,
-    PoliceClearanceModule,
     NgbModule
   ],
   providers: [
     ComponentLoaderService,
+    { provide: IGatherDocsService, useClass: GatherDocsService },
+    { provide: IPoliceClearanceService, useClass: PoliceClearanceService },
+    { provide: IUnabridgedService, useClass: UnabridgedLocalService },
+    { provide: IApostilleService, useClass: ApostilleService },
   ],
   bootstrap: [AppComponent]
 })

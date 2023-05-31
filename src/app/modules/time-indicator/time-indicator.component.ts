@@ -3,10 +3,15 @@ import { Store } from "@ngrx/store";
 import { AppState } from "../../state/app.state";
 import { getCurrentTime, getTotalTime } from "../../state/app.selectors";
 import { combineLatest, map, Observable, tap } from "rxjs";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: 'app-time-indicator',
-  templateUrl: './time-indicator.component.html'
+  templateUrl: './time-indicator.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+  ]
 })
 export class TimeIndicatorComponent {
   @ViewChild('path') path: ElementRef<HTMLDivElement>;

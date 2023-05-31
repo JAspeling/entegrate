@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { AppState } from "../state/app.state";
 import { TimelineActions } from "../modules/timeline/state";
+import { CommonModule } from "@angular/common";
 
 @Component({
   selector: 'app-additional',
@@ -31,8 +32,12 @@ import { TimelineActions } from "../modules/timeline/state";
         <button type="button" class="btn btn-primary" (click)="onSave(config)">Save changes</button>
       </div>
     </div>
-
-  `
+  `,
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule
+  ]
 })
 export class AdditionalTemplateComponent<T> {
   @Output() save = new EventEmitter<T>();

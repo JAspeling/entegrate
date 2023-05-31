@@ -7,6 +7,7 @@ import { initialState, MvvState } from "./store/mvv.state";
 import { Store } from "@ngrx/store";
 import { MvvSelectors } from "./store";
 import { MvvStoreModule } from "./store/mvv-store.module";
+import { AdditionalTemplateComponent } from "../../shared/additional-template.component";
 
 @Component({
   selector: 'mvv-component',
@@ -17,6 +18,7 @@ import { MvvStoreModule } from "./store/mvv-store.module";
     SharedModule,
 
     MvvStoreModule,
+    AdditionalTemplateComponent
   ],
 })
 

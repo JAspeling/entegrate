@@ -7,10 +7,20 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
 import { ApostilleEffects } from "./store/apostille-effects";
 import { ToastrService } from "ngx-toastr";
+import { ApostilleStoreModule } from "./store/apostille-store.module";
+import { CommonModule } from "@angular/common";
+import { AdditionalTemplateComponent } from "../../shared/additional-template.component";
 
 @Component({
   selector: 'app-apostille',
-  templateUrl: './apostille.component.html'
+  templateUrl: './apostille.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ApostilleStoreModule,
+    AdditionalTemplateComponent,
+
+  ]
 })
 @AutoUnsubscribe()
 export class ApostilleComponent implements OnInit {
