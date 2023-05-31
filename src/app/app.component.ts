@@ -11,6 +11,7 @@ import { ApostilleActions } from "./modules/apostille/store";
 import { PoliceClearanceActions } from "./modules/police-clearance/store";
 import { TimelineSelectors } from "./modules/timeline/state";
 import { GatherDocsActions } from "./modules/gather-documents/store";
+import { MvvActions } from "./modules/mvv/store";
 
 @Component({
   selector: 'app-root',
@@ -32,10 +33,12 @@ export class AppComponent implements OnInit {
 
     this.store.dispatch(timelineActions.loadEvents());
     this.store.dispatch(timelineActions.getCurrent());
+
     this.store.dispatch(UnabridgedStoreActions.getConfig());
     this.store.dispatch(ApostilleActions.getConfig());
     this.store.dispatch(PoliceClearanceActions.getConfig());
     this.store.dispatch(GatherDocsActions.getConfig());
+    this.store.dispatch(MvvActions.getConfig());
 
     this.events$ = this.store.select(TimelineSelectors.getEvents);
 

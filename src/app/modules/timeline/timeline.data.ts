@@ -63,11 +63,22 @@ export const timelineData: CustomTimelineEvent[] = [
     done: false,
     title: 'Apostille Documents',
     template: 'ApostilleComponent',
-    description: 'The apostille is a validation stamp ensuring that a particular document is recognized in certain foreign countries. IE Netherlands',
+    description: `The apostille is a validation stamp ensuring that a particular document is recognized in
+    certain foreign countries. IE Netherlands`,
     timestamp: new Date(),
     dependsOn: ['Unabridged certificates'],
     concurrent: false,
   }, {
+    id: 'mvv',
+    done: false,
+    title: 'MVV Application',
+    template: 'MvvComponent',
+    description: `The MVV is a visa that allows you to enter the Netherlands and stay for longer than 90 days.
+    It is a sticker that the Dutch embassy or consulate places in your passport.`,
+    timestamp: new Date(),
+    dependsOn: ['Apostille Documents', 'Unabridged certificates'],
+    concurrent: false,
+  },{
     id: 'flight',
     done: false,
     title: 'Flight tickets',

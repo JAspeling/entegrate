@@ -94,7 +94,6 @@ export class TimelineEffects {
       ofType(TimelineActions.updateEvents),
       tap((action) => {
         for (let index = 0; index < action.events.length; index++) {
-          const event = action.events[index];
           action.events[index].itemPosition = index % 2 === 0
             ? NgxTimelineItemPosition.ON_LEFT
             : NgxTimelineItemPosition.ON_RIGHT;
