@@ -43,7 +43,7 @@ export const timelineReducer = createReducer<TimelineState>(
     })
   ),
   on(
-    TimelineActions.updateEvents, (state, action) => ({
+    TimelineActions.updateEventsSuccess, (state, action) => ({
       ...state,
       events: action.events
     })

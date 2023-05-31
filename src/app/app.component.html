@@ -84,7 +84,7 @@
     <span *ngIf="item.dependsOn?.length > 0">
       <i>Depends on
       <span *ngFor="let dependent of item.dependsOn">
-        {{dependent}}{{dependent === item.dependsOn[item.dependsOn.length - 1] ? "" : ", "}}
+        <b>{{dependent}}{{dependent === item.dependsOn[item.dependsOn.length - 1] ? "" : ", "}}</b>
       </span>
       </i>
     </span>

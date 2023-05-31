@@ -1,13 +1,14 @@
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { TimelineService } from "../timeline.service";
 import * as TimelineActions from "./timeline.actions";
-import { catchError, concatMap, distinctUntilChanged, map, mergeMap, of, take } from "rxjs";
+import { catchError, concatMap, distinctUntilChanged, map, mergeMap, of, take, tap } from "rxjs";
 import { Injectable } from "@angular/core";
 import { AppState } from "../../../state/app.state";
 import { Store } from "@ngrx/store";
 import { TimelineSelectors } from "./index";
 import { CustomTimelineEvent } from "../../../shared/models/timeline-event.interface";
 import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
+import { NgxTimelineItemPosition } from "@frxjs/ngx-timeline";
 
 @Injectable()
 export class TimelineEffects {
@@ -81,20 +82,39 @@ export class TimelineEffects {
       ),
       map((value) => {
         // Update all the consecutive events, including this one.
-        const startDate = {
-          year: value.event.timestamp.getFullYear(),
-          month: value.event.timestamp.getMonth() + 1,
-          day: value.event.timestamp.getDate()
-        }
+        const startDate = this.toDateStruct(value.event.timestamp);
         return this.updateEventDates(value.events, startDate, value.index)
       }),
       map((events) => TimelineActions.updateEvents({ events }))
     )
   )
 
+  updateEvents$ = createEffect(() => this.actions$
+    .pipe(
+      ofType(TimelineActions.updateEvents),
+      tap((action) => {
+        for (let index = 0; index < action.events.length; index++) {
+          const event = action.events[index];
+          action.events[index].itemPosition = index % 2 === 0
+            ? NgxTimelineItemPosition.ON_LEFT
+            : NgxTimelineItemPosition.ON_RIGHT;
+        }
+      }),
+      map((action) => TimelineActions.updateEventsSuccess({ events: action.events }))
+    )
+  )
+
   constructor(private actions$: Actions,
     private readonly timelineService: TimelineService, private readonly store: Store<AppState>) {
 
+  }
+
+  private toDateStruct(date: Date): NgbDateStruct {
+    return {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate()
+    }
   }
 
   private addWeeks(date: Date, weeks: number): Date {

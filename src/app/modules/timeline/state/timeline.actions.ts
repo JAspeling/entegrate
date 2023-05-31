@@ -16,6 +16,7 @@ export enum actions {
   ClearCurrentEventSuccess = '[Timeline] Clear current event success',
   UpdateEvent = '[Timeline] Update event',
   UpdateEvents = '[Timeline] Update events',
+  UpdateEventsSuccess = '[Timeline] Update events Success',
   UpdateTimestamps = '[Timeline] Update timestamps',
 }
 
@@ -77,6 +78,11 @@ export const updateEvent = createAction(
 
 export const updateEvents = createAction(
   actions.UpdateEvents,
+  props<{ events: CustomTimelineEvent[] }>()
+)
+
+export const updateEventsSuccess = createAction(
+  actions.UpdateEventsSuccess,
   props<{ events: CustomTimelineEvent[] }>()
 )
 
