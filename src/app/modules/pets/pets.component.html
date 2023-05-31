@@ -1,5 +1,19 @@
 <app-additional [config]="config$ | async"
                 [form]="form"
                 [title]="'Pets'"
-                (save)="onSave($event)"
-></app-additional>
+                (save)="onSave($event)">
+
+  <div class="p-3 ms-0 pt-0">
+    <app-text [form]="form"
+              [id]="'petsCount'"
+              [label]="'How many pets are you bringing over?'">
+    </app-text>
+
+    <app-dropdown [form]="form"
+                  [isBoolean]="true"
+                  [id]="'arriveTogether'"
+                  [label]="'Do you want your pets to arrive in the Netherlands the same time you do?'">
+    </app-dropdown>
+  </div>
+
+</app-additional>

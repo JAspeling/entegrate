@@ -3,6 +3,8 @@ export interface PetsState {
   cost: number;
   time: number;
   done: boolean;
+  petsCount: number;
+  arriveTogether: boolean;
 }
 
 export const initialState: PetsState = {
@@ -10,4 +12,6 @@ export const initialState: PetsState = {
   done: false,
   cost: 0,
   time: 12,
+  petsCount: 0,
+  arriveTogether: false,
 }

@@ -2,6 +2,7 @@ import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
 
 export interface ProcessInformationState {
   isOpen: boolean;
+  peopleCount?: number;
 
   // This might have a different flow if only one of the people has citizenship
   euCitizenship: boolean;
@@ -11,6 +12,7 @@ export interface ProcessInformationState {
   childrenCount: number;
   pets: boolean;
   petsCount: number;
+  petsArrival?: boolean;
   cost?: number;
   time?: number;
   startDate?: NgbDateStruct;
@@ -24,6 +26,7 @@ export const initialState: ProcessInformationState = {
   children: false,
   childrenCount: 0,
   pets: false,
+  petsArrival: false,
   petsCount: 0,
   startDate: toDateStruct(new Date()),
 }

@@ -35,13 +35,14 @@
           </div>
 
           <div class="mb-3">
-            <label for="peopleCount" class="form-label">Amount of people for application <b>(including yourself)</b></label>
-            <input  [formControlName]="'peopleCount'" type="number" id="peopleCount" class="form-control">
+            <label for="peopleCount" class="form-label">Amount of people for application <b>(including
+              yourself)</b></label>
+            <input [formControlName]="'peopleCount'" type="number" id="peopleCount" class="form-control">
           </div>
 
           <div class="mb-3">
             <label for="euCitizenship" class="form-label">Do you have EU citizenship?</label>
-            <select  id="euCitizenship" formControlName="euCitizenship" class="form-select disabled">
+            <select id="euCitizenship" formControlName="euCitizenship" class="form-select disabled">
               <option *ngFor="let opt of booleanOptions" [ngValue]="opt.value">
                 {{opt.label}}
               </option>
@@ -49,7 +50,7 @@
           </div>
           <div class="mb-3">
             <label for="partner" class="form-label">Are you bringing a partner over?</label>
-            <select  [formControlName]="'partner'" id="partner" class="form-select">
+            <select [formControlName]="'partner'" id="partner" class="form-select">
               <option *ngFor="let opt of booleanOptions" [ngValue]="opt.value">
                 {{opt.label}}
               </option>
@@ -57,7 +58,7 @@
           </div>
           <div class="mb-3">
             <label for="married" class="form-label">Are you married?</label>
-            <select  [formControlName]="'married'" id="married" class="form-select">
+            <select [formControlName]="'married'" id="married" class="form-select">
               <option *ngFor="let opt of booleanOptions" [ngValue]="opt.value">
                 {{opt.label}}
               </option>
@@ -77,23 +78,19 @@
             <input [formControlName]="'childrenCount'" type="number" id="children_count" class="form-control">
           </div>
 
-          <div class="mb-3">
-            <label for="pets" class="form-label">Do you have pets coming over?</label>
-            <select  [formControlName]="'pets'" id="pets" class="form-select">
-              <option *ngFor="let opt of booleanOptions" [ngValue]="opt.value">
-                {{opt.label}}
-              </option>
-            </select>
-          </div>
+          <app-dropdown
+            [label]="'Do you have pets coming over?'"
+            [form]="form"
+            [id]="'pets'"
+            [options]="_booleanOptions">
+          </app-dropdown>
 
-          <div class="mb-3" *ngIf="includePets">
-            <label for="pets_count" class="form-label">How many pets are you bringing over?</label>
-            <input  [formControlName]="'petsCount'" type="number" id="pets_count" class="form-control">
-          </div>
         </fieldset>
         <div class="content-footer d-flex justify-content-end">
           <button type="button" class="btn btn-primary " (click)="save($event)">Save changes</button>
         </div>
+
+        {{ form.value | json }}
       </div>
     </div>
   </div>

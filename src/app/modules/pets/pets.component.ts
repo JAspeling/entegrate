@@ -4,12 +4,14 @@ import { AdditionalTemplateComponent } from "../../shared/additional-template.co
 import { initialState, PetsState } from "./store/pets.state";
 import { Store } from "@ngrx/store";
 import { PetsActions, PetsSelectors } from "./store";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, FormsModule } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { PetsEffects } from "./store/pets.effects";
 import { PetsStoreModule } from "./store/pets.store.module";
 import { tap } from "rxjs";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
+import { DropdownComponent } from "../inputs/dropdown.component";
+import { TextComponent } from "../inputs/input.component";
 
 @Component({
   selector: 'app-pets',
@@ -18,7 +20,10 @@ import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
   imports: [
     CommonModule,
     AdditionalTemplateComponent,
-    PetsStoreModule
+    PetsStoreModule,
+    FormsModule,
+    DropdownComponent,
+    TextComponent
   ]
 })
 @AutoUnsubscribe()

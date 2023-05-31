@@ -4,7 +4,7 @@ import { toggleProcessInformation, updateProcessInformation } from "./store/proc
 import { getIsOpen } from "./store/process-information-store.selectors";
 import { Store } from "@ngrx/store";
 import { initialState, ProcessInformationState } from "./store/process-info-store.state";
-import { FormBuilder, FormGroup, ValidationErrors } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn } from "@angular/forms";
 import { ProcessInfoActions, ProcessInfoSelectors } from "./store";
 import { ProcessInformationStoreEffects } from "./store/process-information-store.effects";
 import { ToastrService } from "ngx-toastr";
@@ -12,6 +12,7 @@ import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
 import { ofType } from "@ngrx/effects";
 import { TimelineActions } from "../timeline/state";
 import { TimelineService } from "../timeline/timeline.service";
+import { DropdownOption } from "../inputs/dropdown.component";
 
 @Component({
   selector: 'app-process-information',
@@ -27,6 +28,11 @@ export class ProcessInformationComponent implements OnInit {
   booleanOptions = [
     { value: true, label: 'Yes' },
     { value: false, label: 'No' }
+  ]
+
+  _booleanOptions: DropdownOption<boolean>[] = [
+    { value: true, display: 'Yes' },
+    { value: false, display: 'No' },
   ]
 
   form: FormGroup;
@@ -66,8 +72,8 @@ export class ProcessInformationComponent implements OnInit {
     return this.form?.get('pets')?.value;
   }
 
-  validateFormGroup(): ValidationErrors {
-    return (group: FormGroup): ValidationErrors => {
+  validateFormGroup(): ValidatorFn | ValidatorFn[] {
+    return (group: AbstractControl): ValidationErrors | null => {
       // Do any custom validation here.
 
       return null;
@@ -92,10 +98,10 @@ export class ProcessInformationComponent implements OnInit {
   }
 
   private initializeForm() {
-    this.form = new FormBuilder().group({
+    this.form = new FormBuilder().group<ProcessInformationState>({
       ...initialState,
       peopleCount: 0,
-    }, { validator: this.validateFormGroup() });
+    }, { validators: this.validateFormGroup() });
 
     this.formSubscription = this.form.valueChanges.subscribe((value) => {
       this.setApplicationAmount();
