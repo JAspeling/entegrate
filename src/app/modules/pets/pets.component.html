@@ -30,4 +30,98 @@
     </ng-container>
   </div>
 
+  <ng-container *ngIf="form.get('selectedOption').value === 0">
+    <h5 class="mt-3">Take a look at these providers</h5>
+
+    <section>
+      <div class="clickable" (click)="navigate('https://www.talbotinternational.co.za/')">
+        <span>Talbot pets international</span>
+      </div>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf="form.get('selectedOption').value === 1">
+    <h5 class="mt-3">Guidelines for doing it yourself</h5>
+
+    <section class="alternate">
+      <h6>Age of pet</h6>
+      <p>
+        The animal has to be <b>7 months or older</b> in order to travel to the EU, and they have to have
+        their own <b>Rabies vaccination</b>.
+      </p>
+    </section>
+
+    <section class="alternate">
+      <h6>Microchip</h6>
+      <p>
+        Pets <b>must be micro-chipped</b>. The microchip must be either implanted before the Rabies vaccination or
+        with the rabies vaccination. Should a microchip fail then a microchip has to be implanted again and
+        the process started from the beginning. A new rabies vaccination would need to be given either on
+        the same day or after the microchip implantation.
+      </p>
+    </section>
+
+    <section class="alternate">
+      <h6>Rabies Vaccinations</h6>
+      <p>
+        Pets must have a Rabies vaccination that is older than 31 days, but not older than one year.
+      </p>
+      <p>
+        Three-year rabies vaccinations can be accepted depending on the manufacturers specifications,
+        as long as the microchip was implanted before the vaccination was given.
+      </p>
+    </section>
+
+    <section class="alternate">
+      <h6>Rabies Neutralizing Anti Body Titre test</h6>
+      <p>
+        The blood sample must be taken at least 30 or 31 days after the rabies vaccination. No Less.
+      </p>
+      <p>
+        Once this blood test has been done, there is then a waiting period of three calendar months or
+        92 days from the date the blood sample was drawn.
+      </p>
+    </section>
+
+    <section class="alternate">
+      <h6>Normal Canine and Feline vaccinations</h6>
+      <p>
+        Annual canine and feline vaccinations are recommended. Kennel cough vaccinations and snuffles
+        vaccinations for dogs and cats are also recommended, should your pet require boarding before
+        or after they travel, all reputable kennels would insist that you produce a valid vaccination
+        certificate.
+      </p>
+    </section>
+
+    <section class="alternate">
+      <h6>Commercial ( Annex 1 ) and Non-Commercial ( Annex IV) Veterinary Health Certificate</h6>
+      <p>
+        The pets have to be accompanied by an Official Third Country Veterinary Health Certificate issued
+        by a private veterinarian certifying compliance with the above requirements, and this Health
+        Certificate must be stamped & signed by the SA State Vet.
+      </p>
+
+      <p>
+        The Non-Commercial Health certificate must be done within 5 days of travel. A Commercial Health
+        Certificate has to be done within 48 hours of travel.
+      </p>
+
+      <p>
+        Owners or an authorized person MUST travel on the same flight or within 5 days of the pet/s in
+        order to have the non-commercial health certificate endorsed. Should the owners or an authorized
+        person not be able to travel on the same flight or within 5 days of the pet/s a commercial
+        health certificate can be used for travel. Note that additional charges will apply should pets
+        travel on a commercial health certificate.
+      </p>
+    </section>
+
+    <section>
+      <h6>Echinococcus (Tapeworm) Treatment</h6>
+      <p>
+        Dogs travelling to the United Kingdom, and EU require treatment for Echinococcus (tapeworm) 120
+        hours and not less than 24 hours before the time of scheduled entry.
+      </p>
+    </section>
+  </ng-container>
+
 </app-additional>

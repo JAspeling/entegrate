@@ -82,4 +82,8 @@ export class PetsComponent {
       ...initialState
     })
   }
+
+  navigate(url: string) {
+    window.open(url, '_blank')
+  }
 }

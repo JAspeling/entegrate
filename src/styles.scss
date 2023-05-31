@@ -2,7 +2,7 @@
 @import 'ngx-toastr/toastr';
 
 @import 'bootstrap-icons/font/bootstrap-icons';
-@import 'bootstrap/scss/bootstrap.scss';
+@import 'bootstrap/scss/bootstrap';
 
 @import 'ngx-toastr/toastr-bs5-alert';
 
@@ -169,5 +169,3 @@ ngx-timeline {
   transition: left 0.5s ease-in-out;
 }
 
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
