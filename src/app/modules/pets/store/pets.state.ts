@@ -5,6 +5,7 @@ export interface PetsState {
   done: boolean;
   petsCount: number;
   arriveTogether: boolean;
+  selectedOption: number;
 }
 
 export const initialState: PetsState = {
@@ -14,4 +15,5 @@ export const initialState: PetsState = {
   time: 12,
   petsCount: 0,
   arriveTogether: false,
+  selectedOption: 1
 }

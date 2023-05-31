@@ -14,6 +14,20 @@
                   [id]="'arriveTogether'"
                   [label]="'Do you want your pets to arrive in the Netherlands the same time you do?'">
     </app-dropdown>
+
+    <h5>Options</h5>
+    <ng-container *ngFor="let _option of selections; let i = index">
+      <div class="option"
+           [class.selected]="i === form.get('selectedOption').value"
+           (click)="select(i)">
+        <h6>{{_option.title}}</h6>
+        <span>{{_option.description}}</span>
+        <br>
+        <b>Cost: </b><span>R {{_option.cost}}</span>
+        <br>
+        <b>Time: </b><span>{{_option.time}} week(s)</span>
+      </div>
+    </ng-container>
   </div>
 
 </app-additional>

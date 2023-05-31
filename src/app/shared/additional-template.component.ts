@@ -27,7 +27,7 @@ import { CommonModule } from "@angular/common";
         <ng-content></ng-content>
       </div>
 
-      <div class="content-footer">
+      <div class="content-footer pe-2">
         <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
         <button type="button" class="btn btn-primary" (click)="onSave(config)">Save changes</button>
       </div>

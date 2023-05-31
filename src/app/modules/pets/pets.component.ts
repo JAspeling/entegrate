@@ -35,8 +35,24 @@ export class PetsComponent {
 
   updateSuccess = this.effects.update$.pipe(
     tap(() => this.toastr.success('Updated'))
-
   ).subscribe();
+
+  selections = [
+    {
+      title: 'I am using a third party',
+      description: 'This can be really costly, but they ensure all the required processes fall into place for your furry friends.',
+      selected: false,
+      cost: "Not sure - find out", // Rands, per pet. Get the latest cost from some service provider.
+      time: 4 // Weeks
+    },
+    {
+      title: 'I am doing this myself',
+      description: 'You can do this yourself, but it requires a lot of admin and time.',
+      selected: false,
+      cost: "Not sure - find out",
+      time: 12 // Weeks
+    }
+  ]
 
   constructor(private readonly store: Store<PetsState>,
     private readonly fb: FormBuilder,
@@ -50,6 +66,15 @@ export class PetsComponent {
     if (this.form.dirty) {
       this.store.dispatch(PetsActions.update({ ...config, ...this.form.value }));
     }
+  }
+
+  select(index: number): void {
+    this.form.patchValue({
+      ...this.form.value,
+      selectedOption: index
+    });
+
+    this.form.markAsDirty();
   }
 
   private initializeForm() {
