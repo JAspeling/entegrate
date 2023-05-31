@@ -43,7 +43,7 @@ export class PetsComponent {
       description: 'This can be really costly, but they ensure all the required processes fall into place for your furry friends.',
       selected: false,
       cost: "Not sure - find out", // Rands, per pet. Get the latest cost from some service provider.
-      time: 4 // Weeks
+      time: 12 // Weeks
     },
     {
       title: 'I am doing this myself',
@@ -71,7 +71,8 @@ export class PetsComponent {
   select(index: number): void {
     this.form.patchValue({
       ...this.form.value,
-      selectedOption: index
+      selectedOption: index,
+      time: this.selections[index].time,
     });
 
     this.form.markAsDirty();

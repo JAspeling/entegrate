@@ -8,7 +8,7 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 
     <div class="col-12 mb-3" [formGroup]="form">
       <label [for]="id" class="form-label">{{label}}</label>
-      <input [formControlName]="id" [id]="id" class="form-control" type="text" />
+      <input [formControlName]="id" [id]="id" class="form-control" [type]="type" />
     </div>
   `,
   standalone: true,
@@ -22,6 +22,7 @@ export class TextComponent implements OnChanges {
   @Input() label: string;
   @Input() form: FormGroup;
   @Input() id: string;
+  @Input() type: 'text' | 'number' = 'text';
 
   ngOnChanges(changes:SimpleChanges) {
   }

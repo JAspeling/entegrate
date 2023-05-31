@@ -6,7 +6,8 @@
   <div class="p-3 ms-0 pt-0">
     <app-text [form]="form"
               [id]="'petsCount'"
-              [label]="'How many pets are you bringing over?'">
+              [label]="'How many pets are you bringing over?'"
+              [type]="'number'">
     </app-text>
 
     <app-dropdown [form]="form"
@@ -55,17 +56,21 @@
       <h6>Microchip</h6>
       <p>
         Pets <b>must be micro-chipped</b>. The microchip must be either implanted before the Rabies vaccination or
-        with the rabies vaccination. Should a microchip fail then a microchip has to be implanted again and
+        with the rabies vaccination.
+      </p>
+
+      <div class="alert alert-warning">
+        Should a microchip fail then a microchip has to be implanted again and
         the process started from the beginning. A new rabies vaccination would need to be given either on
         the same day or after the microchip implantation.
-      </p>
+      </div>
     </section>
 
     <section class="alternate">
       <h6>Rabies Vaccinations</h6>
-      <p>
-        Pets must have a Rabies vaccination that is older than 31 days, but not older than one year.
-      </p>
+      <div class="alert alert-warning">
+        Pets must have a Rabies vaccination that is <b>older than 31 days</b>, but <b>not older than one year</b>.
+      </div>
       <p>
         Three-year rabies vaccinations can be accepted depending on the manufacturers specifications,
         as long as the microchip was implanted before the vaccination was given.
@@ -74,11 +79,11 @@
 
     <section class="alternate">
       <h6>Rabies Neutralizing Anti Body Titre test</h6>
+      <div class="alert alert-warning">
+        The blood sample must be taken at least <b>30 or 31 days</b> <u>after</u> the rabies vaccination. No Less.
+      </div>
       <p>
-        The blood sample must be taken at least 30 or 31 days after the rabies vaccination. No Less.
-      </p>
-      <p>
-        Once this blood test has been done, there is then a waiting period of three calendar months or
+        Once this blood test has been done, there is then a waiting period of <b>three calendar months</b> or
         92 days from the date the blood sample was drawn.
       </p>
     </section>
@@ -87,7 +92,7 @@
       <h6>Normal Canine and Feline vaccinations</h6>
       <p>
         Annual canine and feline vaccinations are recommended. Kennel cough vaccinations and snuffles
-        vaccinations for dogs and cats are also recommended, should your pet require boarding before
+        vaccinations for dogs and cats are also recommended. Should your pet require boarding before
         or after they travel, all reputable kennels would insist that you produce a valid vaccination
         certificate.
       </p>
