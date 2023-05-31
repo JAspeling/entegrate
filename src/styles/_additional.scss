@@ -77,15 +77,23 @@
         }
 
         .clickable {
+          h1, h2, h3, h4, h5, h6 {
+            margin-top: 0.5rem;
+            text-decoration: underline;
+          }
+
           cursor: pointer;
           transition: border 0.3s ease-in-out;
           border-left: 3px solid transparent;
-          text-decoration: underline;
 
           padding: 0.25rem 0 0.25rem 0.5rem;
           border-radius: 0 0.5rem 0.5rem 0;
 
           user-select: none;
+
+          .additional-info {
+            font-size: smaller;
+          }
 
           &:hover {
             border-left: 3px solid var(--bs-warning);
