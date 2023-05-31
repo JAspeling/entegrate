@@ -25,5 +25,13 @@ export const initialState: ProcessInformationState = {
   childrenCount: 0,
   pets: false,
   petsCount: 0,
-  startDate: null,
+  startDate: toDateStruct(new Date()),
+}
+
+function toDateStruct(date: Date): NgbDateStruct {
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth(),
+    day: date.getDate(),
+  }
 }

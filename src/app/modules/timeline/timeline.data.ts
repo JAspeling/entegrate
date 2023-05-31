@@ -59,6 +59,15 @@ export const timelineData: CustomTimelineEvent[] = [
     dependsOn: [],
     concurrent: true,
   }, {
+    id: 'pets',
+    done: false,
+    title: 'Pets',
+    template: 'PetsComponent',
+    description: `We all love our furry little friends, but they can be a bit of a hassle to get them to the Netherlands. You'll need to get them ready for the trip.`,
+    timestamp: new Date(),
+    dependsOn: [],
+    concurrent: true,
+  }, {
     id: 'apostille',
     done: false,
     title: 'Apostille Documents',
@@ -76,21 +85,13 @@ export const timelineData: CustomTimelineEvent[] = [
     description: `The MVV is a visa that allows you to enter the Netherlands and stay for longer than 90 days.
     It is a sticker that the Dutch embassy or consulate places in your passport.`,
     timestamp: new Date(),
-    dependsOn: ['Apostille Documents', 'Unabridged certificates'],
+    dependsOn: ['Apostille Documents', 'Unabridged certificates', 'Valid passports'],
     concurrent: false,
   },{
     id: 'flight',
     done: false,
     title: 'Flight tickets',
     description: `You'll need to book your flight tickets.`,
-    timestamp: new Date(),
-    dependsOn: [],
-    concurrent: true,
-  }, {
-    id: 'pets',
-    done: false,
-    title: 'Pets',
-    description: `We all love our furry little friends, but they can be a bit of a hassle to get them to the Netherlands. You'll need to get them ready for the trip.`,
     timestamp: new Date(),
     dependsOn: [],
     concurrent: true,

@@ -12,6 +12,7 @@ import { PoliceClearanceActions } from "./modules/police-clearance/store";
 import { TimelineSelectors } from "./modules/timeline/state";
 import { GatherDocsActions } from "./modules/gather-documents/store";
 import { MvvActions } from "./modules/mvv/store";
+import { PetsActions } from "./modules/pets/store";
 
 @Component({
   selector: 'app-root',
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit {
     this.store.dispatch(PoliceClearanceActions.getConfig());
     this.store.dispatch(GatherDocsActions.getConfig());
     this.store.dispatch(MvvActions.getConfig());
+    this.store.dispatch(PetsActions.getConfig());
 
     this.events$ = this.store.select(TimelineSelectors.getEvents);
 

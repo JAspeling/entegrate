@@ -27,6 +27,8 @@ import { GatherDocumentsComponent } from "./modules/gather-documents/gather-docu
 import { TimeIndicatorComponent } from "./modules/time-indicator/time-indicator.component";
 import { IMvvService, LocalMvvService } from "./modules/mvv/mvv-service";
 import { MvvComponent } from "./modules/mvv/mvv.component";
+import { IPetsService, LocalPetsService } from "./modules/pets/pets.service";
+import { PetsComponent } from "./modules/pets/pets.component";
 
 @NgModule({
   declarations: [
@@ -48,6 +50,7 @@ import { MvvComponent } from "./modules/mvv/mvv.component";
     GatherDocumentsComponent,
     TimeIndicatorComponent,
     MvvComponent,
+    PetsComponent,
 
     StoreModule.forRoot({
       'app': appReducer
@@ -76,6 +79,7 @@ import { MvvComponent } from "./modules/mvv/mvv.component";
     { provide: IUnabridgedService, useClass: UnabridgedLocalService },
     { provide: IApostilleService, useClass: ApostilleService },
     { provide: IMvvService, useClass: LocalMvvService },
+    { provide: IPetsService, useClass: LocalPetsService },
   ],
   bootstrap: [AppComponent]
 })
