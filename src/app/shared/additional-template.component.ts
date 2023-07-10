@@ -4,28 +4,21 @@ import { Store } from "@ngrx/store";
 import { AppState } from "../state/app.state";
 import { TimelineActions } from "../modules/timeline/state";
 import { CommonModule } from "@angular/common";
+import { CheckboxComponent } from "../modules/inputs/checkbox.component";
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-additional',
   template: `
     <div class="content" *ngIf="config">
-      <div class="scrollable" (scroll)="onScroll($event)">
-        <div class="sticky-top" [class.is-sticky]="isSticky">
-          <h4 class="pt-2">{{title}}</h4>
-          <hr>
-          <div class="form-check mb-3" [formGroup]="form">
-            <input class="form-check-input"
-                   type="checkbox"
-                   id="flexCheckDefault"
-                   [formControlName]="'done'">
-            <label class="form-check-label" for="flexCheckDefault">
-              <i>Mark as done!</i>
-            </label>
-          </div>
-        </div>
-
-        <ng-content></ng-content>
-      </div>
+      <h4 class="pt-2">{{title}}</h4>
+      <hr>
+      <app-checkbox [name]="'done'"
+                    [form]="form"
+                    [id]="'flexCheckDefault'"
+                    [label]="'Mark as done!'">
+      </app-checkbox>
+      <ng-content></ng-content>
 
       <div class="content-footer pe-2">
         <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
@@ -36,7 +29,8 @@ import { CommonModule } from "@angular/common";
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CheckboxComponent
   ]
 })
 export class AdditionalTemplateComponent<T> {
@@ -45,16 +39,7 @@ export class AdditionalTemplateComponent<T> {
   @Input() form: FormGroup;
   @Input() title: string;
 
-  isSticky: boolean = false;
-
-  onScroll(event: any) {
-    const scrollableContainer = document.querySelector('.scrollable');
-    const scrollTop = scrollableContainer.scrollTop;
-
-    this.isSticky = scrollTop > 0;
-  }
-
-  constructor(public store: Store<AppState>) {
+  constructor(public store: Store<AppState>, private readonly modalService: BsModalService) {
 
   }
 
@@ -63,6 +48,7 @@ export class AdditionalTemplateComponent<T> {
   }
 
   onClose() {
+    this.modalService.hide();
     this.store.dispatch(TimelineActions.clearCurrentEvent());
   }
 }

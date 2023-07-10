@@ -13,6 +13,7 @@
 @import './styles/timeline';
 @import './styles/additional';
 @import './styles/progress-indication';
+@import './styles/modal';
 
 @import './assets/fonts/webfonts/Montserrat.css';
 
@@ -142,6 +143,24 @@ ngx-timeline {
   &.active {
     border: 2px solid #FFA500;
     box-shadow: 0px 0px 6px 3px #FFA500;
+  }
+}
+
+.form-check {
+  cursor: pointer;
+
+  input {
+    &.form-check-input {
+      cursor: pointer;
+    }
+  }
+
+  label {
+    &.form-check-label {
+      width: 100%;
+      cursor: pointer;
+      user-select: none;
+    }
   }
 }
 

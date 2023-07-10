@@ -1,18 +1,28 @@
-import { Injectable, ViewContainerRef } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { componentMap } from "../models/component-map";
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { TimelineActions } from '../../modules/timeline/state';
+import { Store } from '@ngrx/store';
+import { TimelineState } from '../../modules/timeline/state/timeline.state';
 
 @Injectable()
 export class ComponentLoaderService {
-  constructor() {}
+  constructor(private readonly modalService: BsModalService, private readonly store: Store<TimelineState>) {}
 
-  loadComponent(componentName: string, containerRef: ViewContainerRef): void {
+  loadComponent(componentName: string, ): void {
     const componentType = componentMap.get(componentName);
 
     if (componentType) {
-      containerRef?.clear();
+      const ref = this.modalService.show(componentType,
+        {
+          id: componentName,
+          class: 'modal-lg'
+        }
+      );
 
-      const componentRef = containerRef.createComponent(componentType);
-      // You can perform additional operations on the component reference if needed.
+      ref.onHide.subscribe(() => {
+        this.store.dispatch(TimelineActions.clearCurrentEvent());
+      })
     } else {
       console.error(`Component '${componentName}' not found in the component map.`);
     }

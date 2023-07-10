@@ -29,6 +29,7 @@ import { IMvvService, LocalMvvService } from "./modules/mvv/mvv-service";
 import { MvvComponent } from "./modules/mvv/mvv.component";
 import { IPetsService, LocalPetsService } from "./modules/pets/pets.service";
 import { PetsComponent } from "./modules/pets/pets.component";
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { PetsComponent } from "./modules/pets/pets.component";
 
     NgxTimelineModule,
     ToastrModule.forRoot(),
+    ModalModule.forRoot(),
     NgbModule,
 
     UnabridgedInformationComponent,

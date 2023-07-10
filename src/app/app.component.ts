@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgxDateFormat, NgxTimelineEventChangeSideInGroup } from "@frxjs/ngx-timeline";
 import { CustomTimelineEvent } from "./shared/models/timeline-event.interface";
 import { Store } from "@ngrx/store";
@@ -20,12 +20,10 @@ import { PetsActions } from "./modules/pets/store";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  @ViewChild('containerRef', { read: ViewContainerRef, static: true }) containerRef!: ViewContainerRef;
 
   ngxDateFormat = NgxDateFormat;
 
   events$: Observable<CustomTimelineEvent[]>
-  currentEvent$: Observable<CustomTimelineEvent>;
   ngxTimelineEventChangeSideInGroup = NgxTimelineEventChangeSideInGroup;
 
   constructor(private store: Store<AppState>,
@@ -43,16 +41,13 @@ export class AppComponent implements OnInit {
     this.store.dispatch(PetsActions.getConfig());
 
     this.events$ = this.store.select(TimelineSelectors.getEvents);
-
-    this.currentEvent$ = this.store.select(TimelineSelectors.getCurrentEvent);
   }
 
   ngOnInit(): void {
-    this.store.select(TimelineSelectors.getCurrentTemplate).subscribe((component) => {
+    this.store.select(TimelineSelectors.getCurrentTemplate)
+      .subscribe((component) => {
         if (component) {
-          this.componentLoader.loadComponent(component, this.containerRef);
-        } else {
-          this.containerRef?.clear();
+          this.componentLoader.loadComponent(component);
         }
       }
     );

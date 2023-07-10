@@ -12,7 +12,7 @@
 
 <div class="container position-relative">
   <div class="app-content">
-    <div class="container-timeline" [class.open]="!!(currentEvent$ | async)">
+    <div class="container-timeline">
       <app-process-information></app-process-information>
 
       <h3 class="mt-3">Your timeline</h3>
@@ -94,9 +94,6 @@
         <li>Bank account</li>
       </ul>
 
-    </div>
-    <div class="container-additional" [class.open]="!!(currentEvent$ | async)">
-      <ng-container #containerRef></ng-container>
     </div>
   </div>
 
