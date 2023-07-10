@@ -68,7 +68,12 @@
               ],
               "outputHashing": "all",
               "baseHref": "https://JAspeling.github.io/entegrate/",
-              "outputPath": "docs/"
+              "outputPath": "docs/",
+              "aot": true,
+              "buildOptimizer": true,
+              "optimization": true,
+              "vendorChunk": false,
+              "sourceMap": false
             },
             "development": {
               "buildOptimizer": false,

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { AdditionalTemplateComponent } from "../../shared/additional-template.component";
 import { initialState, PetsState } from "./store/pets.state";
@@ -6,11 +6,13 @@ import { Store } from "@ngrx/store";
 import { PetsActions, PetsSelectors } from "./store";
 import { FormBuilder, FormGroup, FormsModule } from "@angular/forms";
 import { PetsStoreModule } from "./store/pets.store.module";
-import { tap } from "rxjs";
+import { distinctUntilChanged, tap } from "rxjs";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
 import { DropdownComponent } from "../inputs/dropdown.component";
 import { TextComponent } from "../inputs/input.component";
 import { CheckboxComponent } from "../inputs/checkbox.component";
+
+import { isEqual } from 'lodash-es';
 
 @Component({
   selector: 'app-pets',
@@ -28,7 +30,7 @@ import { CheckboxComponent } from "../inputs/checkbox.component";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 @AutoUnsubscribe()
-export class PetsComponent {
+export class PetsComponent implements OnInit {
   form: FormGroup;
   config$ = this.store.select(PetsSelectors.getConfig).pipe(
     tap(config => this.form.patchValue(config))
@@ -81,5 +83,18 @@ export class PetsComponent {
 
   navigate(url: string) {
     window.open(url, '_blank')
+  }
+
+  ngOnInit(): void {
+    this.form.valueChanges.pipe(
+      distinctUntilChanged(this.compareFormValue)
+    ).subscribe((value) => {
+      // console.log(value);
+      this.store.dispatch(PetsActions.update({ ...value }));
+    })
+  }
+
+  compareFormValue(value: any, value2: any) {
+    return isEqual(value, value2);
   }
 }
