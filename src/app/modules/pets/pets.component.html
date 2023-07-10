@@ -16,6 +16,61 @@
                   [label]="'Do you want your pets to arrive in the Netherlands the same time you do?'">
     </app-dropdown>
 
+
+    <div *ngIf="form.get('arriveTogether').value === true" class="alert alert-warning">
+      <span>
+        Make sure you have your stay sorted out if you want your pets to arrive in the Netherlands when you do.
+        This can be problematic if you are staying at friends, airBnB, hotel, etc.
+      </span>
+    </div>
+
+    <div *ngIf="form.get('arriveTogether').value === false" class="alert alert-warning">
+      <span>
+        If you are not able to travel on the same flight or within 5 days of the pet/s, a commercial
+        health certificate will have to be issued and used.
+      </span>
+    </div>
+
+    <hr>
+
+    <h5>Checklist</h5>
+    <app-checkbox [form]="form"
+                  [name]="'microchip'"
+                  [label]="'Micro-chipped.'">
+    </app-checkbox>
+
+    <app-checkbox [form]="form"
+                  [name]="'rabies_vaccination'"
+                  [label]="'Vaccinated against rabies.'">
+    </app-checkbox>
+
+    <app-checkbox [form]="form"
+                  [name]="'antibody_titre'"
+                  [label]="'Neutralizing Ani-Body Titre test.'">
+    </app-checkbox>
+
+    <app-checkbox [form]="form"
+                  [name]="'normal_vaccinations'"
+                  [label]="'Normal vaccinations up to date.'">
+    </app-checkbox>
+
+    <app-checkbox [form]="form"
+                  [name]="'non_commercial_certificate'"
+                  [label]="'Non-Commercial ( Annex IV) Veterinary Health Certificate issued.'">
+    </app-checkbox>
+
+    <app-checkbox [form]="form"
+                  [name]="'commercial_certificate'"
+                  [label]="'Commercial ( Annex 1 ) Veterinary Health Certificate issued.'">
+    </app-checkbox>
+
+    <app-checkbox [form]="form"
+                  [name]="'tapeworm_treatment'"
+                  [label]="'Echinococcus (Tapeworm) Treatment.'">
+    </app-checkbox>
+    <hr>
+
+
     <h5>Options</h5>
     <ng-container *ngFor="let _option of selections; let i = index">
       <div class="option"
@@ -127,7 +182,7 @@
       <p>
         Owners or an authorized person MUST travel on the same flight or within 5 days of the pet/s in
         order to have the non-commercial health certificate endorsed. Should the owners or an authorized
-        person not be able to travel on the same flight or within 5 days of the pet/s a commercial
+        person not be able to travel on the same flight or within 5 days of the pet/s, a commercial
         health certificate can be used for travel. Note that additional charges will apply should pets
         travel on a commercial health certificate.
       </p>

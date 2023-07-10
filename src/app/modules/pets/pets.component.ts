@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { AdditionalTemplateComponent } from "../../shared/additional-template.component";
 import { initialState, PetsState } from "./store/pets.state";
@@ -12,6 +12,7 @@ import { tap } from "rxjs";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
 import { DropdownComponent } from "../inputs/dropdown.component";
 import { TextComponent } from "../inputs/input.component";
+import { CheckboxComponent } from "../inputs/checkbox.component";
 
 @Component({
   selector: 'app-pets',
@@ -23,8 +24,10 @@ import { TextComponent } from "../inputs/input.component";
     PetsStoreModule,
     FormsModule,
     DropdownComponent,
-    TextComponent
-  ]
+    TextComponent,
+    CheckboxComponent
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 @AutoUnsubscribe()
 export class PetsComponent {
