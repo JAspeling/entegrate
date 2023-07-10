@@ -4,14 +4,11 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { UnabridgedConfig } from "./models/unabridged-options.interface";
 import { combineLatest, map, Observable, Subscription, tap } from "rxjs";
 import * as timelineActions from "../timeline/state/timeline.actions";
-import { ToastrService } from "ngx-toastr";
 import { UnabridgedState } from "./store/unabridged-store.state";
-import { UnabridgedStoreEffects } from "./store/unabridged-store.effects";
 import { UnabridgedStoreActions, UnabridgedStoreSelectors } from "./store";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
 import { ProcessInformationState } from "../process-information/store/process-info-store.state";
 import { ProcessInfoSelectors } from "../process-information/store";
-import { ofType } from "@ngrx/effects";
 import { UnabridgedStoreModule } from "./store/unabridged-store.module";
 import { CommonModule } from "@angular/common";
 import { AdditionalTemplateComponent } from "../../shared/additional-template.component";
@@ -59,9 +56,7 @@ export class UnabridgedInformationComponent implements OnInit {
   ]
   private updateOptions$: Subscription;
 
-  constructor(private store: Store<UnabridgedState>, private processInfoStore: Store<ProcessInformationState>,
-    private toastr: ToastrService,
-    private readonly effect: UnabridgedStoreEffects) {
+  constructor(private store: Store<UnabridgedState>, private processInfoStore: Store<ProcessInformationState>) {
     this.form = new FormBuilder().group<UnabridgedConfig>({
       done: false,
       selectedOption: 0,
@@ -91,12 +86,6 @@ export class UnabridgedInformationComponent implements OnInit {
     this.applicationTotalCost$ = combineLatest(this.applicationAmount$, this.config$).pipe(
       map((value) => value[0] * value[1].cost)
     );
-
-    this.updateOptions$ = this.effect.updateOptions$.pipe(
-      ofType(UnabridgedStoreActions.updateConfigSuccess)
-    ).subscribe(() => {
-      this.toastr.success(`Updated successfully!`);
-    });
   }
 
   select(index: number) {
@@ -119,8 +108,10 @@ export class UnabridgedInformationComponent implements OnInit {
   save(config: UnabridgedConfig): void {
     if (this.form.valid) {
       if (this.form.dirty) {
-        const options = { ...config, ...this.form.value };
-        this.store.dispatch(UnabridgedStoreActions.updateConfig(options));
+        this.store.dispatch(UnabridgedStoreActions.updateConfig({
+          ...this.form.value,
+          ...config,
+        }));
         this.form.markAsPristine();
       }
     }

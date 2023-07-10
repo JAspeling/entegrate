@@ -9,8 +9,6 @@ import { MvvActions, MvvSelectors } from "./store";
 import { MvvStoreModule } from "./store/mvv-store.module";
 import { AdditionalTemplateComponent } from "../../shared/additional-template.component";
 import { ToastrService } from "ngx-toastr";
-import { MvvEffects } from "./store/mvv.effects";
-import { ofType } from "@ngrx/effects";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
 
 @Component({
@@ -31,21 +29,16 @@ export class MvvComponent {
   config$: Observable<MvvState> = this.store.select(MvvSelectors.getConfig).pipe(
     tap(config => this.form.patchValue(config))
   );
-  updateSuccessful = this.effects.update$.pipe(
-    ofType(MvvActions.updateSuccess),
-    tap(() => this.toastr.success('MVV config updated'))
-  ).subscribe()
 
   constructor(private readonly toastr: ToastrService,
     private readonly fb: FormBuilder,
-    private readonly store: Store<MvvState>,
-    private readonly effects: MvvEffects) {
+    private readonly store: Store<MvvState>) {
     this.initializeForm();
   }
 
   onSave(config: MvvState) {
     if (this.form.dirty) {
-      this.store.dispatch(MvvActions.update({ ...config, ...this.form.value }));
+      this.store.dispatch(MvvActions.update({ ...this.form.value, ...config }));
     }
   }
 

@@ -41,6 +41,9 @@ export class GatherDocumentsComponent {
   }
 
   save(config: GatherDocsState) {
-    this.store.dispatch(GatherDocsActions.updateConfig({ ...config, ...this.form.value }));
+    this.store.dispatch(GatherDocsActions.updateConfig({
+      ...this.form.value,
+      ...config,
+    }));
   }
 }

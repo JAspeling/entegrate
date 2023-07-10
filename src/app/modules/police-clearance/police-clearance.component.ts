@@ -4,8 +4,6 @@ import { initialState, PoliceClearanceState } from "./store/police-clearance-sto
 import { Store } from "@ngrx/store";
 import { PoliceClearanceActions, PoliceClearanceSelectors } from "./store";
 import { Subscription, tap } from "rxjs";
-import { PoliceClearanceStoreEffects } from "./store/police-clearance-store.effects";
-import { ToastrService } from "ngx-toastr";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
 import { CommonModule } from "@angular/common";
 import { PoliceClearanceStoreModule } from "./store/police-clearance-store.module";
@@ -41,15 +39,8 @@ export class PoliceClearanceComponent {
 
 
   constructor(private readonly fb: FormBuilder,
-    private readonly effect: PoliceClearanceStoreEffects,
-    private readonly store: Store<PoliceClearanceState>,
-    private readonly toastr: ToastrService) {
+    private readonly store: Store<PoliceClearanceState>) {
     this.initializeForm();
-
-    this.updateEffect = this.effect.$update.subscribe(() => {
-      this.toastr.success(`Updated successfully!`);
-    });
-
   }
 
   initializeForm() {
@@ -60,8 +51,8 @@ export class PoliceClearanceComponent {
 
   save(config: PoliceClearanceState) {
     this.store.dispatch(PoliceClearanceActions.update({
-      ...config,
-      ...this.form.value
+      ...this.form.value,
+      ...config
     }));
   }
 }

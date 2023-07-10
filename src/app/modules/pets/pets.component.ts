@@ -5,8 +5,6 @@ import { initialState, PetsState } from "./store/pets.state";
 import { Store } from "@ngrx/store";
 import { PetsActions, PetsSelectors } from "./store";
 import { FormBuilder, FormGroup, FormsModule } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { PetsEffects } from "./store/pets.effects";
 import { PetsStoreModule } from "./store/pets.store.module";
 import { tap } from "rxjs";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
@@ -36,10 +34,6 @@ export class PetsComponent {
     tap(config => this.form.patchValue(config))
   );
 
-  updateSuccess = this.effects.update$.pipe(
-    tap(() => this.toastr.success('Updated'))
-  ).subscribe();
-
   selections = [
     {
       title: 'I am using a third party',
@@ -58,16 +52,14 @@ export class PetsComponent {
   ]
 
   constructor(private readonly store: Store<PetsState>,
-    private readonly fb: FormBuilder,
-    private readonly toastr: ToastrService,
-    private readonly effects: PetsEffects) {
+    private readonly fb: FormBuilder) {
 
     this.initializeForm();
   }
 
   onSave(config: PetsState) {
     if (this.form.dirty) {
-      this.store.dispatch(PetsActions.update({ ...config, ...this.form.value }));
+      this.store.dispatch(PetsActions.update({ ...this.form.value, ...config }));
     }
   }
 

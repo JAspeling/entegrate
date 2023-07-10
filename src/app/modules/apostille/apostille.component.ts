@@ -1,12 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { ApostilleState, initialState } from "./store/apostille.state";
 import { ApostilleActions, ApostilleSelectors } from "./store";
 import { Observable, Subscription, tap } from "rxjs";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { AutoUnsubscribe } from "../../shared/decorators/auto-unsubscribe";
-import { ApostilleEffects } from "./store/apostille-effects";
-import { ToastrService } from "ngx-toastr";
 import { ApostilleStoreModule } from "./store/apostille-store.module";
 import { CommonModule } from "@angular/common";
 import { AdditionalTemplateComponent } from "../../shared/additional-template.component";
@@ -49,10 +47,7 @@ export class ApostilleComponent implements OnInit {
     }
   ]
 
-  constructor(private readonly store: Store<ApostilleState>,
-    private effect: ApostilleEffects,
-    private readonly toastr: ToastrService,
-    private cdr: ChangeDetectorRef) {
+  constructor(private readonly store: Store<ApostilleState>) {
     this.initializeForm();
     this.config$ = this.store.select(ApostilleSelectors.getConfig)
       .pipe(
@@ -63,13 +58,10 @@ export class ApostilleComponent implements OnInit {
   }
 
   save(config: ApostilleState) {
-    this.store.dispatch(ApostilleActions.update({ ...config, ...this.form.value }));
+    this.store.dispatch(ApostilleActions.update({ ...this.form.value, ...config }));
   }
 
   ngOnInit(): void {
-    this.updateOptions = this.effect.update$.subscribe(() => {
-      this.toastr.success(`Updated successfully!`);
-    });
   }
 
   select(index: number): void {
