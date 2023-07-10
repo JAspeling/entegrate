@@ -37,6 +37,14 @@ $nav-height: 80px;
   }
 }
 
+.alert {
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 4px solid;
+  border-radius: 0 var(--bs-alert-border-radius) var(--bs-alert-border-radius) 0;
+}
+
 ngb-datepicker .bg-light {
   background-color: inherit !important
 }
